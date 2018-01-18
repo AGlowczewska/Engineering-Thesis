@@ -21,7 +21,7 @@
 % Declare default options and load base package (memoir).
 %
 \DeclareOption{bachelor}
-   {\@ppbachelortrue}
+{\@ppbachelortrue}
 
 \ExecuteOptions{a4paper,pl,11pt,oneside,final}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
@@ -48,9 +48,9 @@
 \RequirePackage{graphicx}
 
 \ifpdf
-	\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
 \else
-	\DeclareGraphicsExtensions{.eps}
+\DeclareGraphicsExtensions{.eps}
 \fi
 \RequirePackage{fancyvrb}
 
@@ -61,30 +61,30 @@
 \RequirePackage{url}
 \RequirePackage{nameref}
 \RequirePackage{varioref}
-  
+
 \ifpdf
-        \usepackage[unicode,linktocpage,bookmarks]{hyperref}
+\usepackage[unicode,linktocpage,bookmarks]{hyperref}
 \else
-        \usepackage[dvips,unicode,linktocpage,bookmarks]{hyperref}
+\usepackage[dvips,unicode,linktocpage,bookmarks]{hyperref}
 \fi
 \hypersetup{
-    pdffitwindow=true,
-    bookmarksnumbered=true,
-    bookmarksopen=true,
-    colorlinks=true,
-    pdfpagelayout=SinglePage,
-    pdfpagemode=UseOutlines,
-    pdfstartview=Fit,
-    linkcolor=black,
-    citecolor=black,
-    anchorcolor=black,
-    filecolor=black,
-    menucolor=black,
-    pagecolor=black,
-    urlcolor=black,
-    pdftitle={},
-    pdfauthor={},
-    pdfkeywords={}
+pdffitwindow=true,
+bookmarksnumbered=true,
+bookmarksopen=true,
+colorlinks=true,
+pdfpagelayout=SinglePage,
+pdfpagemode=UseOutlines,
+pdfstartview=Fit,
+linkcolor=black,
+citecolor=black,
+anchorcolor=black,
+filecolor=black,
+menucolor=black,
+pagecolor=black,
+urlcolor=black,
+pdftitle={},
+pdfauthor={},
+pdfkeywords={}
 }
 \RequirePackage{memhfixc}
 
@@ -100,11 +100,12 @@
 
 \renewcommand{\maketitlehooka}{%
 \begin{center}
-\if@pppolish
-Politechnika Pozna\'nska\\Wydzia{\l} Informatyki i Zarz{\k{a}}dzania\\Instytut Informatyki
-\else
-Poznan University of Technology\\Faculty of Computer Science and Management\\Institute of Computer Science
-\fi\end{center}}
+    \if@pppolish
+    Politechnika Pozna\'nska\\Wydzia{\l} Informatyki i Zarz{\k{a}}dzania\\Instytut Informatyki
+    \else
+    Poznan University of Technology\\Faculty of Computer Science and Management\\Institute of Computer Science
+    \fi
+\end{center}}
 
 \pretitle{\vspace{2cm}\begin{center}%
 \if@pppolish%
@@ -178,18 +179,18 @@ Typeset using \LaTeX\ in Computer Modern.
 \makeevenfoot{ppfcmthesis}{}{}{}
 \makeatletter
 \newcommand{\@ppfcmthesismarks}{%
-  \let\@mkboth\markboth
-  \def\chaptermark##1{\markboth{##1}{##1}}    % left mark & right marks
-  \def\sectionmark##1{\markright{%
-    \ifnum \c@secnumdepth>\z@
-      \thesection. \ %
-    \fi
-    ##1}}
-  \def\tocmark{\markboth{\contentsname}{}}
-  \def\lofmark{\markboth{\listfigurename}{}}
-  \def\lotmark{\markboth{\listtablename}{}}
-  \def\bibmark{\markboth{\bibname}{}}
-  \def\indexmark{\markboth{\indexname}{}}
+\let\@mkboth\markboth
+\def\chaptermark##1{\markboth{##1}{##1}}    % left mark & right marks
+\def\sectionmark##1{\markright{%
+\ifnum \c@secnumdepth>\z@
+\thesection. \ %
+\fi
+##1}}
+\def\tocmark{\markboth{\contentsname}{}}
+\def\lofmark{\markboth{\listfigurename}{}}
+\def\lotmark{\markboth{\listtablename}{}}
+\def\bibmark{\markboth{\bibname}{}}
+\def\indexmark{\markboth{\indexname}{}}
 }
 \makepsmarks{ppfcmthesis}{\@ppfcmthesismarks}
 \makeatother
