@@ -101,7 +101,7 @@ pdfkeywords={}
 \renewcommand{\maketitlehooka}{%
 \begin{center}
     \if@pppolish
-    Politechnika Pozna\'nska\\Wydzia{\l} Informatyki i Zarz{\k{a}}dzania\\Instytut Informatyki
+    Politechnika Pozna\'nska\\Wydzia{\l} Informatyki\\Instytut Informatyki
     \else
     Poznan University of Technology\\Faculty of Computer Science and Management\\Institute of Computer Science
     \fi
@@ -144,7 +144,7 @@ Supervisor\\\@ppsupervisor
 
 \medskip\noindent%
 \if@pppolish%
-Instytut Informatyki, Wydzia{\l} Informatyki i Zarz{\k{a}}dzania\\%
+Instytut Informatyki, Wydzia{\l} Informatyki\\%
 Politechnika Pozna\'nska%
 \else%
 Poznan University of Technology\\Faculty of Computer Science and Management\\Institute of Computer Science
