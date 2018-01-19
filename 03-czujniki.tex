@@ -102,21 +102,22 @@ Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i 
 \item Czas konwersji: 10us
 \end{itemize}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=15cm]{GuardSchem}
+	\caption{Schemat układu The Guard}
+\end{figure}
+
 Niestety żaden model Raspberry nie posiada wbudowanego przetwornika analogowo cyfrowego dlatego konieczne było użycie układu zewnętrzenego. Wybraliśmy przetwornik MCP3008 ze względu na jego nisko koszt i interfejs SPI, który jest wspierany przez Raspberry Pi.
 MCP3008 to 10-bitowy przetwornik analogowy cyfrowy. Zasilany jest napięciem 5V, napięcie VRef = 5V.  Skoro jest to przetwornik 10-bitowy jest w stanie wykryć (1024) stanów. Wykrywana przez niego minimalna różnica napięć na wejściu wynosi 1 * 5V / 1024 = 4.88mV.
 Posiada 8 kanałów jednak wykorzystano tylko 2 – do podłączenia czujnika MQ-9 i MQ-2.
 
-
 \paragraph{Interfejs SPI:}
-
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=6cm]{SPI.png}
 	\caption{Interfejs SPI}
 \end{figure}
-
-
 SPI jest to interfejs synchroniczny. Może być do niego podłączone wiele urządzeń typu slave, jednak tylko z jednym urządzeniem Master, który generuje zegar. Master poprzez linię SS wybiera urządzenie z którym chce się komunikować.  \\
 Interfejs ten zawiera jeszcze 3 linie:
 \begin{enumerate} 
