@@ -53,6 +53,9 @@ W kodzie używamy biblioteki wiringpi do odczytu danych z układów cyfrowych. N
   \end{minipage}
 \end{figure}
 
+Oprogramowanie zainstalowane na Raspberry Pi odpowiedzialne jest za ciągłe monitorowanie stanów i danych z czujników pomiarowych. Po podłączeniu układu do zasilania oprogramowanie jest uruchamiane automatycznie. Pierwszą czynnością jaką wykonuje Raspberry jest wysłanie swojego numery seryjnego do bazy danych Firebase. Cały proces jest w pełni zautomatyzowany. Dzięki temu użytkownicy od razu mogą dodać urządzenie i monitorować dane z czujników na aplikacjach klienckich. Dodawanie urządzenia następuje poprzez wprowadzenie w aplikacji numery seryjnego urządzenia, które chcę dołączyć do mojego konta użytkownika.
+
+
 \section*{Czujniki}
 
 Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i jednego przetwornika AC. 
@@ -109,8 +112,11 @@ Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i 
 \end{figure}
 
 Niestety żaden model Raspberry nie posiada wbudowanego przetwornika analogowo cyfrowego dlatego konieczne było użycie układu zewnętrzenego. Wybraliśmy przetwornik MCP3008 ze względu na jego nisko koszt i interfejs SPI, który jest wspierany przez Raspberry Pi.
-MCP3008 to 10-bitowy przetwornik analogowy cyfrowy. Zasilany jest napięciem 5V, napięcie VRef = 5V.  Skoro jest to przetwornik 10-bitowy jest w stanie wykryć (1024) stanów. Wykrywana przez niego minimalna różnica napięć na wejściu wynosi 1 * 5V / 1024 = 4.88mV.
-Posiada 8 kanałów jednak wykorzystano tylko 2 – do podłączenia czujnika MQ-9 i MQ-2.
+MCP3008 to 10-bitowy przetwornik analogowy cyfrowy. Zasilany jest napięciem 5V, napięcie VRef = 5V.  Skoro jest to przetwornik 10-bitowy jest w stanie wykryć 1024 stanów. Wykrywana przez niego minimalna różnica napięć na wejściu wynosi 
+\begin{equation}
+1 * 5V / 1024 = 4.88mV
+\end{equation}
+Posiada 8 kanałów jednak w projekcie wykorzystano tylko 2 – do podłączenia czujników MQ-9 i MQ-2.
 
 \paragraph{Interfejs SPI:}
 \begin{figure}[h]
