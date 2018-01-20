@@ -76,7 +76,6 @@ Po uruchomieniu aplikacji pierwszym widokiem jest ekran logowania i rejestracji 
 \end{figure}
 Po prawidłowej autoryzacji danych użytkownika wprowadzonych podczas logowania ukaże się nam główny widok aplikacji. W górnej części mamy do wyboru 5 sekcji:
 sekcja czujników, sekcja historii notyfikacji, sekcja zagrożeń przy wykryciu ruchu, sekcja streamu na żywo, sekcja ustawień. Wszystkie te sekcje dotyczą konkretnego urządzenia wybranego w pasku na dole ekranu. Przy pierwszym uruchomieniu nie będziemy posiadali żadnych urządzeń przypisanych do naszego konta użytkownika. Aby dodać pierwsze i kolejne stacje, od których chcemy otrzymywać notyfikacje o zagrożeniach a także śledzić i monitorować informacje z czujników należy wybrać przycisk "New" z plusikiem w dolnej części ekranu. Pojawi się okno z prośbą o wpisanie numeru identyfikującego jednoznacznie urządzenie. Po chwili dodany Guard będzie widoczny w na liście.
-
 \paragraph{Sekcja czujników:}
 Jest to jedna z najważniejszych sekcji aplikacji (rys 5.3).  Otrzymuje ona dane z czujników w czasie rzeczywistym i prezentuje je użytkownikowi.  W zależności od koloru prezentowanej wartości z czujnika użytkownik analizuje zagrożenie. Kolor zielony reprezentuje bezpieczne i prawidłowe odczyty na czujnikach, kolor pomarańczowy średnie, kolor czerwony reprezentuje bardzo wysoki poziom niebezpieczeństwa. Implementacja tej funkcjonalności zrealizowana została przy pomocy modelu HSV a nie RGB, dzięki temu zmieniając parametr Hue zmieniamy barwę przy stałym nasyceniu i jasności. Wartość tego parametru równa 120\textdegree{} odpowiada kolorowi zielonemu, kolor czerwony to 0\textdegree{}. Przekształcając wartość otrzymaną z czujników, która jest z zakresu [0-1] na wartość z przedziału [120-0] otrzymano wyżej wspomniany efekt. 
 Poniżej przedstawiono fragment konwersji danych z czujników na kolor w modelu HSV, gdzie zmienna sensors[0] reprezentuje czujnik LPG.
@@ -84,41 +83,35 @@ Poniżej przedstawiono fragment konwersji danych z czujników na kolor w modelu 
 UIColor(hue: CGFloat(0.33 - (sensors[0].value * 0.33)),
 saturation: 1, brightness: 1, alpha: 1)
 \end{verbatim}
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=5cm]{sensors.png}
 	\caption{Sekcja czujników}
 \end{figure}
-
 \paragraph{Sekcja historii notyfikacji:}
-W tej sekcji użytkownik ma dostęp do historii zdarzeń w systemie (rys 5.4). Po zaznaczeniu interesującego nas daty reprezentującej moment wystąpienia zagrożenia i wybranu przycisku 'preview' prezentowana jest informacja o miejscu niebezpieczeństwa i jego rodzaju. 
-
+W tej sekcji użytkownik ma dostęp do historii zdarzeń w systemie (rys 5.4). Po zaznaczeniu interesującego nas daty reprezentującej moment wystąpienia zagrożenia i wybranu przycisku 'preview' prezentowana jest informacja o miejscu niebezpieczeństwa i jego rodzaju.
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=5cm]{history.png}
-	\caption{Sekcja historii zdarzeń}
-\end{figure}
-
-
+\centering
+\begin{minipage}{.4\linewidth}
+    \includegraphics[width=\linewidth]{history.png}
+    \caption{Sekcja historii notyfikacji}
+    \label{img1}
+\end{minipage}
+\hspace{.05\linewidth}
+\begin{minipage}{.4\linewidth}
+    \includegraphics[width=\linewidth]{settings.png}
+    \caption{Sekcja ustawień}
+    \label{img2}
+\end{minipage}
+\end{figure} 
 \paragraph{Sekcja ustawień:}
 Ustawienia dotyczące zaznaczonego na dole ekranu urządzenia (rys 5.5). Użytkownik ma możliwość zmiany nazwy urządzenia, które zazwyczaj reprezentuje miejsce, w którym znajduje się stacja pomiarowa. Istnieje również możliwość uzbrojenia i wyłączenia konkretnego czujnika. Sprowadza się to do tego, że w przypadku zaznaczenia opcji "Disarmed" użytkownik nie będzie otrzymywał kolejnych notyfikacji o zagrożeniach. Opcja ta może okazać się przydatna w momencie uszkodzenia któregoś z modułów i tym samym błednych danych wysyłanych z czujników.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=5cm]{settings.png}
-	\caption{Sekcja historii zdarzeń}
-\end{figure}
-
-
 Przeprowadzono kilka testów aplikacji pod pełnym obciążeniem za pomocą programu Instruments. Szczególnie interesująco przedstawia się zużycie sieci podczas streamu obrazu. Widać, że w ciągu jednej minuty pobrano 6,61MB a wysłano jedynie 24,11Kb. Obraz pobierany jest tylko wtedy kiedy aplikacja jest aktywna. Nie musimy obawiać się, że stream jest aktywny, kiedy nie korzystamy z programu. W ciągu godziny działania aplikacji pobierze ona około 400MB danych.
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=10cm]{networkUsage}
 	\caption{Zużycie sieci podczas streamu}
 \end{figure}
-
 Przeprowadzono także test na zużycie pamięci RAM i zużycia procesora. Te jednak są niewielkie i wynoszą odpowiednio 25MB pamięci RAM i średnio 1 procent zużycia procesora.
 Testy przeprowadzono na iPhonie 6S i iPadzie Pro.
 
