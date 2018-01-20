@@ -6,9 +6,6 @@ Opis Androida, screenshoty
 
 
 \section*{Aplikacja iOS}
-
-Opis iOS, screenshoty
-
 Aplikacja przeznaczona jest na urządzenia z systemem operacyjnym iOS od wersji 10.0. 
 Nie wspiera ona wcześniejszych wersji ze względu na nowe funkcje, które Apple wprowadziło wraz z pojawieniem się iOS 10.0 (m.in. klasa UNUserNotificationCenter). Jednak jak wynika z wykresu niżej (numer rysunku) 92\% wszystkich obecnych użytkowników tego systemu jest w stanie zainstalować aplikację a liczba ta stale rośnie. Aplikacja wykonana została wspierając zarówno telefony komórkowe iPhone jak i tablety iPad. 
 \begin{figure}[h]
@@ -16,8 +13,6 @@ Nie wspiera ona wcześniejszych wersji ze względu na nowe funkcje, które Apple
 	\includegraphics[width=6cm]{iOSstat}
 	\caption{Udziały wersji systemu iOS w rynku}
 \end{figure}
-
-Architektura:
 Aplikacja napisana jest w stosunkowo nowym języku Swift(został zaprezentowany przez Apple w 2014r na konferencji WWDC) w oparciu o architekturę MVC (Model-View-Controller) wykorzystując przy programowanie reaktywne i funkcjonalne. 
 Programowanie reaktywne wykonane zostało przy pomocy biblioteki RxSwift. Wykorzystano je m.in w celu wznowienia streamu obrazu z kamery w momencie przejścia aplikacji z trybu Background do trybu Foreground. Oznacza to, że w momencie wyjścia z aplikacji ale pozostawiając ja działającą w tle i po chwili uruchomienia jej ponownie traciliśmy obraz Video, ze względu na politykę bezpieczeństwa Apple, która nie zezwala aby aplikacje pobierały dane przez dłuższy okres czasu kiedy aplikacja pracuje w tle. Dzięki programowaniu reaktywnemu problem ten został rozwiązany co prezentuje poniższy kod:
 \begin{verbatim}
@@ -39,7 +34,22 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         }).disposed(by: disposeBag)
 \end{verbatim}
 Zmienna inBackground ustawiana jest oddzielnej klasie AppDelegate na wartość true kiedy aplikacja przechodzi w tryb background i na wartość false w przeciwnym wypadku. Kod powyżej uruchamia się za każdym razem przy zmianie tej wartości i uruchamia stream po każdym ponownym uruchomieniu programu.
-Instalacja zewnętrzynych bibliotek odbywa się za pomocą CocoaPods. Jest to menadżer zależności dzięki któremu szybko możemy wyszukać i zainstalować wymagane oprogramowanie.
+Instalacja zewnętrzynych bibliotek odbywa się za pomocą CocoaPods. Jest to menadżer zależności dzięki któremu szybko możemy wyszukać i zainstalować wymagane oprogramowanie. Wszystkie użyte zależności przedstawia poniższy listing: 
+
+\begin{verbatim}
+  pod 'Moya'
+  pod 'MBProgressHUD', '~> 1.0'
+  pod 'RxSwift',    '~> 4.0'
+  pod 'RxCocoa',    '~> 4.0'
+  pod 'IHKeyboardAvoiding'
+  pod 'Moya-SwiftyJSONMapper'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  pod 'M13ProgressSuite'
+\end{verbatim}
+Moya używana jest do asynchronicznej REST-owej komunikacji z serwerem Django. MBProgressHUD umożliwia wyświetlanie ekranu ładowania danych podczas pobierania informacji z serwera. RxSwift i RxCocoa to biblioteki do programowania reaktywnego. Moduły firebase służą do komunikacji z serwerami Firebase. Ostatni pod M13ProgressSuite służy do rysowania wykresów w systemie iOS.
 
 Po uruchomieniu aplikacji pierwszym widokiem jest ekran logowania i rejestracji użytkowników(rys 5.2).
 \begin{figure}[h]
@@ -47,7 +57,6 @@ Po uruchomieniu aplikacji pierwszym widokiem jest ekran logowania i rejestracji 
 	\includegraphics[width=6cm]{login.png}
 	\caption{Ekran logowania}
 \end{figure}
-
 Po prawidłowej autoryzacji danych użytkownika wprowadzonych podczas logowania ukaże się nam główny widok aplikacji. W górnej części mamy do wyboru 5 sekcji:
 sekcja czujników, sekcja historii notyfikacji, sekcja zagrożeń przy wykryciu ruchu, sekcja streamu na żywo, sekcja ustawień. Wszystkie te sekcje dotyczą konkretnego urządzenia wybranego w opcjach na dole ekranu. Początkowo przy pierwszym uruchomieniu nie będziemy posiadali żadnych urządzeń przypisanych do naszego konta użytkownika. Aby dodać pierwsze i kolejne stacje, od których chcemy otrzymywać notyfikacje o zagrożeniach a także śledzić i monitorować informacje z czujników należy wybrać przycisk "New" z plusikiem w dolnej części ekranu. Pojawi się okno z prośbą o wpisanie numeru identyfikującego jednoznacznie urządzenie. Po chwili dodany Guard będzie widoczny w na liście.
 
