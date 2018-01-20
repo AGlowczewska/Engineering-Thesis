@@ -42,6 +42,14 @@ lastNotification = notifications.array.sorted(by: { (n1, n2) -> Bool in
 \end{verbatim}
 Na tablicy z notyfikacjami zastosowano szereg funkcji: posortowano je malejąco według daty, przefiltrowano w taki sposób aby wybrać tylko te o typie 'PIRSensor' czyli tylko te pochodzące z czujnika ruchu. Na sam koniec wybrano tylko jeden pierwszy element z wybranych i wynik wpisano do zmiennej lastNotification.
 
+Strukture kodu(rys. 5.2) podzielono na kilka osobnych logicznych części. Folder Firebase zawiera model bazy danych czujników, które trzymane są na serwerach Firebase. W folderze GuardManager znajdują sie elementy odpowiedzialne za komunikację REST-ową z serwerem Django i również modele bazy danych znajdującej się na naszym serwerze. Folder Views jest zbiorem widoków, które wczytywane są w zależności, w której sekcji się znajdujemy (opis sekcji niżej). ViewController.swift jest głównym kontrolerem zarządzającym widokami i modelami. W folderze GuardianAppTests napisane zostały testy jednostkowe, które sprawdzają poprawność przekształcania danych typu JSON do obiektów zdefiniowanych w folderze GuardManager/Models. Klasy, których nazwy kończą się na Manager oznaczają obiekty typu Singleton. Celem takiego wzorca jest zapewnienie istnienia tylko jednej instancji w całej aplikacji i globalnego dostępu do tego obiektu. GuardManager, który odpowiada za pobieranie danych z bazy danych - taki obiekt nie powinien być utworzony więcej niż jeden raz, gdyż wszystkie klasy, które z niego korzystają nie potrzebują kolejnych instancji tej klasy. W ten sposób zapewniamy, że zawsze odwołujemy się do tego samego obiektu.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=4cm]{iOSstructure}
+	\caption{Struktura aplikacji}
+\end{figure}
+
 
 Instalacja zewnętrznych bibliotek odbywa się za pomocą CocoaPods. Jest to menadżer zależności dzięki któremu szybko możemy wyszukać i zainstalować wymagane oprogramowanie. Wszystkie użyte zależności przedstawia poniższy listing: 
 
@@ -63,7 +71,7 @@ Moya używana jest do asynchronicznej REST-owej komunikacji z serwerem Django. S
 Po uruchomieniu aplikacji pierwszym widokiem jest ekran logowania i rejestracji użytkowników(rys 5.2). 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=6cm]{login.png}
+	\includegraphics[width=5cm]{login.png}
 	\caption{Ekran logowania}
 \end{figure}
 Po prawidłowej autoryzacji danych użytkownika wprowadzonych podczas logowania ukaże się nam główny widok aplikacji. W górnej części mamy do wyboru 5 sekcji:
@@ -79,7 +87,7 @@ saturation: 1, brightness: 1, alpha: 1)
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=6cm]{sensors.png}
+	\includegraphics[width=5cm]{sensors.png}
 	\caption{Sekcja czujników}
 \end{figure}
 
@@ -88,7 +96,7 @@ W tej sekcji użytkownik ma dostęp do historii zdarzeń w systemie (rys 5.4). P
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=6cm]{history.png}
+	\includegraphics[width=5cm]{history.png}
 	\caption{Sekcja historii zdarzeń}
 \end{figure}
 
@@ -98,13 +106,21 @@ Ustawienia dotyczące zaznaczonego na dole ekranu urządzenia (rys 5.5). Użytko
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=6cm]{settings.png}
+	\includegraphics[width=5cm]{settings.png}
 	\caption{Sekcja historii zdarzeń}
 \end{figure}
 
 
+Przeprowadzono kilka testów aplikacji pod pełnym obciążeniem za pomocą programu Instruments. Szczególnie interesująco przedstawia się zużycie sieci podczas streamu obrazu. Widać, że w ciągu jednej minuty pobrano 6,61MB a wysłano jedynie 24,11Kb. Obraz pobierany jest tylko wtedy kiedy aplikacja jest aktywna. Nie musimy obawiać się, że stream jest aktywny, kiedy nie korzystamy z programu. W ciągu godziny działania aplikacji pobierze ona około 400MB danych.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=10cm]{networkUsage}
+	\caption{Zużycie sieci podczas streamu}
+\end{figure}
 
+Przeprowadzono także test na zużycie pamięci RAM i zużycia procesora. Te jednak są niewielkie i wynoszą odpowiednio 25MB pamięci RAM i średnio 1 procent zużycia procesora.
+Testy przeprowadzono na iPhonie 6S i iPadzie Pro.
 
 
 
