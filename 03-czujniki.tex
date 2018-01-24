@@ -36,7 +36,7 @@ Następnym krokiem jest włączenie odpowiednich interfejsów w panelu konfigura
 	\includegraphics[width=6cm]{RSettings}
 	\caption{Ustawienia}
 \end{figure}
-W kodzie używamy biblioteki wiringpi do odczytu danych z układów cyfrowych. Należy zaznaczyć, że numeracja fizycznych pinów i numeracja pinów w bibliotece wiringPi jest różna i nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odniesienie się do pinu numer 1 w wiringPi jest równoznaczne z odczytem stanu na pinie 12 (GPIO18).
+W kodzie używamy biblioteki wiringpi do odczytu danych z układów cyfrowych. Należy zaznaczyć, że numeracja fizycznych pinów i numeracja pinów w bibliotece wiringPi jest różna i nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu 1 w wiringPi jest równoznaczne z odczytem stanu na pinie 12 (GPIO18).
 \begin{figure}[h]
   \centering
   \begin{minipage}[b]{0.4\textwidth}
@@ -49,10 +49,7 @@ W kodzie używamy biblioteki wiringpi do odczytu danych z układów cyfrowych. N
     \caption{GPIO}
   \end{minipage}
 \end{figure}
-
 Oprogramowanie zainstalowane na Raspberry Pi odpowiedzialne jest za ciągłe monitorowanie stanów i danych z czujników pomiarowych. Po podłączeniu układu do zasilania oprogramowanie jest uruchamiane automatycznie. Pierwszą czynnością jaką wykonuje Raspberry jest wysłanie swojego numery seryjnego do bazy danych Firebase. Cały proces jest w pełni zautomatyzowany. Dzięki temu użytkownicy od razu mogą dodać urządzenie i monitorować dane z czujników na aplikacjach klienckich. Dodawanie urządzenia następuje poprzez wprowadzenie w aplikacji numery seryjnego urządzenia, które chcę dołączyć do mojego konta użytkownika.
-
-
 \section*{Czujniki}
 
 Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i jednego przetwornika AC. 
