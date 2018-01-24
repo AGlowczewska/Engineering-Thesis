@@ -31,15 +31,12 @@ Aby prawidłowo zainstalować oprogramowanie The Guard na dowolnym urządzeniu R
 \item pip install pyrebase
 \end{enumerate}
 Następnym krokiem jest włączenie odpowiednich interfejsów w panelu konfiguracyjnym. Należy zmienić ustawienia zgodnie z poniższym schematem:
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=6cm]{RSettings}
 	\caption{Ustawienia}
 \end{figure}
-
-W kodzie używamy biblioteki wiringpi do odczytu danych z układów cyfrowych. Należy zaznaczyć, że numeracja fizycznych pinów i numeracja pinów w bibliotece wiringPi jest różna i nie zawiera wszystkich dostępnych pinów na urządzeniu. 
-
+W kodzie używamy biblioteki wiringpi do odczytu danych z układów cyfrowych. Należy zaznaczyć, że numeracja fizycznych pinów i numeracja pinów w bibliotece wiringPi jest różna i nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odniesienie się do pinu numer 1 w wiringPi jest równoznaczne z odczytem stanu na pinie 12 (GPIO18).
 \begin{figure}[h]
   \centering
   \begin{minipage}[b]{0.4\textwidth}
@@ -145,7 +142,6 @@ Reszta to czujniki cyfrowe, które informują m.in. o wykryciu ognia i wykryciu 
 Bezpośredni odczyt danych z czujników następuje nieprzerwanie co 2 sekundy. Nie należy obawiać się, że czujnik ruchu nie wykryje zagrożenia gdyż nie zostanie odczytany w poprawnym czasie, ponieważ utrzymuje on stan wysoki przez 5 sekund po wykryciu ruchu.
 Oprogramowanie oprócz monitorowania danych z czujników wysyła je także do bazy danych Firebase. Dzięki temu mamy podgląd wszystkich danych z każdego z pomieszczeń w czasie rzeczywistym. Dodatkowo w przypadku wykrycia zagrożenia czyli przekroczeniu progu o którym mowa wyżej wysyłamy push notyfikacje do wszystkich urządzeń użytkownika i zapisujemy wysłaną notyfikację w bazie danych Django. Dzięki zapisywaniu danych jesteśmy w stanie odtworzyć całą historię wydarzeń w systemie.
 Aby zapewnić wydajny i pewny system bezpieczeństwa przy otrzymaniu wysokich wartości na czujnikach i wysłaniu notyfikacji zapisujemy timestamp zdarzenia. Dzięki temu nie ma możliwości zasypania właściciela miliardem informacji gdyż każda kolejna notyfikacja zostanie wysłana po min. 10 min od poprzedniej przy założeniu, że nadal stan na czujniku jest wysoki.
-W przypadku iOS, Apple monitoruje ilość wysłanych push notyfikacji do konkretnego urządzenia. Kiedy ich ilość będzie wysoka zostanie to potraktowane jako spam i zostanie nałożona blokada aby chronić użytkownika przed niechcianymi informacjami. W naszym przypadku nie możemy do tego dopuścić a poprzez mechanizm timestampów zapobiegamy nałożeniu blokady.
 
 
 
