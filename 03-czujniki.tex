@@ -2,7 +2,7 @@
 
 \section*{Raspberry Pi}
 
-Wszystkie zestawy zbudowano w oparciu o Raspberry Pi 3 v1.2. Zdecydowano się na to rozwiązanie, ponieważ bazuje on na dystrybucji Linuxa, posiada opowiednie interfejsy i złącza a także zintegrowany moduł WiFi. Minusem w stosunku do konkurencyjnego Arduino jest brak wejść analogowych. Problem rozwiązano dodając zewnętrzny przetwornik A/C.
+Wszystkie zestawy zbudowano w oparciu o Raspberry Pi 3 v1.2 (rys. 3.1). Zdecydowano się na to rozwiązanie, ponieważ bazuje on na dystrybucji Linuxa, posiada opowiednie interfejsy i złącza a także zintegrowany moduł WiFi. Minusem w stosunku do konkurencyjnego Arduino jest brak wejść analogowych. Problem rozwiązano dodając zewnętrzny przetwornik A/C.
 \paragraph{Specyfikacja Raspberry Pi 3:}
 \begin{itemize} 
 \item Procesor 1.2 GHz
@@ -30,13 +30,13 @@ Aby prawidłowo zainstalować oprogramowanie The Guard na dowolnym urządzeniu R
 \item sudo pip install spidev
 \item pip install pyrebase
 \end{enumerate}
-Następnym krokiem jest włączenie odpowiednich interfejsów w panelu konfiguracyjnym. Należy zmienić ustawienia zgodnie z poniższym schematem:
+Następnym krokiem jest włączenie odpowiednich interfejsów w panelu konfiguracyjnym. Należy zmienić ustawienia zgodnie ze schematem 3.2:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=6cm]{RSettings}
 	\caption{Ustawienia}
 \end{figure}
-W kodzie użyto biblioteki wiringpi do odczytu danych z układów cyfrowych. Należy podkreślić, że numeracja fizycznych pinów i numeracja pinów w bibliotece wiringPi jest różna i nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu 1 w wiringPi jest równoznaczny z odczytem stanu na pinie 12 (GPIO18) na fizycznym urządzeniu.
+W kodzie użyto biblioteki wiringpi do odczytu danych z układów cyfrowych. Należy podkreślić, że numeracja fizycznych pinów(rys. 3.4) i numeracja pinów w bibliotece wiringPi(rys. 3.3) jest różna i nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu numer 1 w wiringPi jest równoznaczny z odczytem stanu na pinie numer 12 (GPIO18).
 \begin{figure}[h]
   \centering
   \begin{minipage}[b]{0.4\textwidth}
@@ -49,8 +49,7 @@ W kodzie użyto biblioteki wiringpi do odczytu danych z układów cyfrowych. Nal
     \caption{GPIO}
   \end{minipage}
 \end{figure}
-Zainstalowane oprogramowanie odpowiedzialne jest za ciągłe monitorowanie stanów i zbieranie danych z czujników pomiarowych. Po podłączeniu układu do zasilania program jest uruchamiany automatycznie. Pierwszą czynnością jaką wykonuje Raspberry Pi jest wysłanie swojego numeru seryjnego do bazy danych Firebase. Cały proces jest w pełni zautomatyzowany. Dzięki temu użytkownicy od razu mogą dodać urządzenie i przeglądać dane z czujników na aplikacjach klienckich. Dodawanie akcesorium "Guard" następuje poprzez wprowadzenie w aplikacji jego numeru seryjnego.
-
+Zainstalowane oprogramowanie odpowiedzialne jest za ciągłe monitorowanie stanów i zbieranie danych z czujników pomiarowych. Po podłączeniu układu do zasilania program jest uruchamiany automatycznie. Pierwszą czynnością jaką wykonuje Raspberry Pi jest wysłanie swojego numeru seryjnego do bazy danych Firebase. Cały proces jest w pełni zautomatyzowany. Dzięki temu użytkownicy od razu mogą dodać urządzenie i przeglądać dane z czujników na aplikacjach klienckich. Dodanie akcesorium pomiarowego następuje poprzez wprowadzenie w aplikacji jego numeru seryjnego.
 \section*{Czujniki}
 Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i jednego przetwornika AC. 
 \paragraph{a) Specyfikacja MQ-9 - czujnik tlenku węgla:}
@@ -103,7 +102,7 @@ MCP3008 to 10-bitowy przetwornik analogowy cyfrowy. Zasilany jest napięciem 5V,
 \begin{equation}
 1 * 5V / 1024 = 4.88mV
 \end{equation}
-Posiada 8 kanałów jednak w projekcie wykorzystano tylko 2 – do podłączenia czujników MQ-9 i MQ-2.
+Posiada 8 kanałów jednak w projekcie wykorzystano tylko 2 – dla czujników MQ-9 i MQ-2.
 \paragraph{Interfejs SPI:}
 \begin{figure}[h]
 	\centering
@@ -118,15 +117,15 @@ Poprzez tę linię wysyłane są dane z Raspberry Pi do przetwornika analogowo c
 \item MISO (ang. Master Input Slave Output):\\
 Poprzez tę linię wysyłane są dane z przetwornika AC do układu Master czyli w naszym przypadku Raspberry Pi 3
 \item SCLK (ang. Serial CLocK) :\\
-Ta linia wykorzystywana jest do przesłania zegara wygenerowanego z Rapberry Pi 3
+Ta linia wykorzystywana jest do przesłania zegara wygenerowanego przez Rapberry Pi 3
 \end{enumerate}
 Do komunikacji poprzez ten interfejs wykorzystano bibliotekę spiDev. \\
 Każdy układ monitoruje wskaźniki pomiarowe z czujników analogowych i cyfrowych. W przypadku wykrycia wskazań, które w znaczący sposób odbiegają od normy informuje właściciela o zagrożeniu. Informacja ta wysyłana jest do wszystkich urządzeń(smartfony, tablety itp), które posiada właściciel.  Analizując dane z czujników analogowych w czystym powietrzu, które wynoszą wtedy odpowiednio:\\
-Czujnik MQ-9: 0.15 – 0.2\\
-Czujnik MQ-2: 0.05 – 0.15\\
-Przyjęto, że granicą wysłania notyfikacji do użytkownika jest przekroczenie progu 0.3. Wartości te to znormalizowane dane z przetwornika AC, który jak już wcześniej wspomniano wykrywa 1024 stany. Odczytywane wartości bezpośrednio na wyjściu cyfrowym przetwornika MCP3008 dla czujnika MQ-9 w czystym powietrzu to około 170. Stąd 170/1024 = 0.166. Wysłanie notyfikacji wiąże się z otrzymaniem wartości większej niż 308 bezpośrednio na wyjściu cyfrowym.
-Reszta to czujniki cyfrowe, które informują o wykryciu ognia i wykryciu ruchu. W przypadku detekcji zagrożenia wysyłają one na swoje wyjście stan niski i utrzymują go przez kilka sekund. W kodzie jednak wykonujemy instrukcje negacji, aby stan wysoki informował o niebezpieczeństwie a stan nisko reprezentował jego brak. Na czujnikach znajduje się potencjometr, za pomocą którego dowolnie można ustawiać jego czułość. Odczyt danych z czujników następuje nieprzerwanie co 2 sekundy. Nie należy obawiać się, że czujnik ruchu nie wykryje zagrożenia z powodu braku odczytu we właściwym momencie, ponieważ utrzymuje on stan wysoki przez 5 sekund po wykryciu ruchu. Oprogramowanie wysyła także informacje z czujników do bazy danych Firebase. Zastosowanie bazy danych Firebase daje możliwość monitorowania wszystkich danych w czasie rzeczywistym na aplikacjach klienckich. Dodatkowo w przypadku wykrycia zagrożenia czyli przekroczeniu progu o którym mowa wyżej wysyłana jest push notyfikacja do urządzeń użytkownika a informacja o zagrożeniu zapisywana jest w bazie danych Django. Każdy jest w stanie odtworzyć całą historię wydarzeń w swoim systemie.
-Aby zapewnić wydajny i pewny system bezpieczeństwa przy otrzymaniu wysokich wartości na czujnikach zapisywany jest czas zdarzenia. Każda kolejna notyfikacja zostanie wysłana po upływie 10 minut od poprzedniej przy założeniu, że nadal stan na czujniku jest wysoki. 
+Czujnik MQ-9: od 0.15 do 0.2\\
+Czujnik MQ-2: od 0.05 do 0.15\\
+Przyjęto, że granicą wysłania notyfikacji do użytkownika jest przekroczenie progu 0.3. Wartości te to znormalizowane dane z przetwornika AC, który jak już wcześniej wspomniano wykrywa 1024 stany. Odczytywane wartości bezpośrednio na wyjściu przetwornika MCP3008 dla czujnika MQ-9 w czystym powietrzu to około 170. Stąd 170/1024 = 0.166. Wysłanie notyfikacji wiąże się z otrzymaniem wartości większej niż 308.
+Czujniki cyfrowe wykorzystane w pracy informują o wykryciu płomieni i ruchu. W przypadku detekcji takiego zagrożenia na wyjściu pojawia się stan niski i utrzymywany jest przez kilka sekund. W kodzie jednak wykonujemy instrukcje negacji, aby stan wysoki informował o niebezpieczeństwie a stan niski reprezentował jego brak. Na czujnikach znajduje się potencjometr, za pomocą którego dowolnie można ustawiać jego czułość. Odczyt danych następuje nieprzerwanie co 2 sekundy. Nie należy obawiać się, że czujnik ruchu nie wykryje zagrożenia z powodu braku odczytu we właściwym momencie, ponieważ utrzymuje on stan wysoki przez 5 sekund po wykryciu ruchu. Oprogramowanie wysyła także informacje z czujników do bazy danych Firebase. Zastosowanie takiej bazy daje możliwość monitorowania wszystkich danych w czasie rzeczywistym na aplikacjach klienckich. Dodatkowo w przypadku zagrożenia czyli przekroczeniu progu o którym mowa wyżej wysyłana jest push notyfikacja do urządzeń użytkownika a informacja o zagrożeniu zapisywana jest w bazie danych Django. Każdy jest w stanie odtworzyć całą historię wydarzeń w swoim systemie.
+Aby zapewnić wydajny i pewny system bezpieczeństwa przy otrzymaniu wysokich wartości na czujnikach zapisywany jest czas zdarzenia. Każda kolejna notyfikacja zostanie wysłana po upływie 10 minut od poprzedniej przy założeniu, że stan na czujniku nadal jest wysoki. 
 
 \section*{Obsługa wideo}
 
