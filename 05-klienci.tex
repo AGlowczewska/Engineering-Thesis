@@ -122,5 +122,14 @@ Testy przeprowadzono na iPhonie 6S i iPadzie Pro.
 
 
 \section*{Aplikacja internetowa}
+Aplikacja webowa przeznaczona jest dla użytkowników wszystkich systemów operacyjnych i~została przetestowana w~przeglądarce Firefox. Rozmieszczenie komponentów aplikacji różni się od tego zastosowanego w~aplikacjach IOS oraz Android - spowodowane jest to inną rozdzielczością ekranu. 
 
-Opis weba, screenshoty
+\paragraph{Panel logowania / rejestracji użytkownika:}
+\paragraph{Menu wyboru urządzenia:}
+\paragraph{Główny panel aplikacji:}
+\paragraph{Panel rejestracji urządzenia:}
+\paragraph{Panel notyfikacji:}
+
+
+\paragraph{Implementacja Django - połączenie z bazą danych:}
+Biblioteka Django posiada wbudowane rozwiązania umożliwiające pobieranie informacji z bazy danych projektu dzięki czemu aplikacja webowa nie wysyła zapytań na określone dla aplikacji mobilnych porty, tylko komunikuje się bezpośrednio z bazą danych. Rozwiązanie to umożliwia uniezależnienie aplikacji webowej od stanu portów oraz zmniejsza liczbę potrzebnych zapytań wysyłanych do serwera.
