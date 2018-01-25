@@ -6,8 +6,8 @@ Wszystkie zestawy zbudowano w oparciu o Raspberry Pi 3 v1.2. Zdecydowano się na
 \paragraph{Specyfikacja Raspberry Pi 3:}
 \begin{itemize} 
 \item Procesor 1.2 GHz
-\item Liczba rdzeni 4. Quad Core
-\item Pamięć RAM 1 GB
+\item Liczba rdzeni 4. Quad Core
+\item Pamięć RAM 1 GB
 \item Pamięć Karta microSD
 \item 40 GPIO
 \end{itemize}
@@ -121,11 +121,11 @@ Posiada 8 kanałów jednak w projekcie wykorzystano tylko 2 – do podłączenia
 SPI jest to interfejs synchroniczny. Może być do niego podłączone wiele urządzeń typu slave, jednak tylko z jednym urządzeniem Master, które generuje zegar. Master poprzez linię SS wybiera urządzenie z którym chce się komunikować.  \\
 Interfejs ten zawiera jeszcze 3 linie:
 \begin{enumerate} 
-\item MOSI (ang. Master Output Slave Input): \\
+\item MOSI (ang. Master Output Slave Input): \\
 Poprzez tę linię wysyłane są dane z Raspberry Pi do przetwornika analogowo cyfrowego MCP3008.
-\item MISO (ang. Master Input Slave Output):\\
+\item MISO (ang. Master Input Slave Output):\\
 Poprzez tę linię wysyłane są dane z przetwornika AC do układu Master czyli w naszym przypadku Raspberry Pi 3
-\item SCLK (ang. Serial CLocK) :\\
+\item SCLK (ang. Serial CLocK) :\\
 Ta linia wykorzystywana jest do przesłania zegara wygenerowanego z Rapberry Pi 3
 \end{enumerate}
 Do komunikacji poprzez ten interfejs wykorzystano bibliotekę spiDev. \\
@@ -140,24 +140,42 @@ Oprogramowanie oprócz badania danych z czujników wysyła je także do bazy dan
 Aby zapewnić wydajny i pewny system bezpieczeństwa - przy otrzymaniu wysokich wartości na czujnikach i wysłaniu notyfikacji zapisywany jest czas zdarzenia. Każda kolejna notyfikacja zostanie wysłana po upływie 10 minut od poprzedniej przy założeniu, że nadal stan na czujniku jest wysoki. 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \section*{Obsługa wideo}
+
+\paragraph{Protokół RTMP}
+
+\paragraph{h264}
+
+\paragraph{Raspberry Pi}
+
+Do obsługi strumieniowania wideo, po stronie Raspberry Pi, wykorzystywany jest program FFMPEG. Pozwala on na sterowanie strumieniem, od wyboru urządzenia wejsciowego, przez statystyki strumienia, po punkt docelowy. Dostęp do unikatowego, dla każdego urządzenia Raspberry, punktu końcowego, gwarantowało wczeniejsze pobranie nr seryjnego urządzenia. Poniżej przedstawiono skrypt, wykonujący wymienione funkcje:
+\begin{verbatim}
+#!/bin/bash
+serial_id="$(cat /proc/cpuinfo | grep Serial | cut -d ' ' -f 2)"
+raspivid -o - -t 0 -fps 30 -b 1000000 | ffmpeg -re -ar 44100 -ac 2 -acodec pcm_s16le -f s16le -i /dev/zero -f h264 -i - -vcodec copy -g 60 -strict experimental -f flv rtmp://52.236.165.15:1936/camera/${serial_id}
+\end{verbatim}
+
+Pierwszą czynnoscią, wykonywaną w skrypcie, jest otwarcie pliku /proc/cpuinfo, następnie znajdowana jest w nim linia, w której znajduje się wyjątkowy serial urządzenia. Na końcu, z wykorzystaniem potoku, i funkcji cut, wartosć ta zostaje przypisana do zmiennej serial_id.
+
+W drugiej linii skryptu wykorzystane jest narzędzie linii poleceń Raspberry - raspivid. Pozwala ono pobrać obraz z kamery. 
+\begin{itemize}
+\item Pierwszym przełącznikiem jest -o z parametrem -. Oznacza to, że obraz z kamery jest wysyłany na wyjscie standardowe.
+\item Przełącznik -t ustawiony na 0 pozwala przekazywać obraz, z modułu kamery, przez nieokrelony czas. Aby przestać pobierać wideo, należy użyć przerwania za pomocą sygnału SIGINT (obsługiwanego w terminalu skrótem klawiszowym CTRL+C).
+\item Opcja -fps pozwala wskazać liczbę przechwytywanych klatek w ciągu sekundy. Tutaj wykorzystano maksymalne możliwoci wybranego modułu kamery.
+\item Ostatnią opcją, wykorzystaną w pobieraniu obrazu z kamery, jest bitrate, tzn wielkosć pamięci, w której ma się znaleźć obraz przechwycony w ciągu 1 sekundy. Ustawienie opcji -b na 1000000 oznacza, że 1 sekunda wideo, może zajmować 125 kilobajtów pamięci. Jest to szczególnie istotna informacja, w kontekcie transmisji obrazu poza urządzenie.
+\end{itemize}
+
+Drugim poleceniem jest wywołanie narzędzia ffmpeg, połączonego za pomocą potoku, odbierającego, przechwytywany za pomocą funkcji raspivid, obraz i przekazującego go na docelowy punkt końcowy. Za jego pomocą ustala się ostatecznie opcje kodujące obraz i dźwięk w trakcie końcowej transmisji.
+\begin{itemize}
+\item Przełącznik -re pozwala odczytywać dane wejsciowe, z oryginalną częstotliwoscią. Zatem zostają przechwycone ustawienia przełącznika funkcji raspivid -fps 30.
+\item Opcje  -ar, -ac, -acodec, -f, -strict odpowiadają kolejno za: próbkowanie dźwięku, wybór liczby kanałów, kodek audio, format dźwięku oraz wybór eksperymentalnego sposobu kodowania. Wymuszenie wykorzystania, jako wejscia strumienia dźwięku, na /dev/zero, oznacza, że strumień ten zostaje wypełniony wartosciami pustymi. Zatem opcje transmisji dźwięku są nieistotne.
+\item Przełącznik -vcodec ustala kodek wideo. W pracy wykorzystano standard kodowania h264.
+\item Następnie ustawiono wejscie obrazu. Przełącznik -i - powoduje, że narzędzie ffmpeg przechwytuje, dzięki potokowi, obraz przekazywany funkcją raspivid.
+\item Opcja -g 60 oznacza, że tzw klatka kluczowa (ang keyframe) pojawia się co 60 klatek. W tej sytuacji, co 2 sekundy. 
+\item Przełącznik -f, w przypadku strumienia obrazu z kamery, wymusza format nadawanego wideo.  
+\item Ostatnim elementem polecenia jest podanie punktu docelowego dla strumienia. Za pomocą protokołu RTMP, obługiwanego przez serwer o adresie IP 52.236.165.15 na porcie 1936, obraz wysyłany jest na aplikację o nazwie camera i punkt charakteryzowany przez serial urządzenia. Działanie tego elementu opisano w kolejnym punkcie. 
+\end{itemize}
+
+\paragraph{Serwer}
 
 Opis procesu, opis Nginxa, opis RTMP i HLS
