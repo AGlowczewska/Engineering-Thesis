@@ -49,7 +49,7 @@ W kodzie użyto biblioteki wiringpi do odczytu danych z układów cyfrowych. Nal
     \caption{GPIO}
   \end{minipage}
 \end{figure}
-Oprogramowanie zainstalowane na Raspberry Pi odpowiedzialne jest za ciągłe monitorowanie stanów i danych z czujników pomiarowych. Po podłączeniu układu do zasilania program jest uruchamiany automatycznie. Pierwszą czynnością jaką wykonuje Raspberry jest wysłanie swojego numeru seryjnego do bazy danych Firebase. Cały proces jest w pełni zautomatyzowany. Dzięki temu użytkownicy od razu mogą dodać urządzenie i monitorować dane z czujników na aplikacjach klienckich. Dodawanie urządzenia następuje poprzez wprowadzenie w aplikacji numeru seryjnego urządzenia.
+Zainstalowane oprogramowanie odpowiedzialne jest za ciągłe monitorowanie stanów i zbieranie danych z czujników pomiarowych. Po podłączeniu układu do zasilania program jest uruchamiany automatycznie. Pierwszą czynnością jaką wykonuje Raspberry Pi jest wysłanie swojego numeru seryjnego do bazy danych Firebase. Cały proces jest w pełni zautomatyzowany. Dzięki temu użytkownicy od razu mogą dodać urządzenie i przeglądać dane z czujników na aplikacjach klienckich. Dodawanie akcesorium "Guard" następuje poprzez wprowadzenie w aplikacji jego numeru seryjnego.
 
 \section*{Czujniki}
 Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i jednego przetwornika AC. 
@@ -60,7 +60,6 @@ Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i 
 \item Temperatura pracy: od -10 do 50 \textdegree{}C
 \item Wyjścia: analogowe oraz cyfrowe
 \end{itemize}
-
 \paragraph{b) Specyfikacja MQ-2 - czujnik LPG i dymu:}
 \begin{itemize} 
 \item Zasilanie: 5 V
@@ -68,7 +67,6 @@ Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i 
 \item Temperatura pracy: od -10 do 50 \textdegree{}C
 \item Wyjścia: analogowe oraz cyfrowe
 \end{itemize}
-
 \paragraph{c) Specyfikacja czujnika wykrywania płomieni:}
 \begin{itemize} 
 \item Zasilanie: 3.3 V
@@ -76,19 +74,16 @@ Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i 
 \item Kąt detekcji: od 0 do 60 stopni
 \item Temperatura pracy: od -25 do 85 \textdegree{}C
 \end{itemize}
-
 \paragraph{d) Specyfikacja DS18B20 - czujnik temperatury:}
 \begin{itemize} 
 \item Zasilanie: 3.3 V
 \item Zakres pomiarowy: od -55 do 125 \textdegree{}C
 \end{itemize}
-
 \paragraph{e) Kamera:}
 \begin{itemize} 
 \item Wykorzystano moduł kamery Raspberry Pi element14
 \item Kamera 5MP - wspierająca nagrywanie 30 klatek na sekundę w rozdzielczości Full HD
 \end{itemize}
-
 \paragraph{f) Specyfikacja MCP3008 - przetwornik A/C:}
 \begin{itemize} 
 \item Zasilanie: od 2.7V do 5.5V
@@ -98,20 +93,17 @@ Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i 
 \item Rozdzielczość: 10bit
 \item Czas konwersji: 10us
 \end{itemize}
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=15cm]{GuardSchem}
 	\caption{Schemat układu The Guard}
 \end{figure}
-
-Niestety żaden model Raspberry nie posiada wbudowanego przetwornika analogowo cyfrowego dlatego konieczne było użycie układu zewnętrzenego. Wybraliśmy przetwornik MCP3008 ze względu na jego nisko koszt i interfejs SPI, który jest wspierany przez Raspberry Pi.
+Niestety żaden model Raspberry nie posiada wbudowanego przetwornika analogowo cyfrowego dlatego konieczne było użycie układu zewnętrzenego. Wybrano przetwornik MCP3008 ze względu na jego nisko koszt i interfejs SPI, który jest wspierany przez Raspberry Pi.
 MCP3008 to 10-bitowy przetwornik analogowy cyfrowy. Zasilany jest napięciem 5V, napięcie VRef = 5V.  Skoro jest to przetwornik 10-bitowy jest w stanie wykryć 1024 stany. Wykrywana przez niego minimalna różnica napięć na wejściu wynosi 
 \begin{equation}
 1 * 5V / 1024 = 4.88mV
 \end{equation}
 Posiada 8 kanałów jednak w projekcie wykorzystano tylko 2 – do podłączenia czujników MQ-9 i MQ-2.
-
 \paragraph{Interfejs SPI:}
 \begin{figure}[h]
 	\centering
@@ -129,16 +121,12 @@ Poprzez tę linię wysyłane są dane z przetwornika AC do układu Master czyli 
 Ta linia wykorzystywana jest do przesłania zegara wygenerowanego z Rapberry Pi 3
 \end{enumerate}
 Do komunikacji poprzez ten interfejs wykorzystano bibliotekę spiDev. \\
-
-Każdy układ monitoruje wskaźniki pomiarowe z czujników analogowych i cyfrowych. W przypadku wykrycia wskazań, które w znaczący sposób odbiegają od normy informuje właściciela o zagrożeniu. Informacja ta wysyłana jest do wszystkich urządzeń, które posiada właściciel.  Analizując dane z czujników analogowych w czystym powietrzu, które wynoszą wtedy odpowiednio:\\
+Każdy układ monitoruje wskaźniki pomiarowe z czujników analogowych i cyfrowych. W przypadku wykrycia wskazań, które w znaczący sposób odbiegają od normy informuje właściciela o zagrożeniu. Informacja ta wysyłana jest do wszystkich urządzeń(smartfony, tablety itp), które posiada właściciel.  Analizując dane z czujników analogowych w czystym powietrzu, które wynoszą wtedy odpowiednio:\\
 Czujnik MQ-9: 0.15 – 0.2\\
 Czujnik MQ-2: 0.05 – 0.15\\
-Przyjęto, że granicą wysłania notyfikacji do urządzeń użytkownika jest przekroczenie progu 0.3. Wartości te to znormalizowane dane z układu przetwornika AC, który jak już wcześniej wspomniano wykrywa 1024 stany. Odczytywane wartości bezpośrednio na wyjściu cyfrowym przetwornika MCP3008 dla czujnika MQ-9 w czystym powietrzu to około 170. Stąd 170/1024 = 0.166. Wysłanie notyfikacji wiąże się z otrzymaniem wartości większej niż 308 bezpośrednio na wyjściu cyfrowym.
-Reszta to czujniki cyfrowe, które informują m.in. o wykryciu ognia i wykryciu ruchu. W przypadku detekcji zagrożenia wysyłają one na wyjście stan niski i utrzymują go przez kilka sekund. W kodzie jednak wykonujemy instrukcje negacji, aby stan wysoki informował o niebezpieczeństwie a stan nisko reprezentował jego brak. Na czujnikach znajduje się potencjometr, za pomocą którego dowolnie można ustawiać jego czułość.
-Odczyt danych z czujników następuje nieprzerwanie co 2 sekundy. Nie należy obawiać się, że czujnik ruchu nie wykryje zagrożenia gdyż nie zostanie odczytany w poprawnym czasie, ponieważ utrzymuje on stan wysoki przez 5 sekund po wykryciu ruchu.
-Oprogramowanie oprócz badania danych z czujników wysyła je także do bazy danych Firebase. Daje to możliwość monitorowania wszystkich danych z każdego z pomieszczeń w czasie rzeczywistym na aplikacjach klienckich. Dodatkowo w przypadku wykrycia zagrożenia czyli przekroczeniu progu o którym mowa wyżej wysyłana jest push notyfikacja do wszystkich urządzeń użytkownika a informacja o zagrożeniu zapisywana jest w bazie danych Django. Dzięki temu każdy jest w stanie odtworzyć całą historię wydarzeń w swoim systemie.
-Aby zapewnić wydajny i pewny system bezpieczeństwa - przy otrzymaniu wysokich wartości na czujnikach i wysłaniu notyfikacji zapisywany jest czas zdarzenia. Każda kolejna notyfikacja zostanie wysłana po upływie 10 minut od poprzedniej przy założeniu, że nadal stan na czujniku jest wysoki. 
-
+Przyjęto, że granicą wysłania notyfikacji do użytkownika jest przekroczenie progu 0.3. Wartości te to znormalizowane dane z przetwornika AC, który jak już wcześniej wspomniano wykrywa 1024 stany. Odczytywane wartości bezpośrednio na wyjściu cyfrowym przetwornika MCP3008 dla czujnika MQ-9 w czystym powietrzu to około 170. Stąd 170/1024 = 0.166. Wysłanie notyfikacji wiąże się z otrzymaniem wartości większej niż 308 bezpośrednio na wyjściu cyfrowym.
+Reszta to czujniki cyfrowe, które informują o wykryciu ognia i wykryciu ruchu. W przypadku detekcji zagrożenia wysyłają one na swoje wyjście stan niski i utrzymują go przez kilka sekund. W kodzie jednak wykonujemy instrukcje negacji, aby stan wysoki informował o niebezpieczeństwie a stan nisko reprezentował jego brak. Na czujnikach znajduje się potencjometr, za pomocą którego dowolnie można ustawiać jego czułość. Odczyt danych z czujników następuje nieprzerwanie co 2 sekundy. Nie należy obawiać się, że czujnik ruchu nie wykryje zagrożenia z powodu braku odczytu we właściwym momencie, ponieważ utrzymuje on stan wysoki przez 5 sekund po wykryciu ruchu. Oprogramowanie wysyła także informacje z czujników do bazy danych Firebase. Zastosowanie bazy danych Firebase daje możliwość monitorowania wszystkich danych w czasie rzeczywistym na aplikacjach klienckich. Dodatkowo w przypadku wykrycia zagrożenia czyli przekroczeniu progu o którym mowa wyżej wysyłana jest push notyfikacja do urządzeń użytkownika a informacja o zagrożeniu zapisywana jest w bazie danych Django. Każdy jest w stanie odtworzyć całą historię wydarzeń w swoim systemie.
+Aby zapewnić wydajny i pewny system bezpieczeństwa przy otrzymaniu wysokich wartości na czujnikach zapisywany jest czas zdarzenia. Każda kolejna notyfikacja zostanie wysłana po upływie 10 minut od poprzedniej przy założeniu, że nadal stan na czujniku jest wysoki. 
 
 \section*{Obsługa wideo}
 
@@ -152,14 +140,12 @@ potem
 potem
 
 \paragraph{Raspberry Pi}
-
 Do obsługi strumieniowania wideo, po stronie Raspberry Pi, wykorzystywany jest program FFMPEG. Pozwala on na sterowanie strumieniem, od wyboru urządzenia wejsciowego, przez statystyki strumienia, po punkt docelowy. Dostęp do unikatowego, dla każdego urządzenia Raspberry, punktu końcowego, gwarantowało wczeniejsze pobranie nr seryjnego urządzenia. Poniżej przedstawiono skrypt, wykonujący wymienione funkcje:
 \begin{verbatim}
 #!/bin/bash
 serial_id="$(cat /proc/cpuinfo | grep Serial | cut -d ' ' -f 2)"
 raspivid -o - -t 0 -fps 30 -b 1000000 | ffmpeg -re -ar 44100 -ac 2 -acodec pcm_s16le -f s16le -i /dev/zero -f h264 -i - -vcodec copy -g 60 -strict experimental -f flv rtmp://52.236.165.15:1936/camera/${serial_id}
 \end{verbatim}
-
 Pierwszą czynnoscią, wykonywaną w skrypcie, jest otwarcie pliku /proc/cpuinfo, następnie znajdowana jest w nim linia, w której znajduje się wyjątkowy serial urządzenia. Na końcu, z wykorzystaniem potoku, i funkcji cut, wartosć ta zostaje przypisana do zmiennej serial_id.
 
 W drugiej linii skryptu wykorzystane jest narzędzie linii poleceń Raspberry - raspivid. Pozwala ono pobrać obraz z kamery. 
