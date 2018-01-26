@@ -6,7 +6,16 @@ Opis chmury oraz używanych przez nas usług
 
 \section*{Aplikacja serwerowa}
 
-Opis Django
+\paragraph{Koncepcja}
+Aplikacja serwerowa, została zaplanowana jako interfejs pomiędzy: urządzeniami peryferyjnymi, aplikacjami użytkowników urządzeń mobilnych, bazą danych a usługami chmurowymi.
+Założeniem, dotyczącym pierwsza częsci komunikacji: Raspberry - Serwer - Aplikacja, było wykorzystanie zapytań HTTP: GET i POST.
+\begin{itemize}
+\item Zapytanie GET 
+\item Zapytanie POST
+\end{itemize}
+
+\paragraph{final version}
+W ostatecznej wersji, skorzystano z dodatkowych usług, m. in Firebase OAuth2. Uwierzytelnianie użytkowników zaczęło wymagać, by do każdego zapytania, dodać token użytkownika. Spowodowało to, że jedynym typem zapytań, wykorzystywanym w systemie, są zapytania POST. 
 
 \section*{Baza danych}
 
