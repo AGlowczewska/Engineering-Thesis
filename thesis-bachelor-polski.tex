@@ -18,9 +18,7 @@ Paweł Szudrowicz \album{122445}}
 \ppsupervisor{dr inż. Mariusz Nowak} % Your supervisor comes here.
 \ppyear{2018}                                         % Year of final submission (not graduation!)
 
-
 \begin{document}
-
     % Front matter starts here
     \frontmatter\pagestyle{empty}%
     \maketitle\cleardoublepage%
@@ -28,7 +26,7 @@ Paweł Szudrowicz \album{122445}}
     % Blank info page for "karta dyplomowa"
     \thispagestyle{empty}\vspace*{\fill}%
     \begin{center}
-        Tutaj przychodzi karta pracy dyplomowej;\\oryginał wstawiamy do wersji dla archiwum PP, w pozostałych kopiach wstawiamy ksero.
+        Tutaj przychodzi karta pracy dyplomowej;\\oryginał wstawiamy do wersji dla archiwum PP, w pozostałych kopiach wstawiamy ksero. \cite{DUMMY:1}
     \end{center}%
     \vfill\cleardoublepage%
 
@@ -51,7 +49,9 @@ Paweł Szudrowicz \album{122445}}
     \input{0b-pisanie-w-latexu.tex}
 
     % Bibliography (books, articles) starts here.
-    \bibliographystyle{plalpha}{\raggedright\sloppy\small\bibliography{bibliography}}
+    \bibliography{bibliography} 
+    \bibliographystyle{plain}
+  %  {\raggedright\sloppy\small\bibliography{bibliography}}
 
     % Colophon is a place where you should let others know about copyrights etc.
     \ppcolophon
