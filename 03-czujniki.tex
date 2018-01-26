@@ -34,13 +34,13 @@ Aby prawidłowo zainstalować oprogramowanie The Guard na dowolnym urządzeniu R
 \item pip install pyrebase
 \end{enumerate}
 Następnym krokiem jest włączenie odpowiednich interfejsów w panelu konfiguracyjnym. Należy zmienić ustawienia zgodnie ze schematem (rys. 3.3).
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=6cm]{RSettings}
 	\caption{Ustawienia}
 \end{figure}
 Użyto biblioteki wiringpi do odczytu danych z układów cyfrowych. Należy podkreślić, że numeracja fizycznych pinów(rys. 3.4) i numeracja pinów w wiringPi(rys. 3.5) jest różna i nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu numer 1 w wiringPi jest równoznaczny z odczytem stanu na pinie numer 12 (GPIO18).
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{minipage}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{gpio.png}
@@ -96,16 +96,17 @@ Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i 
 \item Czas konwersji: 10us
 \end{itemize}
 Na schematach (rys. 3.6, rys. 3.7) przedstawiono charakterystykę czujników analogowych.
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=8cm]{MQ2}
 	\caption{Charakterystyka MQ-2}
 \end{figure}
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=8cm]{MQ9}
 	\caption{Charakterystyka MQ-9}
 \end{figure}
+
 Ro - jest to stała wartość oporu czujnika przy 1000ppm H2 w czystym powietrzu.
 Rs - jest to opór czujnika w różnych stężeniach gazu.
 Skoro Ro jest stałe to przy wzroście Rs czułość będzie maleć. Dlatego też im mniejszy stosunek Rs do Ro tym lepiej. Widać, że oba czujniki reagują na wiele różnych gazów. MQ-2 nazwano czujnikiem LPG a MQ-9 czujnikiem CO ze względu na to, że w stosunku do tych gazów mają najwyższą czułość. 
@@ -113,7 +114,7 @@ Skoro Ro jest stałe to przy wzroście Rs czułość będzie maleć. Dlatego te�
 Niestety żaden model Raspberry nie posiada wbudowanego przetwornika analogowo cyfrowego dlatego konieczne było użycie układu zewnętrznego. Wybrano przetwornik MCP3008 ze względu na jego nisko koszt i interfejs SPI, który jest wspierany przez Raspberry Pi.
 MCP3008 to 10-bitowy przetwornik analogowy cyfrowy. Zasilany jest napięciem 5V.  Skoro jest to przetwornik 10-bitowy jest w stanie wykryć 1024 stany. Posiada 8 kanałów jednak w projekcie wykorzystano tylko 2 – dla MQ-9 i MQ-2.
 \paragraph{Interfejs SPI:}
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=5cm]{SPI.png}
 	\caption{Interfejs SPI}
@@ -125,7 +126,7 @@ Interfejs ten zawiera jeszcze 3 linie:
 Poprzez tę linię wysyłane są dane z Raspberry Pi do przetwornika analogowo cyfrowego MCP3008.
 \item MISO (ang. Master Input Slave Output):\\
 Poprzez tę linię wysyłane są dane z przetwornika AC do układu Master czyli w naszym przypadku Raspberry Pi 3
-\item SCLK (ang. Serial CLocK) :\\
+\item SCLK (ang. Serial Clock) :\\
 Ta linia wykorzystywana jest do przesłania zegara wygenerowanego przez Rapberry Pi 3
 \end{enumerate}
 Do komunikacji poprzez ten interfejs wykorzystano bibliotekę spiDev. \\
