@@ -42,24 +42,14 @@ Opis połączenia aplikacji z Firebase, Fabric i innymi bibliotekami.
 
 \section*{Aplikacja iOS}
 Aplikacja przeznaczona jest na urządzenia z systemem operacyjnym iOS od wersji 10.0. 
-<<<<<<< HEAD
-Nie wspiera ona wcześniejszych wersji ze względu na nowe funkcje, które Apple wprowadziło wraz z pojawieniem się iOS 10.0 (m.in. klasa UNUserNotificationCenter). Jednak 92\% wszystkich obecnych użytkowników tego systemu(rys. 5.1) jest w stanie zainstalować aplikację a liczba ta stale rośnie. Aplikacja wspiera zarówno telefony komórkowe iPhone jak i tablety iPad. 
-\begin{figure}[h]
-=======
 Nie wspiera ona wcześniejszych wersji ze względu na nowe funkcje, które Apple wprowadziło wraz z pojawieniem się iOS 10.0 (m.in. klasa UNUserNotificationCenter). Jednak 93\% wszystkich obecnych użytkowników tego systemu(rys. 5.1)\footnote{\url{https://developer.apple.com/support/app-store/}} jest w stanie zainstalować oprogramowanie a liczba ta stale rośnie. Aplikacja wspiera zarówno telefony komórkowe iPhone jak i tablety iPad. 
 \begin{figure}[ht]
->>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 	\centering
 	\includegraphics[width=6cm]{iOSstat}
 	\caption{Udziały wersji systemu iOS z 18.01.2018}
 \end{figure}
-<<<<<<< HEAD
-Napisana w stosunkowo nowym języku Swift (zaprezentowany przez Apple w 2014r na konferencji WWDC) w oparciu o architekturę MVC (Model-View-Controller) wykorzystując przy tym programowanie reaktywne i funkcjonalne. Aplikacja powstała w programie Xcode. Programowanie reaktywne zrealizowano przy pomocy biblioteki RxSwift. Ten paradygmat programowania związany jest z pojęciem obserwatora i sekwencji obserwowalnych. Każdy obserwator wywołując funkcję 'subscribe' na elemencie obserwowalnym otrzymuje informację o każdej zmianie na tym obiekcie. RxSwift wykorzystano m.in w celu wznowienia streamu obrazu z kamery w momencie przejścia aplikacji z trybu background do trybu foreground. Oznacza to, że po wyjściu z aplikacji, ale pozostawiając ja działającą w tle i po ponownym jej uruchomieniu tracono obraz ze streamu. Przyczyną jest polityka Apple, która nie zaleca aby aplikacje pracowały w tle i domyślnie wyłącza każdą taką aktywność. Ma to na celu przedłużenie żywotności baterii i optymalizacji całego systemu poprzez ograniczenie ilości zajmowanych zasobów [https://developer.apple.com/library/content/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html].  Oczywiście istnieje możliwość włączenia pracy w tle, jednakże konieczne jest aktywowanie trybu "Background Modes" i zaznaczenie konkretnej aktywności, którą chcielibyśmy wykonywać. Lista dozwolonych czynności możliwych do realizacji w tle jest ograniczona (rys. 5.2). 
-\begin{figure}[h]
-=======
 Napisana w stosunkowo nowym języku Swift (zaprezentowany przez Apple w 2014r na konferencji WWDC) w oparciu o architekturę MVC (Model-View-Controller) wykorzystując przy tym programowanie reaktywne i funkcjonalne. Aplikacja powstała w programie Xcode. Programowanie reaktywne zrealizowano przy pomocy biblioteki RxSwift. Ten paradygmat programowania związany jest z pojęciem obserwatora i sekwencji obserwowalnych. Każdy obserwator wywołując funkcję 'subscribe' na elemencie obserwowalnym otrzymuje informację o każdej zmianie na tym obiekcie. RxSwift wykorzystano m.in w celu wznowienia streamu obrazu z kamery w momencie przejścia aplikacji z trybu background do trybu foreground. Oznacza to, że po wyjściu z aplikacji, ale pozostawiając ja działającą w tle i po ponownym jej uruchomieniu tracono obraz ze streamu. Przyczyną jest polityka Apple, która nie zaleca aby aplikacje pracowały w tle i domyślnie wyłącza każdą taką aktywność. Ma to na celu przedłużenie żywotności baterii i optymalizacji całego systemu poprzez ograniczenie ilości zajmowanych zasobów \footnote{\url{https://developer.apple.com/library/content/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html}}.  Oczywiście istnieje możliwość włączenia pracy w tle, jednakże konieczne jest aktywowanie trybu "Background Modes" i zaznaczenie konkretnej aktywności, którą chcielibyśmy wykonywać. Lista dozwolonych czynności możliwych do realizacji w tle jest ograniczona (rys. 5.2). 
 \begin{figure}[ht]
->>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 	\centering
 	\includegraphics[width=9cm]{backgroundModes}
 	\caption{Tryby pracy w tle}
@@ -84,11 +74,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         }).disposed(by: disposeBag)
 \end{verbatim}
 Zmienna 'inBackground', która jest zmienną obserwowalną, ustawiana jest w oddzielnej klasie AppDelegate (klasa, która zapewnie poprawną interakcję z systemem iOS) na wartość true w chwili przejścia do trybu pracy w tle i na wartość false w przeciwnym wypadku. Klasa, w której wywoływany jest funkcja 'subscribe' jest obserwatorem tej zmiennej. Kod wewnątrz funkcji subscribe uruchamiany jest przy każdej zmianie wartości 'inBackground' i wznawia ponownie stream po każdym ponownym uruchomieniu programu.
-<<<<<<< HEAD
-"Programowanie funkcjonalne natomiast polega na traktowaniu funkcji jako obiektu. Oznacza to, że mogą być one zapisywane, kopiowane i przekazywane tak samo jak wszystkie inne obiekty. Mogą być używane jako parametry innych funkcji." [Pro Swift, Paul Hudson 04.19.2016 strona 172 link do store na iTunes : https://itunes.apple.com/us/book/pro-swift/id1111033310?mt=11 ]. Wykorzystane są w miejscach gdzie konieczne jest przekształcanie danych:
-=======
 "Programowanie funkcjonalne natomiast polega na traktowaniu funkcji jako obiektu. Oznacza to, że mogą być one zapisywane, kopiowane i przekazywane tak samo jak wszystkie inne obiekty. Mogą być używane jako parametry innych funkcji." \footnote{\url{https://itunes.apple.com/us/book/pro-swift/id1111033310?mt=11}}. Wykorzystane są w miejscach gdzie konieczne jest przekształcanie danych:
->>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 \begin{verbatim}
 lastNotification = notifications.array.sorted(by: { (n1, n2) -> Bool in
 	n1.date > n2.date 
@@ -97,11 +83,7 @@ lastNotification = notifications.array.sorted(by: { (n1, n2) -> Bool in
 Na tablicy z notyfikacjami zastosowano szereg kolejnych funkcji: posortowano je malejąco według daty, przefiltrowano w taki sposób aby wybrać tylko te o typie 'PIRSensor' czyli te pochodzące z czujnika ruchu. Na sam koniec wybrano tylko jeden pierwszy element z wybranych i wynik wpisano do zmiennej lastNotification. Ważne jest, że każda kolejna wywoływana funkcja np. filter, odbiera wynik poprzedniej. 
 
 Strukturę kodu (rys. 5.3) podzielono na kilka osobnych, logicznych części. Folder Firebase zawiera model bazy danych czujników, które zapisane są na serwerach Firebase. W folderze GuardManager znajdują się elementy odpowiedzialne za komunikację REST-ową z serwerem Django i modele bazy danych znajdującej się na naszym serwerze. Folder Views jest zbiorem widoków, które wczytywane są w zależności, w której sekcji się znajdujemy (opis sekcji niżej). ViewController.swift jest głównym kontrolerem zarządzającym widokami i modelami. Odpowiada za załadowanie odpowiedniego widoku i prezentację danych z odpowiedniej sekcji. W folderze GuardianAppTests napisane zostały testy jednostkowe, które sprawdzają poprawność przekształcania danych typu JSON (odpowiedź serwera) do obiektów zdefiniowanych w folderze GuardManager/Models. Klasy, których nazwy kończą się na Manager oznaczają obiekty typu Singleton. Celem takiego wzorca jest zapewnienie istnienia tylko jednej instancji w całej aplikacji i globalnego dostępu do tego obiektu. GuardManager, który odpowiada za pobieranie danych z bazy danych - taki obiekt nie powinien być utworzony więcej niż jeden raz, gdyż wszystkie klasy, które z niego korzystają nie potrzebują kolejnych instancji tej klasy. W ten sposób zapewniono, że zawsze odwołujemy się do tego samego obiektu.
-<<<<<<< HEAD
-\begin{figure}[h]
-=======
 \begin{figure}[ht]
->>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 	\centering
 	\includegraphics[width=4cm]{iOSstructure}
 	\caption{Struktura aplikacji}
@@ -122,11 +104,7 @@ Instalacja zewnętrznych bibliotek odbywa się za pomocą CocoaPods. Jest to men
 \end{verbatim}
 Moya używana jest do asynchronicznej REST-owej komunikacji z serwerem Django. SwiftyJSONMapper przydatna okazuje się do przekształcenia odpowiedzi serwera w postaci JSON do wcześniej zdefiniowanego modelu. MBProgressHUD umożliwia wyświetlanie ekranu ładowania podczas pobierania informacji z serwera. RxSwift i RxCocoa to biblioteki do programowania reaktywnego. Moduły Firebas/Core itp. służą do komunikacji z serwerami Firebase. Ostatni 'pod M13ProgressSuite' służy do rysowania wykresów i animowanych elementów graficznych w systemie iOS.
 Po uruchomieniu aplikacji pierwszym widokiem jest ekran logowania i rejestracji użytkowników (rys 5.4). 
-<<<<<<< HEAD
-\begin{figure}[h]
-=======
 \begin{figure}[ht]
->>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 	\centering
 	\includegraphics[width=5cm]{login.png}
 	\caption{Ekran logowania}
@@ -147,11 +125,7 @@ saturation: 1, brightness: 1, alpha: 1)
 \end{figure}
 \paragraph{Sekcja historii notyfikacji:}
 W tej sekcji użytkownik ma dostęp do historii zdarzeń w systemie (rys 5.6). Po zaznaczeniu daty reprezentującej moment wystąpienia zagrożenia i wybranu przycisku 'preview' prezentowana jest informacja o miejscu niebezpieczeństwa i jego rodzaju. 
-<<<<<<< HEAD
-\begin{figure}[h]
-=======
 \begin{figure}[ht]
->>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 \centering
 \begin{minipage}{.4\linewidth}
     \includegraphics[width=\linewidth]{history.png}
@@ -173,22 +147,14 @@ Sekcja odpowiedzialna za prawidłowy odbiór obrazu z kamery zaznaczonej w dolne
 Sekcja prezentuje ostatnie nagrane zagrożenie. Służy do szybkiego przeglądu ostatniego niebezpieczeństwa i prezentuje ostatni nagrany materiał video. 
 
 Przeprowadzono kilka testów aplikacji pod pełnym obciążeniem za pomocą programu Instruments. Szczególnie interesująco przedstawia się zużycie sieci podczas streamu obrazu. Widać, że w ciągu jednej minuty pobrano 6,61MB a wysłano jedynie 24,11Kb (rys. 5.8). Obraz pobierany jest tylko wtedy kiedy aplikacja jest aktywna. W ciągu godziny działania aplikacji pobierze ona około 400MB danych. Jednak dla zapewnienia komfortu użytkowania i płynnego streamu obrazu zalecane jest posiadanie łącza umożliwiającego transfer danych na poziomie min. 200KB/s. 
-<<<<<<< HEAD
-\begin{figure}[h]
-=======
 \begin{figure}[ht]
->>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 	\centering
 	\includegraphics[width=11cm]{networkUsage}
 	\caption{Zużycie sieci podczas streamu}
 \end{figure}
 Przeprowadzono także test na zużycie pamięci RAM i zużycie procesora. Te jednak są niewielkie i wynoszą odpowiednio 25MB pamięci RAM i średnio 1 procent zużycia procesora.
 Zużycie procesora wzrasta do poziomu ok. 15 procent tylko w momencie pobierania nagranego obrazu z serwera. Wtedy też zużycie pamięci RAM jest o około 5MB większe i wynosi około 30MB (rys. 5.9).
-<<<<<<< HEAD
-\begin{figure}[h]
-=======
 \begin{figure}[ht]
->>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 	\centering
 	\includegraphics[width=11cm]{CPURAM}
 	\caption{Zużycie procesora i RAM podczas największego obciążenia}
@@ -197,7 +163,6 @@ Testy przeprowadzono na iPhonie 6S i iPadzie Pro.
 
 
 \section*{Aplikacja internetowa}
-<<<<<<< HEAD
 Aplikacja webowa przeznaczona jest dla użytkowników wszystkich systemów operacyjnych i~została przetestowana w~przeglądarce Firefox. Rozmieszczenie komponentów aplikacji różni się od tego zastosowanego w~aplikacjach IOS oraz Android - spowodowane jest to inną rozdzielczością ekranu. 
 
 \paragraph{Panel logowania / rejestracji użytkownika:}
@@ -209,7 +174,6 @@ Aplikacja webowa przeznaczona jest dla użytkowników wszystkich systemów opera
 
 \paragraph{Implementacja Django - połączenie z bazą danych:}
 Biblioteka Django posiada wbudowane rozwiązania umożliwiające pobieranie informacji z bazy danych projektu dzięki czemu aplikacja webowa nie wysyła zapytań na określone dla aplikacji mobilnych porty, tylko komunikuje się bezpośrednio z bazą danych. Rozwiązanie to umożliwia uniezależnienie aplikacji webowej od stanu portów oraz zmniejsza liczbę potrzebnych zapytań wysyłanych do serwera.
-=======
 Aplikacja internetowa przeznaczona jest dla użytkowników wszystkich systemów operacyjnych i~została przetestowana w~przeglądarce Firefox w systemach operacyjnych Microsoft Windows 10 oraz Linux Debian 9 (Firefox ESR 52.5.2 64 bit). Do stworzenia aplikacji użyto języków programowania Python 3, JavaScript oraz framework'u Django, natomiast frontend jest oparty na bibliotece Bootstrap oraz JQuery. Połączenie z~bazą danych Firebase zaimplementowano za pomocą Firebase Web Api. Rozmieszczenie komponentów aplikacji różni się od tego zastosowanego w~aplikacjach IOS oraz Android - spowodowane jest to inną rozdzielczością ekranu. 
 
 \paragraph{Panel logowania / rejestracji użytkownika:} Panele logowania oraz rejestracji użytkownika są do siebie bardzo podobne - jedyna ich różnica jest w nazwie i~funkcjonalności. Obydwa panele składają się z~loga aplikacji oraz formularza w~którym trzeba podać adres email i~hasło. W przypadku panelu logowania, dane są weryfikowane i~jeśli są poprawne użytkownik zostaje zalogowany. Jeżeli użytkownik chce zarejestrować konto, sprawdzana jest poprawność adresu email, a następnie tworzone jest konto w usłudze FireBase Auth. W przypadku błędu, jest on wyświetlany powyżej formularza (rys. \ref{web_login})
@@ -278,4 +242,3 @@ Aplikacja internetowa przeznaczona jest dla użytkowników wszystkich systemów 
 
 \paragraph{Implementacja Django - połączenie z bazą danych:}
 Biblioteka Django posiada wbudowane rozwiązania umożliwiające pobieranie informacji z bazy danych projektu dzięki czemu aplikacja webowa nie wysyła zapytań na określone dla aplikacji mobilnych porty, tylko komunikuje się bezpośrednio z bazą danych. Rozwiązanie to umożliwia uniezależnienie aplikacji webowej od stanu portów oraz zmniejsza liczbę potrzebnych zapytań wysyłanych do serwera.
->>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
