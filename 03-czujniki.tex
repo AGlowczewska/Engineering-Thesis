@@ -1,20 +1,16 @@
 \chapter{Zbieranie i przetwarzanie danych z czujników}
 \section*{Raspberry Pi}
-Źródła:\\
-https://pl.wikipedia.org/wiki/Serial_Peripheral_Interface\\
-Dokumentacja MQ-2 i MQ-9 (datasheet w folderze) \\
-Raspberry Pi Przewodnik użytkownika Eben Upton i Gareth Halfacree, Helion\\
-https://www.14core.com/configure-clibrary-wiringpi/ \\
-https://www.element14.com/community/docs/DOC-73950/l/raspberry-pi-3-model-b-gpio-40-pin-block-pinout \\
-Specyfikacje czujników cyfrowych ze strony sprzedawcy https://botland.com.pl/czujniki-ruchu/1655-czujnik-ruchu-pir-hc-sr501-zielony.html \\
-
-Wszystkie zestawy zbudowano w oparciu o Raspberry Pi 3 v1.2. Zdecydowano się na to rozwiązanie, ponieważ bazuje on na dystrybucji Linuxa, posiada opowiednie interfejsy i złącza a także zintegrowany moduł WiFi. Minusem w stosunku do konkurencyjnego Arduino jest brak wejść analogowych. Problem rozwiązano dodając zewnętrzny przetwornik A/C. Całość zamknięto w małą plastikową obudowę z wyciętymi otworami na czujniki (rys. 3.1).
+Wszystkie zestawy zbudowano w oparciu o Raspberry Pi 3 v1.2. Zdecydowano się na to rozwiązanie, ponieważ bazuje on na dystrybucji Linuxa, posiada opowiednie interfejsy i złącza a także zintegrowany moduł WiFi. Minusem w stosunku do konkurencyjnego Arduino jest brak wejść analogowych. Problem rozwiązano dodając zewnętrzny przetwornik A/C. Całość zamknięto w małą plastikową obudowę z wyciętymi otworami na czujniki (rys. 3.1). Schemat budowy układu wykonano w programie Fritzing (rys. 3.2).
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=7cm]{guard.jpg}
 	\caption{Zbudowany zestaw The Guard}
 \end{figure}
-
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=15cm]{GuardSchem}
+	\caption{Schemat układu The Guard}
+\end{figure}
 \paragraph{Specyfikacja Raspberry Pi 3:}
 \begin{itemize} 
 \item Procesor 1.2 GHz
@@ -37,23 +33,23 @@ Aby prawidłowo zainstalować oprogramowanie The Guard na dowolnym urządzeniu R
 \item sudo pip install spidev
 \item pip install pyrebase
 \end{enumerate}
-Następnym krokiem jest włączenie odpowiednich interfejsów w panelu konfiguracyjnym. Należy zmienić ustawienia zgodnie ze schematem (rys. 3.2).
+Następnym krokiem jest włączenie odpowiednich interfejsów w panelu konfiguracyjnym. Należy zmienić ustawienia zgodnie ze schematem (rys. 3.3).
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=6cm]{RSettings}
 	\caption{Ustawienia}
 \end{figure}
-Użyto biblioteki wiringpi do odczytu danych z układów cyfrowych. Należy podkreślić, że numeracja fizycznych pinów(rys. 3.4) i numeracja pinów w wiringPi(rys. 3.3) jest różna i nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu numer 1 w wiringPi jest równoznaczny z odczytem stanu na pinie numer 12 (GPIO18).
+Użyto biblioteki wiringpi do odczytu danych z układów cyfrowych. Należy podkreślić, że numeracja fizycznych pinów(rys. 3.4) i numeracja pinów w wiringPi(rys. 3.5) jest różna i nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu numer 1 w wiringPi jest równoznaczny z odczytem stanu na pinie numer 12 (GPIO18).
 \begin{figure}[h]
   \centering
   \begin{minipage}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{wiringpi.png}
-    \caption{WiringPi}
+    \includegraphics[width=\textwidth]{gpio.png}
+    \caption{GPIO}
   \end{minipage}
   \hfill
   \begin{minipage}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{gpio.png}
-    \caption{GPIO}
+    \includegraphics[width=\textwidth]{wiringpi.png}
+    \caption{WiringPi}
   \end{minipage}
 \end{figure}
 Zainstalowane oprogramowanie odpowiedzialne jest za ciągłe monitorowanie stanów i zbieranie danych z czujników pomiarowych. Po podłączeniu układu do zasilania program jest uruchamiany automatycznie. Pierwszą czynnością jaką wykonuje Raspberry Pi jest wysłanie swojego numeru seryjnego do bazy danych Firebase. Cały proces jest w pełni zautomatyzowany. Dzięki temu użytkownicy od razu mogą dodać urządzenie i przeglądać dane z czujników na aplikacjach klienckich. Dodanie akcesorium pomiarowego następuje poprzez wprowadzenie w aplikacji jego numeru seryjnego.
@@ -99,43 +95,30 @@ Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i 
 \item Rozdzielczość: 10bit
 \item Czas konwersji: 10us
 \end{itemize}
+Na schematach (rys. 3.6, rys. 3.7) przedstawiono charakterystykę czujników analogowych.
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=15cm]{GuardSchem}
-	\caption{Schemat układu The Guard}
+	\includegraphics[width=8cm]{MQ2}
+	\caption{Charakterystyka MQ-2}
 \end{figure}
-Na schematach (rys. 3.6, rys. 3.7) przedstawiono charakterystykę czujników analogowych.
-\begin{figure}[H]
-\centering
-\begin{minipage}{.4\linewidth}
-    \includegraphics[width=\linewidth]{MQ2}
-    \caption{Charakterystyka MQ-2\\Źródło: dokumentacja czujnika}
-    \label{img1}
-\end{minipage}
-\hspace{.05\linewidth}
-\begin{minipage}{.4\linewidth}
-    \includegraphics[width=\linewidth]{MQ9}
-    \caption{Charakterystyka MQ-9\\Źródło: dokumentacja czujnika}
-    \label{img2}
-\end{minipage}
-\end{figure} 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=8cm]{MQ9}
+	\caption{Charakterystyka MQ-9}
+\end{figure}
 Ro - jest to stała wartość oporu czujnika przy 1000ppm H2 w czystym powietrzu.
 Rs - jest to opór czujnika w różnych stężeniach gazu.
-Skoro Ro jest stałe to przy wzroście Rs czułość będzie maleć. Dlatego też im mniejszy stosunek Rs do Ro tym lepiej. Widać, że oba czujniki reagują na wiele różnych gazów. MQ-2 nazwano czujnikiem LPG a MQ-9 czujnikiem CO ze względu na to, że w stosunku do tych gazów mają najwyższą czułość.  
+Skoro Ro jest stałe to przy wzroście Rs czułość będzie maleć. Dlatego też im mniejszy stosunek Rs do Ro tym lepiej. Widać, że oba czujniki reagują na wiele różnych gazów. MQ-2 nazwano czujnikiem LPG a MQ-9 czujnikiem CO ze względu na to, że w stosunku do tych gazów mają najwyższą czułość. 
 
 Niestety żaden model Raspberry nie posiada wbudowanego przetwornika analogowo cyfrowego dlatego konieczne było użycie układu zewnętrznego. Wybrano przetwornik MCP3008 ze względu na jego nisko koszt i interfejs SPI, który jest wspierany przez Raspberry Pi.
-MCP3008 to 10-bitowy przetwornik analogowy cyfrowy. Zasilany jest napięciem 5V.  Skoro jest to przetwornik 10-bitowy jest w stanie wykryć 1024 stany. Wykrywana przez niego minimalna różnica napięć na wejściu wynosi 
-\begin{equation}
-1 * 5V / 1024 = 4.88mV
-\end{equation}
-Posiada 8 kanałów jednak w projekcie wykorzystano tylko 2 – dla MQ-9 i MQ-2.
+MCP3008 to 10-bitowy przetwornik analogowy cyfrowy. Zasilany jest napięciem 5V.  Skoro jest to przetwornik 10-bitowy jest w stanie wykryć 1024 stany. Posiada 8 kanałów jednak w projekcie wykorzystano tylko 2 – dla MQ-9 i MQ-2.
 \paragraph{Interfejs SPI:}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=5cm]{SPI.png}
 	\caption{Interfejs SPI}
 \end{figure}
-SPI jest to interfejs synchroniczny. Może być do niego podłączone wiele urządzeń typu slave, jednak tylko z jednym urządzeniem Master, które generuje zegar. Master poprzez linię SS wybiera urządzenie z którym chce się komunikować.  \\
+SPI jest to interfejs synchroniczny (rys. 3.8). Może być do niego podłączone wiele urządzeń typu slave, jednak tylko z jednym urządzeniem Master, które generuje zegar. Master poprzez linię SS wybiera urządzenie z którym chce się komunikować.  \\
 Interfejs ten zawiera jeszcze 3 linie:
 \begin{enumerate} 
 \item MOSI (ang. Master Output Slave Input): \\
