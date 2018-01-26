@@ -1,5 +1,11 @@
 \chapter{Zbieranie i przetwarzanie danych z czujników}
-
+Źródła:\\
+https://pl.wikipedia.org/wiki/Serial_Peripheral_Interface\\
+Dokumentacja MQ-2 i MQ-9 (datasheet w folderze) \\
+Raspberry Pi Przewodnik użytkownika Eben Upton i Gareth Halfacree, Helion\\
+https://www.14core.com/configure-clibrary-wiringpi/ \\
+https://www.element14.com/community/docs/DOC-73950/l/raspberry-pi-3-model-b-gpio-40-pin-block-pinout \\
+Specyfikacje czujników cyfrowych ze strony sprzedawcy https://botland.com.pl/czujniki-ruchu/1655-czujnik-ruchu-pir-hc-sr501-zielony.html \\
 \section*{Raspberry Pi}
 Wszystkie zestawy zbudowano w oparciu o Raspberry Pi 3 v1.2. Zdecydowano się na to rozwiązanie, ponieważ bazuje on na dystrybucji Linuxa, posiada opowiednie interfejsy i złącza a także zintegrowany moduł WiFi. Minusem w stosunku do konkurencyjnego Arduino jest brak wejść analogowych. Problem rozwiązano dodając zewnętrzny przetwornik A/C.
 \paragraph{Specyfikacja Raspberry Pi 3:}
@@ -119,7 +125,7 @@ Posiada 8 kanałów jednak w projekcie wykorzystano tylko 2 – dla MQ-9 i MQ-2.
 \paragraph{Interfejs SPI:}
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=6cm]{SPI.png}
+	\includegraphics[width=5cm]{SPI.png}
 	\caption{Interfejs SPI}
 \end{figure}
 SPI jest to interfejs synchroniczny. Może być do niego podłączone wiele urządzeń typu slave, jednak tylko z jednym urządzeniem Master, które generuje zegar. Master poprzez linię SS wybiera urządzenie z którym chce się komunikować.  \\
