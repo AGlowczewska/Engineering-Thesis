@@ -1,6 +1,37 @@
 \chapter{Aplikacje klienckie}
 
+Na podstawie statystyk rynkowych, dostępnych na stronie statcounter.com (http://gs.statcounter.com/os-market-share/mobile-tablet/worldwide/#monthly-201801-201801-bar) zdecydowano się na stworzenie 3 klientów systemu The Guard, które umożliwią użytkowanie możliwie największej grupie osób:
+\newline
+\newline
+\textbullet \space aplikacji mobilnej na system Android,\newline
+\textbullet \space aplikacji mobilnej na system iOS,\newline
+\textbullet \space aplikację webową.
+
 \section*{Aplikacja Android}
+\subsection*{Wybór narzędzi}
+Do stworzenia aplikacji mobilnej na system Android użyto języka Kotlin - języka stworzonego przez firmę JetBrains, który 17.05.2017 r. (źródło: https://twitter.com/Android/status/864911929143197696) został uznany przez Google jako oficjalny język programowania aplikacji na platformę Android.
+Kotlin ściśle współegzystuje z kodem stworzonym w Javie i w przypadku Androida jest kompilowany do kodu JVM.
+
+Skorzystano ze środowiska Android Studio w wersji 3.0.1, do automatyzacji budowy projektu został wykrozystany Gradle w wersji 4.1.
+
+Aplikacja skierowana jest na urządzenia z systemem Android od wersji Lollipop 5.0 (o numerze SDK większym niż 20), który został wydany 12.12.2014 r. Ograniczenie wersji spowodowane jest możliwością użycia bardziej zaawansowanych komponentów, niedostępnych dla niższych wersji. W styczniu 2018 r. oficjalne statystyki informują o tym, że około 80,7 \% wszystkich urządzeń z systemem Android na świecie ma wersję 5.0 lub wyższą.
+
+\subsection{Architektura aplikacji}
+Aplikacja The Guard dla systemu Android została stworzona zgodnie z założeniami architektury Model View Presenter. Architektura MVP zakłada rozdzielenie kodu źródłowego aplikacji na 3 kategorie:
+
+\newline
+\newline
+\textbullet \space *Model*, czyli kod odpowiedzialny za logikę biznesową, połączenie z serwerem i złożone operacje,\newline
+\textbullet \space *View*, czyli kod odpowiedzialny wyłącznie za poprawne wyświetlanie przygotowanych informacji,\newline
+\textbullet \space *Presenter*, czyli kod odpowiedzialny za przygotowanie informacji otrzymanych z warstwy model do wyświetlenia w warstwie View.\newline
+
+\newline Największą zaletą architektury MVP jest możliwość wygodnego testowania logiki aplikacji (w warstwie Presenter) oraz zastosowanie programowania reaktywnego przy użyciu biblioteki RxKotlin.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=9cm]{android_architecture}
+    \caption{Architektura MVP}
+\end{figure}
 
 \section*{Aplikacja iOS}
 Aplikacja przeznaczona jest na urządzenia z systemem operacyjnym iOS od wersji 10.0. 
