@@ -1,5 +1,9 @@
 \chapter{Zbieranie i przetwarzanie danych z czujników}
 \section*{Raspberry Pi}
+<<<<<<< HEAD
+
+Wszystkie zestawy zbudowano w oparciu o Raspberry Pi 3 v1.2 (rys. 3.1). Zdecydowano się na to rozwiązanie, ponieważ bazuje on na dystrybucji Linuxa, posiada opowiednie interfejsy i złącza a także zintegrowany moduł WiFi. Minusem w stosunku do konkurencyjnego Arduino jest brak wejść analogowych. Problem rozwiązano dodając zewnętrzny przetwornik A/C.
+=======
 Wszystkie zestawy zbudowano w oparciu o Raspberry Pi 3 v1.2. Zdecydowano się na to rozwiązanie, ponieważ bazuje on na dystrybucji Linuxa, posiada opowiednie interfejsy i złącza a także zintegrowany moduł WiFi. Minusem w stosunku do konkurencyjnego Arduino jest brak wejść analogowych. Problem rozwiązano dodając zewnętrzny przetwornik A/C. Całość zamknięto w małą plastikową obudowę z wyciętymi otworami na czujniki (rys. 3.1). Schemat budowy układu wykonano w programie Fritzing (rys. 3.2).
 \begin{figure}[h]
 	\centering
@@ -11,6 +15,7 @@ Wszystkie zestawy zbudowano w oparciu o Raspberry Pi 3 v1.2. Zdecydowano się na
 	\includegraphics[width=15cm]{GuardSchem}
 	\caption{Schemat układu The Guard}
 \end{figure}
+>>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 \paragraph{Specyfikacja Raspberry Pi 3:}
 \begin{itemize} 
 \item Procesor 1.2 GHz
@@ -33,14 +38,24 @@ Aby prawidłowo zainstalować oprogramowanie The Guard na dowolnym urządzeniu R
 \item sudo pip install spidev
 \item pip install pyrebase
 \end{enumerate}
+<<<<<<< HEAD
+Następnym krokiem jest włączenie odpowiednich interfejsów w panelu konfiguracyjnym. Należy zmienić ustawienia zgodnie ze schematem 3.2:
+\begin{figure}[h]
+=======
 Następnym krokiem jest włączenie odpowiednich interfejsów w panelu konfiguracyjnym. Należy zmienić ustawienia zgodnie ze schematem (rys. 3.3).
 \begin{figure}[ht]
+>>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 	\centering
 	\includegraphics[width=6cm]{RSettings}
 	\caption{Ustawienia}
 \end{figure}
+<<<<<<< HEAD
+W kodzie użyto biblioteki wiringpi do odczytu danych z układów cyfrowych. Należy podkreślić, że numeracja fizycznych pinów(rys. 3.4) i numeracja pinów w bibliotece wiringPi(rys. 3.3) jest różna i nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu numer 1 w wiringPi jest równoznaczny z odczytem stanu na pinie numer 12 (GPIO18).
+\begin{figure}[h]
+=======
 Użyto biblioteki wiringpi do odczytu danych z układów cyfrowych. Należy podkreślić, że numeracja fizycznych pinów(rys. 3.4) i numeracja pinów w wiringPi(rys. 3.5) jest różna i nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu numer 1 w wiringPi jest równoznaczny z odczytem stanu na pinie numer 12 (GPIO18).
 \begin{figure}[ht]
+>>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
   \centering
   \begin{minipage}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{gpio.png}
@@ -95,8 +110,12 @@ Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i 
 \item Rozdzielczość: 10bit
 \item Czas konwersji: 10us
 \end{itemize}
+<<<<<<< HEAD
+\begin{figure}[h]
+=======
 Na schematach (rys. 3.6, rys. 3.7) przedstawiono charakterystykę czujników analogowych.
 \begin{figure}[ht]
+>>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 	\centering
 	\includegraphics[width=8cm]{MQ2}
 	\caption{Charakterystyka MQ-2}
@@ -106,6 +125,14 @@ Na schematach (rys. 3.6, rys. 3.7) przedstawiono charakterystykę czujników ana
 	\includegraphics[width=8cm]{MQ9}
 	\caption{Charakterystyka MQ-9}
 \end{figure}
+<<<<<<< HEAD
+Niestety żaden model Raspberry nie posiada wbudowanego przetwornika analogowo cyfrowego dlatego konieczne było użycie układu zewnętrzenego. Wybrano przetwornik MCP3008 ze względu na jego nisko koszt i interfejs SPI, który jest wspierany przez Raspberry Pi.
+MCP3008 to 10-bitowy przetwornik analogowy cyfrowy. Zasilany jest napięciem 5V, napięcie VRef = 5V.  Skoro jest to przetwornik 10-bitowy jest w stanie wykryć 1024 stany. Wykrywana przez niego minimalna różnica napięć na wejściu wynosi 
+\begin{equation}
+1 * 5V / 1024 = 4.88mV
+\end{equation}
+Posiada 8 kanałów jednak w projekcie wykorzystano tylko 2 – dla czujników MQ-9 i MQ-2.
+=======
 
 Ro - jest to stała wartość oporu czujnika przy 1000ppm H2 w czystym powietrzu.
 Rs - jest to opór czujnika w różnych stężeniach gazu.
@@ -113,6 +140,7 @@ Skoro Ro jest stałe to przy wzroście Rs czułość będzie maleć. Dlatego te�
 
 Niestety żaden model Raspberry nie posiada wbudowanego przetwornika analogowo cyfrowego dlatego konieczne było użycie układu zewnętrznego. Wybrano przetwornik MCP3008 ze względu na jego nisko koszt i interfejs SPI, który jest wspierany przez Raspberry Pi.
 MCP3008 to 10-bitowy przetwornik analogowy cyfrowy. Zasilany jest napięciem 5V.  Skoro jest to przetwornik 10-bitowy jest w stanie wykryć 1024 stany. Posiada 8 kanałów jednak w projekcie wykorzystano tylko 2 – dla MQ-9 i MQ-2.
+>>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 \paragraph{Interfejs SPI:}
 \begin{figure}[ht]
 	\centering
@@ -126,7 +154,11 @@ Interfejs ten zawiera jeszcze 3 linie:
 Poprzez tę linię wysyłane są dane z Raspberry Pi do przetwornika analogowo cyfrowego MCP3008.
 \item MISO (ang. Master Input Slave Output):\\
 Poprzez tę linię wysyłane są dane z przetwornika AC do układu Master czyli w naszym przypadku Raspberry Pi 3
+<<<<<<< HEAD
+\item SCLK (ang. Serial CLocK) :\\
+=======
 \item SCLK (ang. Serial Clock) :\\
+>>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 Ta linia wykorzystywana jest do przesłania zegara wygenerowanego przez Rapberry Pi 3
 \end{enumerate}
 Do komunikacji poprzez ten interfejs wykorzystano bibliotekę spiDev. \\
@@ -134,20 +166,28 @@ Każdy układ monitoruje wskaźniki pomiarowe z czujników analogowych i cyfrowy
 Czujnik MQ-9: od 0.15 do 0.2\\
 Czujnik MQ-2: od 0.05 do 0.15\\
 Przyjęto, że granicą wysłania notyfikacji do użytkownika jest przekroczenie progu 0.3. Wartości te to znormalizowane dane z przetwornika AC, który jak już wcześniej wspomniano wykrywa 1024 stany. Odczytywane wartości bezpośrednio na wyjściu przetwornika MCP3008 dla czujnika MQ-9 w czystym powietrzu to około 170. Stąd 170/1024 = 0.166. Wysłanie notyfikacji wiąże się z otrzymaniem wartości większej niż 308.
+<<<<<<< HEAD
+Czujniki cyfrowe wykorzystane w pracy informują o wykryciu płomieni i ruchu. W przypadku detekcji takiego zagrożenia na wyjściu pojawia się stan niski i utrzymywany jest przez kilka sekund. W kodzie jednak wykonujemy instrukcje negacji, aby stan wysoki informował o niebezpieczeństwie a stan niski reprezentował jego brak. Na czujnikach znajduje się potencjometr, za pomocą którego dowolnie można ustawiać jego czułość. Odczyt danych następuje nieprzerwanie co 2 sekundy. Nie należy obawiać się, że czujnik ruchu nie wykryje zagrożenia z powodu braku odczytu we właściwym momencie, ponieważ utrzymuje on stan wysoki przez 5 sekund po wykryciu ruchu. Oprogramowanie wysyła także informacje z czujników do bazy danych Firebase. Zastosowanie takiej bazy daje możliwość monitorowania wszystkich danych w czasie rzeczywistym na aplikacjach klienckich. Dodatkowo w przypadku zagrożenia czyli przekroczeniu progu o którym mowa wyżej wysyłana jest push notyfikacja do urządzeń użytkownika a informacja o zagrożeniu zapisywana jest w bazie danych Django. Każdy jest w stanie odtworzyć całą historię wydarzeń w swoim systemie.
+=======
 Czujniki cyfrowe wykorzystane w pracy informują o wykryciu płomieni i ruchu. Czujnik ruchu detekcję zagrożenia określa przez stan wysoki natomiast czujnik płomieni przez stan niski. W kodzie jednak wykonano instrukcje negacji, aby stan wysoki informował o niebezpieczeństwie a stan niski reprezentował jego brak. Na czujnikach znajduje się potencjometr, za pomocą którego dowolnie można ustawiać jego czułość. Odczyt danych następuje nieprzerwanie co 2 sekundy. Nie należy obawiać się, że czujnik ruchu nie wykryje zagrożenia z powodu braku odczytu we właściwym momencie, ponieważ utrzymuje on stan wysoki przez 5 sekund po wykryciu ruchu. Oprogramowanie wysyła także informacje z czujników do bazy danych Firebase. Zastosowanie takiej bazy daje możliwość monitorowania wszystkich danych w czasie rzeczywistym na aplikacjach klienckich. Dodatkowo w przypadku zagrożenia czyli przekroczeniu progu, o którym mowa wyżej wysyłana jest push notyfikacja do urządzeń użytkownika a informacja o zagrożeniu zapisywana jest w bazie danych Django. Każdy jest w stanie odtworzyć całą historię wydarzeń w swoim systemie.
+>>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 Aby zapewnić wydajny i pewny system bezpieczeństwa przy otrzymaniu wysokich wartości na czujnikach zapisywany jest czas zdarzenia. Każda kolejna notyfikacja zostanie wysłana po upływie 10 minut od poprzedniej przy założeniu, że stan na czujniku nadal jest wysoki. 
 
 \section*{Obsługa wideo}
 
 \paragraph{Protokół RTMP}
-1. rtmp) Podstawą funkcji strumieniowania wideo, jest protokół RTMP (Real-Time Message Protocol). Jest to, oparty na protokole TCP, protokół wysyłania informacji 
-potem
+Podstawą funkcji strumieniowania wideo, jest protokół RTMP (Real-Time Message Protocol). Jest to, oparty na protokole TCP, protokół wysyłania obrazu, dźwięku oraz danych. 
+Podstawową jednostką danych, w protokole RTMP, jest wiadomosć (ang. Message), której struktura jest zależna od typu strumieniowanych informacji. 
+Wiadomosci dzielone są na kawałki (ang. Chunks), które są porcjami gotowymi do transmisji. Zatem strumień RTMP to ostatecznie strumień cząstek (ang. Chunk Stream)
 
-2. hls)
+Ponadto, wykorzystano protokół HLS (HTTP Live Streaming), zapisywanie odbieranego obrazu, we wskazanej liczbie plików wideo o okreslonej dłusgoci. Gdy aplikacja kliencka odtwarza strumień wideo, w rzeczywistosci odbiera, strumieniowane po kolei, zapisane pliki ts. Wpływa to na opóźnienie odtwarzania, względem rzeczywistosci, z jednej strony, a z drugiej, dostarcza płynne wideo.
 
 \paragraph{h264}
-potem
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 2688ba13846a92baa8deea770d60be5065fe7915
 \paragraph{Raspberry Pi}
 Do obsługi strumieniowania wideo, po stronie Raspberry Pi, wykorzystywany jest program FFMPEG. Pozwala on na sterowanie strumieniem, od wyboru urządzenia wejsciowego, przez statystyki strumienia, po punkt docelowy. Dostęp do unikatowego, dla każdego urządzenia Raspberry, punktu końcowego, gwarantowało wczeniejsze pobranie nr seryjnego urządzenia. Poniżej przedstawiono skrypt, wykonujący wymienione funkcje:
 \begin{verbatim}
