@@ -1,15 +1,15 @@
 \chapter{Aplikacje klienckie}
 
-Na podstawie statystyk rynkowych, dostępnych na stronie statcounter.com (http://gs.statcounter.com/os-market-share/mobile-tablet/worldwide/#monthly-201801-201801-bar) zdecydowano się na stworzenie 3 klientów systemu The Guard, które umożliwią użytkowanie możliwie największej grupie osób:
+Na podstawie analizy statystyk dotyczących podziału rynku aplikacji na platformy, dostępnych na stronie statcounter.com \footnote{\url{http://gs.statcounter.com/os-market-share/mobile-tablet/worldwide/#monthly-201801-201801-bar}}, zdecydowano się na stworzenie 3 klientów systemu The Guard, które pozwolę możliwie największej grupie osób na korzystanie z systemu:
 \newline
 \newline
-\textbullet \space aplikacji mobilnej na system Android,\newline
-\textbullet \space aplikacji mobilnej na system iOS,\newline
-\textbullet \space aplikację webową.
+\textbullet \space aplikacja mobilna na system Android,\newline
+\textbullet \space aplikacja mobilna na system iOS,\newline
+\textbullet \space aplikacja webowa.
 
 \section*{Aplikacja Android}
 \subsection*{Wybór narzędzi}
-Do stworzenia aplikacji mobilnej na system Android użyto języka Kotlin - języka stworzonego przez firmę JetBrains, który 17.05.2017 r. (źródło: https://twitter.com/Android/status/864911929143197696) został uznany przez Google jako oficjalny język programowania aplikacji na platformę Android.
+Do stworzenia aplikacji mobilnej na system Android użyto języka Kotlin - języka stworzonego przez firmę JetBrains, który 17 maja 2017 roku został uznany przez Google jako oficjalny język programowania aplikacji na platformę Android.\footnote{\url{https://twitter.com/Android/status/864911929143197696}}
 Kotlin ściśle współegzystuje z kodem stworzonym w Javie i w przypadku Androida jest kompilowany do kodu JVM.
 
 Skorzystano ze środowiska Android Studio w wersji 3.0.1, do automatyzacji budowy projektu został wykrozystany Gradle w wersji 4.1.
@@ -20,15 +20,16 @@ Aplikacja skierowana jest na urządzenia z systemem Android od wersji Lollipop 5
 Aplikacja The Guard dla systemu Android została stworzona zgodnie z założeniami architektury Model View Presenter. Architektura MVP zakłada rozdzielenie kodu źródłowego aplikacji na 3 kategorie:
 
 \newline
-\newline
-\textbullet \space *Model*, czyli kod odpowiedzialny za logikę biznesową, połączenie z serwerem i złożone operacje,\newline
-\textbullet \space *View*, czyli kod odpowiedzialny wyłącznie za poprawne wyświetlanie przygotowanych informacji,\newline
-\textbullet \space *Presenter*, czyli kod odpowiedzialny za przygotowanie informacji otrzymanych z warstwy model do wyświetlenia w warstwie View.\newline
+\textbullet \space "Model", czyli kod odpowiedzialny za logikę biznesową, połączenie z serwerem i złożone operacje,\newline
+\textbullet \space "View", czyli kod odpowiedzialny wyłącznie za poprawne wyświetlanie przygotowanych informacji,\newline
+\textbullet \space "Presenter", czyli kod odpowiedzialny za przygotowanie informacji otrzymanych z warstwy model do wyświetlenia w warstwie View.\newline
 
 \newline Największą zaletą architektury MVP jest możliwość wygodnego testowania logiki aplikacji (w warstwie Presenter) oraz zastosowanie programowania reaktywnego przy użyciu biblioteki RxKotlin.
+Warstwy komunikują się między sobą w sposób reaktywny - przy użyciu strumieni wydarzeń. Przykładowo klasa warstwy Presenter odpowiedzialna za wyświetlanie obrazu z kamery wykorzystuje klasę warstwy Model do asynchronicznej komunikacji z API.
 
-\subsection*{Interfejs użytkownika}
-Tak zwane międzymordzie - kilka screenów i opis z linkiem do material design.
+\subsection*{Funkcje i interfejs użytkownika}
+Aplikacja została zaprojektowana zgodnie z wytycznymi Material Design\footnote{Learning Material Design: Master Material Design and create beautiful, animated interfaces for mobile and web applications, Kyle Mew, Packt Publishing 2015}.
+Do nawigacji po funkcjach aplikacji służy panel na dole ekranu - "Bottom Bar".
 
 \subsection*{Integracje}
 Opis połączenia aplikacji z Firebase, Fabric i innymi bibliotekami.
