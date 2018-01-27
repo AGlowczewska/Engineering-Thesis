@@ -9,9 +9,15 @@ Wstęp do rozdziału
 
 \section*{Komunikacja}
 
-Komunikacja, pomiędzy elementami systemu, odbywa się na zasadach architektury REST. Takie podejście gwarantuje prostotę przesyłanych komunikatów oraz skalowalność w kontekście nowych urządzeń Raspberry, strumieniujących dane, oraz nowych urządzeń korzystających z aplikacji klienckich. 
-//GET i POST - todo
-Początkowo, projekt był oparty o zapytania GET i POST, nastomiast wprowadzenie tokenów uwierzytelniających, spowodowało, że wymianę komunikatów oparto tylko i wyłącznie na zapytaniach POST. 
+Komunikacja, pomiędzy elementami systemu, odbywa się na zasadach architektury REST. Takie podejście gwarantuje prostotę przesyłanych komunikatów oraz skalowalność w kontekście nowych urządzeń Raspberry, strumieniujących dane, oraz nowych urządzeń korzystających z aplikacji klienckich. Początkowo, projekt był oparty o zapytania GET i POST.  
+
+\paragraph{Zapytanie GET}
+Metoda GET pozwala na pobranie dokumentu sieciowego, na postawie zapytania zawartego w adresie URL. Metoda ta jest używana tylko i wyłącznie do pobierania danych z punktu docelowego. 
+
+\paragraph{Zapytanie POST}
+W metodzie POST, należy zamieścić wiadomość wewnątrz zapytania HTTP. Odpowiedzią na ten typ zapytania, może być zarówno kod statusu, jak i dane, zwracane w podobnej postaci jak przy zapytaniu GET.
+
+Wprowadzenie tokenów uwierzytelniających (więcej w akapicie nt. Bezpieczeństwa), spowodowało, że wymianę komunikatów oparto tylko i wyłącznie na zapytaniach POST. 
 W zależności od zadania, obsługa zapytania polega na wykonaniu zapytania na bazie danych lub wysłaniu notyfikacji do klienta.
 Obsługę zapytań można również podzielić, ze względu na zaplanowane źródło zapytania: aplikacja użytkownika lub urządzenie Raspberry.
 W pierwszej kolejności przedstawione zostaną wiadomości wymieniane na linii Raspberry - Serwer.
@@ -69,7 +75,7 @@ Następne zapytania dotyczą poleceń wysyłanych z aplikacji użytkownika.
 \item Działanie: Powiązuje aplikację, zarówno mobilną, jak i sesję aplikacji przeglądarkowej, o podanym tokenie, z kontem użytkownika. Dzięki temu, notyfikacje trafiają na wszystkie urządzenia użytkownika.
 \end{itemize}
 
-//Podsumowanie części o komunikacji
+Wybrane rozwiązanie pozwala na łatwą lokalizację ewentualnego błędu w działaniu systemu, oraz szybką naprawę zaistniałego problemu. Ponadto prosta logika oraz łatwe, krótkie funkcje, obsługujące zapytania, sprawiają, że dalszy rozwój tej części systemu, będzie możliwy bardzo niskim nakładem sił. 
 
 \section*{Bezpieczeństwo}
 
