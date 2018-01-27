@@ -30,7 +30,8 @@ W pierwszej kolejności przedstawione zostaną wiadomości wymieniane na linii R
 \paragraph{c) Wykrycie zmian na czujniku:}
 \begin{itemize}
 \item Adres: /backend/v1/notification
-\item Zawartość: {‘serial’: <serial-urządzenia>, ‘sensorType’: <typ-czujnika>, ‘value’: <wartość>, 'token': `jwt.token.from.client`}
+\item Zawartość: {‘serial’: <serial-urządzenia>, ‘sensorType’: <typ-czujnika>, 
+‘value’: <wartość>, 'token': `jwt.token.from.client`}
 \item Działanie: Informuje serwer o zmianie wartości jednego z czujników.
 \end{itemize}
 Następne zapytania dotyczą poleceń wysyłanych z aplikacji użytkownika.
@@ -43,13 +44,15 @@ Następne zapytania dotyczą poleceń wysyłanych z aplikacji użytkownika.
 \paragraph{e) Zmiana nazwy urządzenia:}
 \begin{itemize}
 \item Adres: /backend/v1/devices/changeRaspName
-\item Zawartość: {‘serial’: <serial-urządzenia>‘, ‘name’: <nowa-nazwa>, 'token': `jwt.token.from.client`}
+\item Zawartość: {‘serial’: <serial-urządzenia>‘, ‘name’: <nowa-nazwa>, 
+'token': `jwt.token.from.client`}
 \item Działanie: Zmienia nazwę urządzenia, wyświetlaną w podglądzie, w aplikacji użytkownika.
 \end{itemize}
 \paragraph{f) Uzbrojenie/rozbrojenie urządzenia:}
 \begin{itemize}
 \item Adres: /backend/v1/devices/changeIsArmed
-\item Zawartość: {‘serial’: <serial-urządzenia>, ‘armed’: <nowy-stan>, 'token': `jwt.token.from.client`}
+\item Zawartość: {‘serial’: <serial-urządzenia>, ‘armed’: <nowy-stan>, 
+'token': `jwt.token.from.client`}
 \item Działanie: Ustala, czy nowe powiadomienia, związane z urządzeniem, dalej będą wysyłane do aplikacji.
 \end{itemize}
 \paragraph{g) Pobranie listy notyfikacji:}
@@ -61,7 +64,8 @@ Następne zapytania dotyczą poleceń wysyłanych z aplikacji użytkownika.
 \paragraph{h) Powiązanie aplikacji z kontem użytkownika:}
 \begin{itemize}
 \item Adres: /backend/v1/devices/fcmTokenUpdate
-\item Zawartość: {‘email’: <użytkownik>, 'fcmToken': <token-z-firebase>, ‘deviceId’ : <id_aplikacji>}
+\item Zawartość: {‘email’: <użytkownik>, 'fcmToken': <token-z-firebase>, 
+‘deviceId’ : <id_aplikacji>}
 \item Działanie: Powiązuje aplikację, zarówno mobilną, jak i sesję aplikacji przeglądarkowej, o podanym tokenie, z kontem użytkownika. Dzięki temu, notyfikacje trafiają na wszystkie urządzenia użytkownika.
 \end{itemize}
 
