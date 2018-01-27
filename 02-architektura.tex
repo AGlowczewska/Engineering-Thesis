@@ -5,10 +5,67 @@ Wstęp do rozdziału
 \section*{Schemat}
 
 // Piotr - schemat na podstawie "Praca inżynierska na Google Docs"
+//tzn?
 
 \section*{Komunikacja}
 
-// Piotr - opis requesteów i REST
+Komunikacja, pomiędzy elementami systemu, odbywa się na zasadach architektury REST. Takie podejście gwarantuje prostotę przesyłanych komunikatów oraz skalowalność w kontekście nowych urządzeń Raspberry, strumieniujących dane, oraz nowych urządzeń korzystających z aplikacji klienckich. 
+//GET i POST - todo
+Początkowo, projekt był oparty o zapytania GET i POST, nastomiast wprowadzenie tokenów uwierzytelniających, spowodowało, że wymianę komunikatów oparto tylko i wyłącznie na zapytaniach POST. 
+W zależności od zadania, obsługa zapytania polega na wykonaniu zapytania na bazie danych lub wysłaniu notyfikacji do klienta.
+Obsługę zapytań można również podzielić, ze względu na zaplanowane źródło zapytania: aplikacja użytkownika lub urządzenie Raspberry.
+W pierwszej kolejności przedstawione zostaną wiadomości wymieniane na linii Raspberry - Serwer.
+\paragraph{a) Rejestracja Raspberry Pi:}
+\begin{itemize}
+\item Adres: /backend/v1/devices/add
+\item Zawartość: {'serial': <serial-urządzenia>, ‘name’: <nazwa-urządzenia>, 'token': `jwt.token.from.client`}
+\item Działanie: Raspberry, o podanych serialu i nazwie, zostaje dodane do bazy danych urządzeń.
+\end{itemize}
+\paragraph{b) Wykrycie ruchu:}
+\begin{itemize}
+\item Adres: /backend/v1/PIRnotification
+\item Zawartość: {'serial': <serial-urządzenia>, ‘message’: <wiadomość>, 'token': `jwt.token.from.client`}
+\item Działanie: Po odebraniu informacji, o wykryciu ruchu, następuje pobranie klatki ze strumienia obrazu, nadawanego przez Raspberry o wskazanym serialu. Jeśli wykryto ruch człowieka, następuje nagranie fragmentu wideo, który zostaje zapisany w bazie danych Firebase Storage, a użytkownik zostaje poinformowany o zajściu i o nagraniu, któe może pobrać. Jeśli nie wykryto obecności ludzkiej, notyfikacja zostaje zignorowana.
+\end{itemize}
+\paragraph{c) Wykrycie zmian na czujniku:}
+\begin{itemize}
+\item Adres: /backend/v1/notification
+\item Zawartość: {‘serial’: <serial-urządzenia>, ‘sensorType’: <typ-czujnika>, ‘value’: <wartość>, 'token': `jwt.token.from.client`}
+\item Działanie: Informuje serwer o zmianie wartości jednego z czujników.
+\end{itemize}
+Następne zapytania dotyczą poleceń wysyłanych z aplikacji użytkownika.
+\paragraph{d) Pobranie urządzeń użytkownika:}
+\begin{itemize}
+\item Adres: /backend/v1/get
+\item Zawartość: {‘owner’:<użytkownik>, 'token': `jwt.token.from.client`}
+\item Działanie: Zwraca listę urządzeń użytkownika.
+\end{itemize}
+\paragraph{e) Zmiana nazwy urządzenia:}
+\begin{itemize}
+\item Adres: /backend/v1/devices/changeRaspName
+\item Zawartość: {‘serial’: <serial-urządzenia>‘, ‘name’: <nowa-nazwa>, 'token': `jwt.token.from.client`}
+\item Działanie: Zmienia nazwę urządzenia, wyświetlaną w podglądzie, w aplikacji użytkownika.
+\end{itemize}
+\paragraph{f) Uzbrojenie/rozbrojenie urządzenia:}
+\begin{itemize}
+\item Adres: /backend/v1/devices/changeIsArmed
+\item Zawartość: {‘serial’: <serial-urządzenia>, ‘armed’: <nowy-stan>, 'token': `jwt.token.from.client`}
+\item Działanie: Ustala, czy nowe powiadomienia, związane z urządzeniem, dalej będą wysyłane do aplikacji.
+\end{itemize}
+\paragraph{g) Pobranie listy notyfikacji:}
+\begin{itemize}
+\item Adres: /backend/v1/devices/getNotifications
+\item Zawartość: {‘serial’: <serial-urządzenia>,  'token': `jwt.token.from.client`}
+\item Działanie: Pobiera listę notyfikacji, powiązanych z urządzeniem o podanym serialu.
+\end{itemize}
+\paragraph{h) Powiązanie aplikacji z kontem użytkownika:}
+\begin{itemize}
+\item Adres: /backend/v1/devices/fcmTokenUpdate
+\item Zawartość: {‘email’: <użytkownik>, 'fcmToken': <token-z-firebase>, ‘deviceId’ : <id_aplikacji>}
+\item Działanie: Powiązuje aplikację, zarówno mobilną, jak i sesję aplikacji przeglądarkowej, o podanym tokenie, z kontem użytkownika. Dzięki temu, notyfikacje trafiają na wszystkie urządzenia użytkownika.
+\end{itemize}
+
+//Podsumowanie części o komunikacji
 
 \section*{Bezpieczeństwo}
 
