@@ -31,7 +31,6 @@
 %
 % Require additional packages
 %
-\RequirePackage{setspace}
 \RequirePackage{babel}
 \newif\if@pppolish
 \iflanguage{polish}{\@pppolishtrue}{\@pppolishfalse}
@@ -216,7 +215,10 @@ Typeset using \LaTeX\ in Computer Modern.
 \setmarginnotes{6pt}{50pt}{\onelineskip}
 \setheadfoot{\onelineskip}{2\onelineskip}
 \setheaderspaces{*}{2\onelineskip}{*}
-\OneHalfSpacing
+
+\DisemulatePackage{setspace}
+\usepackage{setspace}
+\onehalfspacing
 
 \changecaptionwidth
 \captionwidth{.9\linewidth}

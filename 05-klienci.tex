@@ -1,6 +1,6 @@
 \chapter{Aplikacje klienckie}
 
-Na podstawie analizy statystyk dotyczących podziału rynku aplikacji na platformy, dostępnych na stronie statcounter.com \footnote{\url{http://gs.statcounter.com/os-market-share/mobile-tablet/worldwide/#monthly-201801-201801-bar}}, zdecydowano się na stworzenie 3 klientów systemu The Guard, które pozwolę możliwie największej grupie osób na korzystanie z systemu:
+Na podstawie analizy statystyk dotyczących podziału rynku aplikacji na platformy, dostępnych na stronie statcounter.com \footnote{\url{http://gs.statcounter.com/os-market-share/mobile-tablet/worldwide/#monthly-201801-201801-bar}} , zdecydowano się na stworzenie 3 klientów systemu The Guard, które pozwolę możliwie największej grupie osób na korzystanie z systemu:
 \newline
 \newline
 \textbullet \space aplikacja mobilna na system Android,\newline
@@ -19,12 +19,11 @@ Aplikacja skierowana jest na urządzenia z systemem Android od wersji Lollipop 5
 \subsection*{Architektura}
 Aplikacja The Guard dla systemu Android została stworzona zgodnie z założeniami architektury Model View Presenter. Architektura MVP zakłada rozdzielenie kodu źródłowego aplikacji na 3 kategorie:
 
-\newline
 \textbullet \space "Model", czyli kod odpowiedzialny za logikę biznesową, połączenie z serwerem i złożone operacje,\newline
 \textbullet \space "View", czyli kod odpowiedzialny wyłącznie za poprawne wyświetlanie przygotowanych informacji,\newline
 \textbullet \space "Presenter", czyli kod odpowiedzialny za przygotowanie informacji otrzymanych z warstwy model do wyświetlenia w warstwie View.\newline
 
-\newline Największą zaletą architektury MVP jest możliwość wygodnego testowania logiki aplikacji (w warstwie Presenter) oraz zastosowanie programowania reaktywnego przy użyciu biblioteki RxKotlin.
+sNajwiększą zaletą architektury MVP jest możliwość wygodnego testowania logiki aplikacji (w warstwie Presenter) oraz zastosowanie programowania reaktywnego przy użyciu biblioteki RxKotlin.
 Warstwy komunikują się między sobą w sposób reaktywny - przy użyciu strumieni wydarzeń. Przykładowo klasa warstwy Presenter odpowiedzialna za wyświetlanie obrazu z kamery wykorzystuje klasę warstwy Model do asynchronicznej komunikacji z API.
 
 \subsection*{Funkcje i interfejs użytkownika}
