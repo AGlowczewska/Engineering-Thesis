@@ -31,6 +31,7 @@
 %
 % Require additional packages
 %
+\RequirePackage{setspace}
 \RequirePackage{babel}
 \newif\if@pppolish
 \iflanguage{polish}{\@pppolishtrue}{\@pppolishfalse}
@@ -43,7 +44,6 @@
 \selectlanguage{english}
 \fi
 
-\RequirePackage{setspace}
 \RequirePackage{booktabs}
 \RequirePackage{graphicx}
 
@@ -80,7 +80,6 @@ citecolor=black,
 anchorcolor=black,
 filecolor=black,
 menucolor=black,
-pagecolor=black,
 urlcolor=black,
 pdftitle={},
 pdfauthor={},
@@ -217,7 +216,7 @@ Typeset using \LaTeX\ in Computer Modern.
 \setmarginnotes{6pt}{50pt}{\onelineskip}
 \setheadfoot{\onelineskip}{2\onelineskip}
 \setheaderspaces{*}{2\onelineskip}{*}
-\onehalfspacing
+\OneHalfSpacing
 
 \changecaptionwidth
 \captionwidth{.9\linewidth}
