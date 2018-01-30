@@ -81,7 +81,7 @@ Napisana w stosunkowo nowym języku Swift (zaprezentowany przez Apple w 2014 rok
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=10cm]{ios_screenshots/backgroundModes.png}
-	\caption{Tryby pracy w tle \newline źródło własne}
+	\caption{Tryby pracy w tle [źródło własne]}
 \end{figure}
 Próba oszustwa i wykonywania innej pracy w tle niż zaznaczona zostanie wychwycona w procesie weryfikacji przed jej publikacją na platformie Apple Store. Dzięki programowaniu reaktywnemu problem wznowienia podglądu obrazu został rozwiązany co prezentuje poniższy kod:
 \begin{verbatim}
@@ -115,7 +115,7 @@ Strukturę kodu (rys. 5.3) podzielono na kilka osobnych, logicznych części. Fo
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=4cm]{ios_screenshots/iOSstructure.png}
-	\caption{Struktura aplikacji \protect\newline źródło własne}
+	\caption{Struktura aplikacji [źródło własne]}
 \end{figure}
 Instalacja zewnętrznych bibliotek odbywa się za pomocą CocoaPods. Jest to menadżer zależności dzięki któremu szybko możemy wyszukać i zainstalować wymagane oprogramowanie. Wszystkie użyte zależności przedstawiono poniżej: 
 \begin{verbatim}
@@ -136,7 +136,7 @@ Po uruchomieniu aplikacji pierwszym widokiem jest ekran logowania i rejestracji 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=5cm]{ios_screenshots/login.png}
-	\caption{Ekran logowania \protect\newline źródło własne}
+	\caption{Ekran logowania [źródło własne]}
 \end{figure}
 Po prawidłowym uwierzytelnieniu użytkownika uzyskiwany jest dostęp do głównego widoku aplikacji. W górnej części możliwy jest wybór 5 sekcji:
 sekcja czujników, sekcja historii notyfikacji, sekcja ostatnich zagrożeń przy wykryciu ruchu, sekcja streamu na żywo, sekcja ustawień. Wszystkie te sekcje dotyczą konkretnego urządzenia wybranego na pasku u dołu ekranu. Przy pierwszym uruchomieniu nie istnieje żadne urządzenie przypisane do naszego konta użytkownika. Aby dodać pierwsze i kolejne stacje, od których chcemy otrzymywać notyfikacje o zagrożeniach a także śledzić i monitorować informacje z czujników należy wybrać przycisk "New" z plusikiem w dolnej części ekranu. Pojawi się okno z prośbą o wpisanie numeru identyfikującego urządzenie. Po chwili dodany "Guard" będzie widoczny w na liście.
@@ -150,7 +150,7 @@ saturation: 1, brightness: 1, alpha: 1)
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=5cm]{ios_screenshots/sensors.png}
-	\caption{Sekcja czujników \protect\newline źródło własne}
+	\caption{Sekcja czujników [źródło własne]}
 \end{figure}
 \paragraph{Sekcja historii notyfikacji:}
 W tej sekcji użytkownik ma dostęp do historii zdarzeń w systemie (rys 5.6). Po zaznaczeniu daty reprezentującej moment wystąpienia zagrożenia i wybranu przycisku 'preview' prezentowana jest informacja o miejscu niebezpieczeństwa i jego rodzaju. 
@@ -158,13 +158,13 @@ W tej sekcji użytkownik ma dostęp do historii zdarzeń w systemie (rys 5.6). P
 \centering
 \begin{minipage}{.4\linewidth}
     \includegraphics[width=\linewidth]{ios_screenshots/history.png}
-    \caption{Sekcja historii notyfikacji \protect\newline źródło własne}
+    \caption{Sekcja historii notyfikacji  [źródło własne]}
     \label{img1}
 \end{minipage}
 \hspace{.05\linewidth}
 \begin{minipage}{.4\linewidth}
     \includegraphics[width=\linewidth]{ios_screenshots/settings.png}
-    \caption{Sekcja ustawień \protect\newline źródło własne}
+    \caption{Sekcja ustawień [źródło własne]}
     \label{img2}
 \end{minipage}
 \end{figure} 
@@ -179,14 +179,14 @@ Przeprowadzono kilka testów aplikacji pod pełnym obciążeniem za pomocą prog
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=11cm]{ios_screenshots/networkUsage.png}
-	\caption{Zużycie sieci podczas streamu \protect\newline źródło własne}
+	\caption{Zużycie sieci podczas streamu [źródło własne]}
 \end{figure}
 Przeprowadzono także test na zużycie pamięci RAM i zużycie procesora. Te jednak są niewielkie i wynoszą odpowiednio 25MB pamięci RAM i średnio 1 procent zużycia procesora.
 Zużycie procesora wzrasta do poziomu ok. 15 procent tylko w momencie pobierania nagranego obrazu z serwera. Wtedy też zużycie pamięci RAM jest o około 5MB większe i wynosi około 30MB (rys. 5.9).
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=11cm]{ios_screenshots/CPURAM.png}
-	\caption{Zużycie procesora i RAM podczas największego obciążenia \protect\newline źródło własne}
+	\caption{Zużycie procesora i RAM podczas największego obciążenia [źródło własne]}
 \end{figure}
 Testy przeprowadzono na iPhonie 6S i iPadzie Pro.
 
