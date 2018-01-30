@@ -103,7 +103,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         }).disposed(by: disposeBag)
 \end{verbatim}
 Zmienna 'inBackground', która jest zmienną obserwowalną, ustawiana jest w oddzielnej klasie AppDelegate (klasa, która zapewnie poprawną interakcję z systemem iOS) na wartość true w chwili przejścia do trybu pracy w tle i na wartość false w przeciwnym wypadku. Klasa, w której wywoływany jest funkcja 'subscribe' jest obserwatorem tej zmiennej. Kod wewnątrz funkcji subscribe uruchamiany jest przy każdej zmianie wartości 'inBackground' i wznawia ponownie stream po każdym ponownym uruchomieniu programu.
-"Programowanie funkcjonalne natomiast polega na traktowaniu funkcji jako obiektu. Oznacza to, że mogą być one zapisywane, kopiowane i przekazywane tak samo jak wszystkie inne obiekty. Mogą być używane jako parametry innych funkcji." \cite{proswift}. Wykorzystane są w miejscach gdzie konieczne jest przekształcanie danych:
+"Programowanie funkcjonalne natomiast polega na traktowaniu funkcji jako obiektu. Oznacza to, że mogą być one zapisywane, kopiowane i przekazywane tak samo jak wszystkie inne obiekty. Mogą być używane jako parametry innych funkcji." \cite[p.~172]{proswift}. Wykorzystane są w miejscach gdzie konieczne jest przekształcanie danych:
 \begin{verbatim}
 lastNotification = notifications.array.sorted(by: { (n1, n2) -> Bool in
 	n1.date > n2.date 
