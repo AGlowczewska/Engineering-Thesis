@@ -71,17 +71,17 @@ Opis połączenia aplikacji z Firebase, Fabric i innymi bibliotekami.
 
 \section{Aplikacja iOS}
 Aplikacja przeznaczona jest na urządzenia z systemem operacyjnym iOS od wersji 10.0. 
-Nie wspiera ona wcześniejszych wersji ze względu na nowe funkcje, które Apple wprowadziło wraz z pojawieniem się iOS 10.0 (m.in. klasa UNUserNotificationCenter). Jednak 93\% wszystkich obecnych użytkowników tego systemu(rys. 5.1)\footnote{\url{https://developer.apple.com/support/app-store/}} jest w stanie zainstalować oprogramowanie a liczba ta stale rośnie. Aplikacja wspiera zarówno telefony komórkowe iPhone jak i tablety iPad. 
+Nie wspiera ona wcześniejszych wersji ze względu na nowe funkcje, które Apple wprowadziło wraz z pojawieniem się iOS 10.0 (m.in. klasa UNUserNotificationCenter). Jednak 93\% wszystkich obecnych użytkowników tego systemu(rys. 5.1) jest w stanie zainstalować oprogramowanie a liczba ta stale rośnie. Aplikacja wspiera zarówno telefony komórkowe iPhone jak i tablety iPad. 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=6cm]{ios_screenshots/iOSstat.png}
-	\caption{Udziały wersji systemu iOS z 18.01.2018}
+	\caption{Udziały wersji systemu iOS z 18.01.2018 \cite{iosversions}}
 \end{figure}
 Napisana w stosunkowo nowym języku Swift (zaprezentowany przez Apple w 2014r na konferencji WWDC) w oparciu o architekturę MVC (Model-View-Controller) wykorzystując przy tym programowanie reaktywne i funkcjonalne. Aplikacja powstała w programie Xcode. Programowanie reaktywne zrealizowano przy pomocy biblioteki RxSwift. Ten paradygmat programowania związany jest z pojęciem obserwatora i sekwencji obserwowalnych. Każdy obserwator wywołując funkcję 'subscribe' na elemencie obserwowalnym otrzymuje informację o każdej zmianie na tym obiekcie. RxSwift wykorzystano m.in w celu wznowienia streamu obrazu z kamery w momencie przejścia aplikacji z trybu background do trybu foreground. Oznacza to, że po wyjściu z aplikacji, ale pozostawiając ja działającą w tle i po ponownym jej uruchomieniu tracono obraz ze streamu. Przyczyną jest polityka Apple, która nie zaleca aby aplikacje pracowały w tle i domyślnie wyłącza każdą taką aktywność. Ma to na celu przedłużenie żywotności baterii i optymalizacji całego systemu poprzez ograniczenie ilości zajmowanych zasobów \cite{backgroundmodes}.  Oczywiście istnieje możliwość włączenia pracy w tle, jednakże konieczne jest aktywowanie trybu "Background Modes" i zaznaczenie konkretnej aktywności, którą chcielibyśmy wykonywać. Lista dozwolonych czynności możliwych do realizacji w tle jest ograniczona (rys. 5.2). 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=9cm]{ios_screenshots/backgroundModes.png}
-	\caption{Tryby pracy w tle}
+	\caption{Tryby pracy w tle \\ źródło własne}
 \end{figure}
 Próba oszustwa i wykonywania innej pracy w tle niż zaznaczona zostanie wychwycona w procesie weryfikacji przed jej publikacją na platformie Apple Store. Dzięki programowaniu reaktywnemu problem wznowienia podglądu obrazu został rozwiązany co prezentuje poniższy kod:
 \begin{verbatim}
@@ -115,7 +115,7 @@ Strukturę kodu (rys. 5.3) podzielono na kilka osobnych, logicznych części. Fo
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=4cm]{ios_screenshots/iOSstructure.png}
-	\caption{Struktura aplikacji}
+	\caption{Struktura aplikacji \\ źródło własne}
 \end{figure}
 Instalacja zewnętrznych bibliotek odbywa się za pomocą CocoaPods. Jest to menadżer zależności dzięki któremu szybko możemy wyszukać i zainstalować wymagane oprogramowanie. Wszystkie użyte zależności przedstawiono poniżej: 
 \begin{verbatim}
@@ -136,7 +136,7 @@ Po uruchomieniu aplikacji pierwszym widokiem jest ekran logowania i rejestracji 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=5cm]{ios_screenshots/login.png}
-	\caption{Ekran logowania}
+	\caption{Ekran logowania \\źródło własne}
 \end{figure}
 Po prawidłowym uwierzytelnieniu użytkownika uzyskiwany jest dostęp do głównego widoku aplikacji. W górnej części możliwy jest wybór 5 sekcji:
 sekcja czujników, sekcja historii notyfikacji, sekcja ostatnich zagrożeń przy wykryciu ruchu, sekcja streamu na żywo, sekcja ustawień. Wszystkie te sekcje dotyczą konkretnego urządzenia wybranego w pasku na dole ekranu. Przy pierwszym uruchomieniu nie istnieje żadne urządzenie przypisane do naszego konta użytkownika. Aby dodać pierwsze i kolejne stacje, od których chcemy otrzymywać notyfikacje o zagrożeniach a także śledzić i monitorować informacje z czujników należy wybrać przycisk "New" z plusikiem w dolnej części ekranu. Pojawi się okno z prośbą o wpisanie numeru identyfikującego urządzenie. Po chwili dodany "Guard" będzie widoczny w na liście.
@@ -150,7 +150,7 @@ saturation: 1, brightness: 1, alpha: 1)
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=5cm]{ios_screenshots/sensors.png}
-	\caption{Sekcja czujników}
+	\caption{Sekcja czujników \\źródło własne}
 \end{figure}
 \paragraph{Sekcja historii notyfikacji:}
 W tej sekcji użytkownik ma dostęp do historii zdarzeń w systemie (rys 5.6). Po zaznaczeniu daty reprezentującej moment wystąpienia zagrożenia i wybranu przycisku 'preview' prezentowana jest informacja o miejscu niebezpieczeństwa i jego rodzaju. 
@@ -158,13 +158,13 @@ W tej sekcji użytkownik ma dostęp do historii zdarzeń w systemie (rys 5.6). P
 \centering
 \begin{minipage}{.4\linewidth}
     \includegraphics[width=\linewidth]{ios_screenshots/history.png}
-    \caption{Sekcja historii notyfikacji}
+    \caption{Sekcja historii notyfikacji \\źródło własne}
     \label{img1}
 \end{minipage}
 \hspace{.05\linewidth}
 \begin{minipage}{.4\linewidth}
     \includegraphics[width=\linewidth]{ios_screenshots/settings.png}
-    \caption{Sekcja ustawień}
+    \caption{Sekcja ustawień \\źródło własne}
     \label{img2}
 \end{minipage}
 \end{figure} 
@@ -179,14 +179,14 @@ Przeprowadzono kilka testów aplikacji pod pełnym obciążeniem za pomocą prog
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=11cm]{ios_screenshots/networkUsage.png}
-	\caption{Zużycie sieci podczas streamu}
+	\caption{Zużycie sieci podczas streamu \\źródło własne}
 \end{figure}
 Przeprowadzono także test na zużycie pamięci RAM i zużycie procesora. Te jednak są niewielkie i wynoszą odpowiednio 25MB pamięci RAM i średnio 1 procent zużycia procesora.
 Zużycie procesora wzrasta do poziomu ok. 15 procent tylko w momencie pobierania nagranego obrazu z serwera. Wtedy też zużycie pamięci RAM jest o około 5MB większe i wynosi około 30MB (rys. 5.9).
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=11cm]{ios_screenshots/CPURAM.png}
-	\caption{Zużycie procesora i RAM podczas największego obciążenia}
+	\caption{Zużycie procesora i RAM podczas największego obciążenia \\źródło własne}
 \end{figure}
 Testy przeprowadzono na iPhonie 6S i iPadzie Pro.
 
