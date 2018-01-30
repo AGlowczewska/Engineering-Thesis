@@ -150,19 +150,19 @@ Aby zapewnić wydajny i pewny system bezpieczeństwa przy otrzymaniu wysokich wa
 \section{Obsługa wideo}
 
 \paragraph{Protokół RTMP}
-Podstawą funkcji strumieniowania wideo, jest protokół RTMP (Real-Time Message Protocol). Jest to, oparty na protokole TCP, protokół wysyłania obrazu, dźwięku oraz danych. 
+Podstawą funkcji strumieniowania wideo, jest protokół RTMP (Real-Time Message Protocol). Jest to, oparty na protokole TCP, protokół wysyłania obrazu, dźwięku oraz danych. \cite{MOBILERTMP}
 Podstawową jednostką danych, w protokole RTMP, jest wiadomosć (ang. Message), której struktura jest zależna od typu strumieniowanych informacji. 
-Wiadomosci dzielone są na kawałki (ang. Chunks), które są porcjami gotowymi do transmisji. Zatem strumień RTMP to ostatecznie strumień cząstek (ang. Chunk Stream)
+Wiadomosci dzielone są na kawałki (ang. Chunks), które są porcjami gotowymi do transmisji. Zatem strumień RTMP to ostatecznie strumień cząstek (ang. Chunk Stream) \cite{STREAMRTMP}
 
 Ponadto, wykorzystano protokół HLS (HTTP Live Streaming), zapisywanie odbieranego obrazu, we wskazanej liczbie plików wideo o okreslonej dłusgoci. Gdy aplikacja kliencka odtwarza strumień wideo, w rzeczywistosci odbiera, strumieniowane po kolei, zapisane pliki ts. Wpływa to na opóźnienie odtwarzania, względem rzeczywistosci, z jednej strony, a z drugiej, dostarcza płynne wideo.
 
 \paragraph{H264}
-W pracy wykorzystano kodowanie obrazu koderem H.264. Charakteryzuje go niska złożonosć algorytmów kompresji oraz niewielkie opóźnienie, dzięki czemu idealnie nadaje się do zadania związanego z szybkim enkodowaniem obrazu, przed przestrumieniowaniem go dalej.
+W pracy wykorzystano kodowanie obrazu koderem H.264. Charakteryzuje go niska złożonosć algorytmów kompresji oraz niewielkie opóźnienie, dzięki czemu idealnie nadaje się do zadania związanego z szybkim enkodowaniem obrazu, przed przestrumieniowaniem go dalej. \cite{H264}
 Szybkoć i złożonoć H.264, idą w parze z jego jakoscią, która jest o wiele wyższa, niż w starszych rozwiązaniach.
 Cechą charakterystyczną, dla tego typu kodowania wideo, jest użycie klatki kluczowej (ang keyframe, i-frame). Jest to pełna klatka obrazu, w przeciwieństwie, do następujących po niej danych, które wyrażają różnice między dwoma konsekutywnymi klatkami. Pozwala to na zmniejszenie rozmiarów, ostatecznego obrazu wideo.
 
 \paragraph{Raspberry Pi}
-Do obsługi strumieniowania wideo, po stronie Raspberry Pi, wykorzystywany jest program FFMPEG. Pozwala on na sterowanie strumieniem, od wyboru urządzenia wejsciowego, przez statystyki strumienia, po punkt docelowy. Dostęp do unikatowego, dla każdego urządzenia Raspberry, punktu końcowego, gwarantowało wczeniejsze pobranie nr seryjnego urządzenia. Poniżej przedstawiono skrypt, wykonujący wymienione funkcje:
+Do obsługi strumieniowania wideo, po stronie Raspberry Pi, wykorzystywany jest program FFMPEG. Pozwala on na sterowanie strumieniem, od wyboru urządzenia wejsciowego, przez statystyki strumienia, po punkt docelowy. Dostęp do unikatowego, dla każdego urządzenia Raspberry, punktu końcowego, gwarantowało wczeniejsze pobranie nr seryjnego urządzenia. Poniżej przedstawiono skrypt, wykonujący wymienione funkcje \cite{raspivid}:
 \begin{verbatim}
 #!/bin/bash
 serial_id="$(cat /proc/cpuinfo | grep Serial | cut -d ' ' -f 2)"
@@ -193,7 +193,7 @@ Drugim poleceniem jest wywołanie narzędzia ffmpeg, połączonego za pomocą po
 \end{itemize}
 
 \paragraph{Serwer}
-Narzędziem, umożliwiającym obsługę strumieniowania wideo, z wielu źródeł, na wiele urządzeń równoczesnie, jest serwer NGINX. W częsci projektu, związanej ze strumieniowaniem wideo, wykorzystano moduł nginx-rtmp. 
+Narzędziem, umożliwiającym obsługę strumieniowania wideo, z wielu źródeł, na wiele urządzeń równoczesnie, jest serwer NGINX. W częsci projektu, związanej ze strumieniowaniem wideo, wykorzystano moduł nginx-rtmp \cite{NGINX}. 
 Moduł ten pozwala, m. in., na:
 \begin{itemize}
 \item Tworzenie dynamicznych punktów końcowych, dla urządzeń strumienujących obraz
