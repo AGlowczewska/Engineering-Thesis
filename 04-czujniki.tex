@@ -60,21 +60,21 @@ Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i 
 \item Temperatura pracy: od -10 do 50 \textdegree{}C
 \item Wyjścia: analogowe oraz cyfrowe
 \end{itemize}
-\paragraph{b) Specyfikacja MQ-2 \cite{specyfikacjaMQ-2} - czujnik LPG i dymu:}
+\paragraph{b) Specyfikacja MQ-2 - czujnik LPG i dymu \protect\cite{specyfikacjaMQ-2}:}
 \begin{itemize} 
 \item Zasilanie: 5 V
 \item Pobór prądu: 150 mA
 \item Temperatura pracy: od -10 do 50 \textdegree{}C
 \item Wyjścia: analogowe oraz cyfrowe
 \end{itemize}
-\paragraph{c) Specyfikacja czujnika wykrywania płomieni\cite{specyfikacjaFlame}:}
+\paragraph{c) Specyfikacja czujnika wykrywania płomieni \protect\cite{specyfikacjaFlame}:}
 \begin{itemize} 
 \item Zasilanie: 3.3 V
 \item Zakres wykrywanej fali: 760 do 1100nm
 \item Kąt detekcji: od 0 do 60 stopni
 \item Temperatura pracy: od -25 do 85 \textdegree{}C
 \end{itemize}
-\paragraph{d) Specyfikacja DS18B20 - czujnik temperatury\cite{specyfikacjaTemp}:}
+\paragraph{d) Specyfikacja DS18B20 - czujnik temperatury \protect\cite{specyfikacjaTemp}:}
 \begin{itemize} 
 \item Zasilanie: 3.3 V
 \item Zakres pomiarowy: od -55 do 125 \textdegree{}C
@@ -84,7 +84,7 @@ Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i 
 \item Wykorzystano moduł kamery Raspberry Pi element14
 \item Kamera 5MP - wspierająca nagrywanie 30 klatek na sekundę w rozdzielczości Full HD
 \end{itemize}
-\paragraph{f) Specyfikacja MCP3008 - przetwornik A/C\cite{specyfikacjaAC}:}
+\paragraph{f) Specyfikacja MCP3008 - przetwornik A/C \protect\cite{specyfikacjaAC}:}
 \begin{itemize} 
 \item Zasilanie: od 2.7V do 5.5V
 \item Pobór prądu: 0.5 mA
@@ -92,7 +92,7 @@ Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i 
 \item Liczba kanałów: 8
 \item Rozdzielczość: 10bit
 \end{itemize}
-\paragraph{g) Specyfikacja czujnika ruchu PIR HC-SR501\cite{pir}:}
+\paragraph{g) Specyfikacja czujnika ruchu PIR HC-SR501 \protect\cite{pir}:}
 \begin{itemize} 
 \item Zasilanie: od 4.5V do 20V
 \item Pobór prądu w stanie czuwania: 50 uA
@@ -103,12 +103,12 @@ Na schematach (rys. 3.6, rys. 3.7) przedstawiono charakterystykę czujników ana
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=8cm]{MQ2}
-	\caption{Charakterystyka MQ-2 \cite{mq2}}
+	\caption{Charakterystyka MQ-2 \protect\cite{mq2}}
 \end{figure}
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=8cm]{MQ9}
-	\caption{Charakterystyka MQ-9 \cite{mq9}}
+	\caption{Charakterystyka MQ-9 \protect\cite{mq9}}
 \end{figure}
 Ro - jest to stała wartość oporu czujnika przy 1000ppm H2 w czystym powietrzu.\\
 Rs - jest to opór czujnika w różnych stężeniach gazu.
@@ -119,7 +119,7 @@ Niestety żaden model Raspberry nie posiada wbudowanego przetwornika analogowo c
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=5cm]{SPI.png}
-	\caption{Interfejs SPI \cite{spi}}
+	\caption{Interfejs SPI \protect\cite{spi}}
 \end{figure}
 SPI jest to interfejs synchroniczny(rys. 3.8). Może być do niego podłączone wiele urządzeń typu slave, jednak tylko z jednym urządzeniem Master, które generuje zegar. Master poprzez linię SS wybiera urządzenie z którym chce się komunikować. \\
 Interfejs ten zawiera jeszcze 3 linie:
