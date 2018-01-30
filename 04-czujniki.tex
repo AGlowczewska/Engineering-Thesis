@@ -4,12 +4,12 @@ Wszystkie zestawy zbudowano w oparciu o Raspberry Pi 3 v1.2. Zdecydowano się na
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=7cm]{guard.jpg}
-	\caption{Zbudowany zestaw The Guard}
+	\caption{Zbudowany zestaw The Guard \\ źródło własne}
 \end{figure}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=15cm]{GuardSchem}
-	\caption{Schemat układu The Guard}
+	\caption{Schemat układu The Guard \\ źródło własne}
 \end{figure}
 \paragraph{Specyfikacja Raspberry Pi 3:}
 \begin{itemize} 
@@ -37,44 +37,44 @@ Następnym krokiem jest włączenie odpowiednich interfejsów w panelu konfigura
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=6cm]{RSettings}
-	\caption{Ustawienia}
+	\caption{Ustawienia\\ źródło własne}
 \end{figure}
 Użyto biblioteki wiringpi do odczytu danych z układów cyfrowych. Należy podkreślić, że numeracja fizycznych pinów(rys. 3.4) i numeracja pinów w wiringPi(rys. 3.5) jest różna i nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu numer 1 w wiringPi jest równoznaczny z odczytem stanu na pinie numer 12 (GPIO18).
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=6cm]{gpio.png}
-        \caption{GPIO}
+        \caption{GPIO \cite{gipo}}
 \end{figure}
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=4cm]{wiringpi.png}
-        \caption{WiringPi}
+        \caption{WiringPi \cite{wiringpi}}
 \end{figure}
 Zainstalowane oprogramowanie odpowiedzialne jest za ciągłe monitorowanie stanów i zbieranie danych z czujników pomiarowych. Po podłączeniu układu do zasilania program jest uruchamiany automatycznie. Pierwszą czynnością jaką wykonuje Raspberry Pi jest wysłanie swojego numeru seryjnego do bazy danych Firebase. Cały proces jest w pełni zautomatyzowany. Dzięki temu użytkownicy od razu mogą dodać urządzenie i przeglądać dane z czujników na aplikacjach klienckich. Dodanie akcesorium pomiarowego następuje poprzez wprowadzenie w aplikacji jego numeru seryjnego.
 \section{Czujniki}
 Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i jednego przetwornika AC. 
-\paragraph{a) Specyfikacja MQ-9 - czujnik tlenku węgla:}
+\paragraph{a) Specyfikacja MQ-9 - czujnik tlenku węgla\cite{specyfikacjaMQ-9}:}
 \begin{itemize} 
 \item Zasilanie: 5 V
 \item Pobór prądu: 150 mA
 \item Temperatura pracy: od -10 do 50 \textdegree{}C
 \item Wyjścia: analogowe oraz cyfrowe
 \end{itemize}
-\paragraph{b) Specyfikacja MQ-2 - czujnik LPG i dymu:}
+\paragraph{b) Specyfikacja MQ-2 \cite{specyfikacjaMQ-2} - czujnik LPG i dymu:}
 \begin{itemize} 
 \item Zasilanie: 5 V
 \item Pobór prądu: 150 mA
 \item Temperatura pracy: od -10 do 50 \textdegree{}C
 \item Wyjścia: analogowe oraz cyfrowe
 \end{itemize}
-\paragraph{c) Specyfikacja czujnika wykrywania płomieni:}
+\paragraph{c) Specyfikacja czujnika wykrywania płomieni\cite{specyfikacjaFlame}:}
 \begin{itemize} 
 \item Zasilanie: 3.3 V
 \item Zakres wykrywanej fali: 760 do 1100nm
 \item Kąt detekcji: od 0 do 60 stopni
 \item Temperatura pracy: od -25 do 85 \textdegree{}C
 \end{itemize}
-\paragraph{d) Specyfikacja DS18B20 - czujnik temperatury:}
+\paragraph{d) Specyfikacja DS18B20 - czujnik temperatury\cite{specyfikacjaTemp}:}
 \begin{itemize} 
 \item Zasilanie: 3.3 V
 \item Zakres pomiarowy: od -55 do 125 \textdegree{}C
@@ -84,7 +84,7 @@ Każdy zestaw składa się z 5 czujników analogowo cyfrowych,  jednej kamery i 
 \item Wykorzystano moduł kamery Raspberry Pi element14
 \item Kamera 5MP - wspierająca nagrywanie 30 klatek na sekundę w rozdzielczości Full HD
 \end{itemize}
-\paragraph{f) Specyfikacja MCP3008 - przetwornik A/C:}
+\paragraph{f) Specyfikacja MCP3008 - przetwornik A/C\cite{specyfikacjaAC}:}
 \begin{itemize} 
 \item Zasilanie: od 2.7V do 5.5V
 \item Pobór prądu: 0.5 mA
