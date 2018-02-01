@@ -1,15 +1,16 @@
 \chapter{Architektura systemu}
 
-Wstęp do rozdziału
+Dobre zaprojektowanie architektury systemu jest fundamentalnym zadaniem. Na rynku istnieje wiele infrastruktur opartych na technologi przetwarzania w chmurze, które oferują bardzo podobne funkcjonalności. Należało wybrać te, które dawały najwięcej korzyści przy jak najniższej cenie (kosztorys omówiono w rozdziale 3). Dlatego zdecydowano się na Microsoft Azure. Dodatkowym atutem było to, że zespół miał już doświadczenie z tą usługą. Opis działania poszczególnych elementów systemu zostanie omówiony w dalszej części pracy.
 
 \section{Schemat}
 
-\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+\begin{figure}[ht] %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=12cm]{anton.png} 
-   \caption{Schemat systemu}
-   \label{fig:example}
+   \caption{Schemat systemu [źródło własne]}
 \end{figure}
+
+Architektura została przedstawiona na schemacie (rys.x.x) . Wszystkie urządzenia klienckie(iOS, Android i Web) jak i Raspberry Pi komunikują się z serwerem ANTON wykupionym i pracującym na platformie Microsoft Azure. Komunikacja pomiędzy klientami a serwerem odbywa się za pomocą REST API. Obraz natomiast przesyłany może być za pomocą dwóch protokołów RTMP i HLS. Zdecydowano się jednak na HLS ze względów na brak możliwości obsługi RTMP na iOS. Priorytetem było zapewnienie identycznych warunków i tych samych doświadczeń użytkownika na wszystkich platformach. Było to głównym powodem całkowitego odrzucenia przesyłania obrazu przy użyciu protokołu RTMP. RTMP posiada jednak w porównaniu do HLS jedną, aczkolwiek bardzo istotną przewagę. Jest to brak opóźnienia w transmisji obrazu. HLS wysyła dane w małych porcjach. Przed wysłaniem pierwszej części transmisji, konieczne jest jej nagranie. To właśnie powoduje kilkunastosekundowe opóźnienie w stosunku do RTMP, który transmituje obraz bezpośrednio.
 
 \section{Komunikacja}
 
@@ -48,7 +49,7 @@ Zawartość:
 	'token': 'jwt.token.from.client'
 }
 \end{verbatim}
-Działanie: Po odebraniu informacji, o wykryciu ruchu, następuje pobranie klatki ze strumienia obrazu, nadawanego przez Raspberry o wskazanym serialu. Jeśli wykryto ruch człowieka, następuje nagranie fragmentu wideo, który zostaje zapisany w bazie danych Firebase Storage, a użytkownik zostaje poinformowany o zajściu i o nagraniu, któe może pobrać. Jeśli nie wykryto obecności ludzkiej, notyfikacja zostaje zignorowana.
+Działanie: Po odebraniu informacji, o wykryciu ruchu, następuje pobranie klatki ze strumienia obrazu, nadawanego przez Raspberry o wskazanym serialu. Jeśli wykryto ruch człowieka, następuje nagranie fragmentu wideo, który zostaje zapisany w bazie danych Firebase Storage, a użytkownik zostaje poinformowany o zajściu i o nagraniu, które może pobrać. Jeśli nie wykryto obecności ludzkiej, notyfikacja zostaje zignorowana.
 
 \paragraph{c) Wykrycie zmian na czujniku:}
 \begin{verbatim}
