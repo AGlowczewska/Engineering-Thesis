@@ -3,10 +3,33 @@
 \section{Microsoft Azure}
 
 Aby zapewnić wysoki poziom bezpieczeństwa oraz dostępności systemu zdecydowano się na skorzystanie z chmury Micrsoft Azure.
+Wykorzystany został serwer wirtualny, na którym zainstalowano system Ubuntu 16.04 LTS. Dostęp do serwera możliwy jest wyłącznie po protokole SSH.
+
+\paragraph{Parametry maszyny wirtualnej 'Anton'}
+\begin{itemize}
+    \item \textbf{Klasa}: B2MS
+    \item \textbf{Lokalizacja}: Zachodnia Europa
+    \item \textbf{Moc obliczeniowa}: 2 vCPU
+    \item \textbf{Pamięć RAM}: 8 GB
+    \item \textbf{Dysk SSD}: 16 GB
+    \item \textbf{Ilość dysków danych}: 4
+    \item \textbf{Ilość operacji wejścia/wyjścia na sekundę}: 4800
+\end{itemize}
+
+Po skonfigurowaniu środowisk deweloperskich zarówno dla części obsługującej aplikacje mobilne oraz części odpowiedzialnej za przetwarzanie obrazu, wybrany katalog podłączono do repozytorium kodu korzystającego z systemu kontroli wersji  "git", które znajduje się w serwisie GitHub.com.
+W ten sposób bieżące zmiany były dokonywane na komputerach deweloperów, którzy za pomocą repozytorium publikowali nowe wersje aplikacji serwerowej w chmurze.
 
 \section{Firebase}
 
-// Mateusz
+W celu usprawnienia działania aplikacji klienckich skorzystano także z usług platformy Firebase. Platforma Firebase jest częścią chmury Google Cloud i oferuje między innymi:
+
+\begin{itemize}
+    \item \textbf{Firebase Auth} - usługę bezpiecznej autoryzacji użytkowników ,
+    \item \textbf{Firebase Storage} - usługę wygodnego przechowywania plików,
+    \item \textbf{Firebase Realtime Database} - usługę bazy danych aktualizowanej w czasie rzeczywistym.
+\end{itemize}
+
+Usługi autoryzacji użytkowników zostały wykorzystane nie tylko w aplikacjach klienckich, ale i także na serwerze do autoryzacji tokenów z nadchodzących żądań klientów. Usługa przechowywania plików została wykorzystywana do przesyłania fragmentów nagrań na których wykryto niebezpieczeństwo. Usługa bazy danych została wykorzystana do prezentowania w czasie rzeczywistym wartości czujników w aplikacjach klienckich.
 
 \section{Aplikacja serwerowa}
 
