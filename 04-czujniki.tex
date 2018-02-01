@@ -151,18 +151,18 @@ Aby zapewnić wydajny i pewny system bezpieczeństwa przy otrzymaniu wysokich wa
 
 \paragraph{Protokół RTMP}
 Podstawą funkcji strumieniowania wideo, jest protokół RTMP (Real-Time Message Protocol). Jest to, oparty na protokole TCP, protokół wysyłania obrazu, dźwięku oraz danych. \cite{MOBILERTMP}
-Podstawową jednostką danych, w protokole RTMP, jest wiadomosć (ang. Message), której struktura jest zależna od typu strumieniowanych informacji. 
-Wiadomosci dzielone są na kawałki (ang. Chunks), które są porcjami gotowymi do transmisji. Zatem strumień RTMP to ostatecznie strumień cząstek (ang. Chunk Stream) \cite{STREAMRTMP}
+Podstawową jednostką danych, w~protokole RTMP, jest wiadomość (ang. Message), której struktura jest zależna od typu strumieniowanych informacji. 
+Wiadomości dzielone są na części (ang. Chunks), które są porcjami gotowymi do transmisji. Zatem strumień RTMP to ostatecznie strumień cząstek (ang. Chunk Stream) \cite{STREAMRTMP}
 
-Ponadto, wykorzystano protokół HLS (HTTP Live Streaming), zapisywanie odbieranego obrazu, we wskazanej liczbie plików wideo o okreslonej dłusgoci. Gdy aplikacja kliencka odtwarza strumień wideo, w rzeczywistosci odbiera, strumieniowane po kolei, zapisane pliki ts. Wpływa to na opóźnienie odtwarzania, względem rzeczywistosci, z jednej strony, a z drugiej, dostarcza płynne wideo.
+Ponadto, wykorzystano protokół HLS (HTTP Live Streaming), zapisywanie odbieranego obrazu, we wskazanej liczbie plików wideo o~określonej dłuśgoci. Gdy aplikacja kliencka odtwarza strumień wideo, w~rzeczywistości odbiera, strumieniowane po kolei, zapisane pliki ts. Wpływa to na opóźnienie odtwarzania, względem rzeczywistości, z~jednej strony, a~z drugiej,~dostarcza płynne wideo.
 
 \paragraph{H264}
-W pracy wykorzystano kodowanie obrazu koderem H.264. Charakteryzuje go niska złożonosć algorytmów kompresji oraz niewielkie opóźnienie, dzięki czemu idealnie nadaje się do zadania związanego z szybkim enkodowaniem obrazu, przed przestrumieniowaniem go dalej. \cite{H264}
-Szybkoć i złożonoć H.264, idą w parze z jego jakoscią, która jest o wiele wyższa, niż w starszych rozwiązaniach.
-Cechą charakterystyczną, dla tego typu kodowania wideo, jest użycie klatki kluczowej (ang keyframe, i-frame). Jest to pełna klatka obrazu, w przeciwieństwie, do następujących po niej danych, które wyrażają różnice między dwoma konsekutywnymi klatkami. Pozwala to na zmniejszenie rozmiarów, ostatecznego obrazu wideo.
+W~pracy wykorzystano kodowanie obrazu koderem H.264. Charakteryzuje go niska złożoność algorytmów kompresji oraz niewielkie opóźnienie, dzięki czemu idealnie nadaje się do zadania związanego z~szybkim enkodowaniem obrazu, przed przestrumieniowaniem go dalej. \cite{H264}
+Szybkoć i~złożonoć H.264, idą w parze z~jego jakością, która jest o~wiele wyższa, niż w~starszych rozwiązaniach.
+Cechą charakterystyczną, dla tego typu kodowania wideo, jest użycie klatki kluczowej (ang keyframe, i-frame). Jest to pełna klatka obrazu, w~przeciwieństwie, do następujących po niej danych, które wyrażają różnice między dwoma konsekutywnymi klatkami. Pozwala to na zmniejszenie rozmiarów, ostatecznego obrazu wideo.
 
 \paragraph{Raspberry Pi}
-Do obsługi strumieniowania wideo, po stronie Raspberry Pi, wykorzystywany jest program FFMPEG. Pozwala on na sterowanie strumieniem, od wyboru urządzenia wejsciowego, przez statystyki strumienia, po punkt docelowy. Dostęp do unikatowego, dla każdego urządzenia Raspberry, punktu końcowego, gwarantowało wczeniejsze pobranie nr seryjnego urządzenia. Poniżej przedstawiono skrypt, wykonujący wymienione funkcje \cite{raspivid}:
+Do obsługi strumieniowania wideo, po stronie Raspberry Pi, wykorzystywany jest program FFMPEG. Pozwala on na sterowanie strumieniem, od wyboru urządzenia wejściowego, przez statystyki strumienia, po punkt docelowy. Dostęp do unikatowego, dla każdego urządzenia Raspberry, punktu końcowego, gwarantowało wcześniejsze pobranie nr seryjnego urządzenia. Poniżej przedstawiono skrypt, wykonujący wymienione funkcje \cite{raspivid}:
 \begin{verbatim}
 #!/bin/bash
 serial_id="$(cat /proc/cpuinfo | grep Serial | cut -d ' ' -f 2)"
@@ -171,29 +171,29 @@ raspivid -o - -t 0 -fps 30 -b 1000000 | ffmpeg -re -ar 44100 -ac 2
 -strict experimental 
 -f flv rtmp://52.236.165.15:1936/camera/${serial_id}
 \end{verbatim}
-Pierwszą czynnoscią, wykonywaną w skrypcie, jest otwarcie pliku /proc/cpuinfo, następnie znajdowana jest w nim linia, w której znajduje się wyjątkowy serial urządzenia. Na końcu, z wykorzystaniem potoku, i funkcji cut, wartosć ta zostaje przypisana do zmiennej serialid.
+Pierwszą czynnością, wykonywaną w~skrypcie, jest otwarcie pliku /proc/cpuinfo, następnie znajdowana jest w~nim linia, w~której znajduje się wyjątkowy serial urządzenia. Na końcu, z~wykorzystaniem potoku, i~funkcji cut, wartość ta zostaje przypisana do zmiennej serialid.
 
-W drugiej linii skryptu wykorzystane jest narzędzie linii poleceń Raspberry - raspivid. Pozwala ono pobrać obraz z kamery. 
+W drugiej linii skryptu wykorzystane jest narzędzie linii poleceń Raspberry - raspivid. Pozwala ono pobrać obraz z~kamery. 
 \begin{itemize}
-\item Pierwszym przełącznikiem jest -o z parametrem -. Oznacza to, że obraz z kamery jest wysyłany na wyjscie standardowe.
-\item Przełącznik -t ustawiony na 0 pozwala przekazywać obraz, z modułu kamery, przez nieokrelony czas. Aby przestać pobierać wideo, należy użyć przerwania za pomocą sygnału SIGINT (obsługiwanego w terminalu skrótem klawiszowym CTRL+C).
-\item Opcja -fps pozwala wskazać liczbę przechwytywanych klatek w ciągu sekundy. Tutaj wykorzystano maksymalne możliwoci wybranego modułu kamery.
-\item Ostatnią opcją, wykorzystaną w pobieraniu obrazu z kamery, jest bitrate, tzn wielkosć pamięci, w której ma się znaleźć obraz przechwycony w ciągu 1 sekundy. Ustawienie opcji -b na 1000000 oznacza, że 1 sekunda wideo, może zajmować 125 kilobajtów pamięci. Jest to szczególnie istotna informacja, w kontekcie transmisji obrazu poza urządzenie.
+\item Pierwszym przełącznikiem jest -o z parametrem -. Oznacza to, że obraz z kamery jest wysyłany na wyjście standardowe.
+\item Przełącznik -t ustawiony na 0~pozwala przekazywać obraz, z~modułu kamery, przez nieokrelony czas. Aby przestać pobierać wideo, należy użyć przerwania za pomocą sygnału SIGINT (obsługiwanego w terminalu skrótem klawiszowym CTRL+C).
+\item Opcja -fps pozwala wskazać liczbę przechwytywanych klatek w~ciągu sekundy. Tutaj wykorzystano maksymalne możliwoci wybranego modułu kamery.
+\item Ostatnią opcją, wykorzystaną w~pobieraniu obrazu z kamery, jest bitrate, tzn wielkość jednostki pamięci, w~której ma się znaleźć obraz przechwycony w~ciągu 1~sekundy. Ustawienie opcji -b na 1000000 oznacza, że 1~sekunda wideo, może zajmować 125 kilobajtów pamięci. Jest to szczególnie istotna informacja, w~kontekcie transmisji obrazu poza urządzenie.
 \end{itemize}
 
-Drugim poleceniem jest wywołanie narzędzia ffmpeg, połączonego za pomocą potoku, odbierającego, przechwytywany za pomocą funkcji raspivid, obraz i przekazującego go na docelowy punkt końcowy. Za jego pomocą ustala się ostatecznie opcje kodujące obraz i dźwięk w trakcie końcowej transmisji.
+Drugim poleceniem jest wywołanie narzędzia ffmpeg, połączonego za pomocą potoku, odbierającego, przechwytywany za pomocą funkcji raspivid, obraz i~przekazującego go na docelowy punkt końcowy. Za jego pomocą ustala się ostatecznie opcje kodujące obraz i~dźwięk w~trakcie końcowej transmisji.
 \begin{itemize}
-\item Przełącznik -re pozwala odczytywać dane wejsciowe, z oryginalną częstotliwoscią. Zatem zostają przechwycone ustawienia przełącznika funkcji raspivid -fps 30.
-\item Opcje  -ar, -ac, -acodec, -f, -strict odpowiadają kolejno za: próbkowanie dźwięku, wybór liczby kanałów, kodek audio, format dźwięku oraz wybór eksperymentalnego sposobu kodowania. Wymuszenie wykorzystania, jako wejscia strumienia dźwięku, na /dev/zero, oznacza, że strumień ten zostaje wypełniony wartosciami pustymi. Zatem opcje transmisji dźwięku są nieistotne.
-\item Przełącznik -vcodec ustala kodek wideo. W pracy wykorzystano standard kodowania h264.
-\item Następnie ustawiono wejscie obrazu. Przełącznik -i - powoduje, że narzędzie ffmpeg przechwytuje, dzięki potokowi, obraz przekazywany funkcją raspivid.
+\item Przełącznik -re pozwala odczytywać dane wejściowe, z~oryginalną częstotliwością. Zatem zostają przechwycone ustawienia przełącznika funkcji raspivid -fps 30.
+\item Opcje  -ar, -ac, -acodec, -f, -strict odpowiadają kolejno za: próbkowanie dźwięku, wybór liczby kanałów, kodek audio, format dźwięku oraz wybór eksperymentalnego sposobu kodowania. Wymuszenie wykorzystania, jako wejścia strumienia dźwięku, na /dev/zero, oznacza, że strumień ten zostaje wypełniony wartościami pustymi. Zatem opcje transmisji dźwięku są nieistotne.
+\item Przełącznik -vcodec ustala kodek wideo. W~pracy wykorzystano standard kodowania h264.
+\item Następnie ustawiono wejście obrazu. Przełącznik -i - powoduje, że narzędzie ffmpeg przechwytuje, dzięki potokowi, obraz przekazywany funkcją raspivid.
 \item Opcja -g 60 oznacza, że tzw klatka kluczowa (ang keyframe) pojawia się co 60 klatek. W tej sytuacji, co 2 sekundy. 
-\item Przełącznik -f, w przypadku strumienia obrazu z kamery, wymusza format nadawanego wideo.  
-\item Ostatnim elementem polecenia jest podanie punktu docelowego dla strumienia. Za pomocą protokołu RTMP, obługiwanego przez serwer o adresie IP 52.236.165.15 na porcie 1936, obraz wysyłany jest na aplikację o nazwie camera i punkt charakteryzowany przez serial urządzenia. Działanie tego elementu opisano w kolejnym punkcie. 
+\item Przełącznik -f, w~przypadku strumienia obrazu z~kamery, wymusza format nadawanego wideo.  
+\item Ostatnim elementem polecenia jest podanie punktu docelowego dla strumienia. Za pomocą protokołu RTMP, obługiwanego przez serwer o~adresie IP 52.236.165.15 na porcie 1936, obraz wysyłany jest na aplikację o~nazwie camera i~punkt charakteryzowany przez serial urządzenia. Działanie tego elementu opisano w kolejnym punkcie. 
 \end{itemize}
 
 \paragraph{Serwer}
-Narzędziem, umożliwiającym obsługę strumieniowania wideo, z wielu źródeł, na wiele urządzeń równoczesnie, jest serwer NGINX. W częsci projektu, związanej ze strumieniowaniem wideo, wykorzystano moduł nginx-rtmp \cite{NGINX}. 
+Narzędziem, umożliwiającym obsługę strumieniowania wideo, z~wielu źródeł, na wiele urządzeń równocześnie, jest serwer NGINX. W~części projektu, związanej ze strumieniowaniem wideo, wykorzystano moduł nginx-rtmp \cite{NGINX}. 
 Moduł ten pozwala, m. in., na:
 \begin{itemize}
 \item Tworzenie dynamicznych punktów końcowych, dla urządzeń strumienujących obraz
@@ -203,7 +203,7 @@ Moduł ten pozwala, m. in., na:
 \end{itemize}
 Ponadto pozwala na utworzenie aplikacji HLS, przechowującej tymczasowo obraz, zanim zostanie on przestrumieniowany dalej. Pozwala to na uniknięcie opóźnień między kolejnymi klatkami obrazu.
 
-Wszystkie funkcjonalnosci definiują poniższe ustawienia pliku konfiguracyjnego, którego lokalizacja to /usr/local/nginx/conf/nginx.conf:
+Wszystkie funkcjonalności definiują poniższe ustawienia pliku konfiguracyjnego, którego lokalizacja to /usr/local/nginx/conf/nginx.conf:
 
 \begin{verbatim}
 rtmp {
@@ -224,8 +224,8 @@ rtmp {
 }
 \end{verbatim}
 
-Powyższe linie powodują, że serwer rtmp, dostępny jest na porcie 1936 (domyslne porty dla protokołu RTMP, na urządzeniu z systemem z rodziny Ubuntu,  to 1935 i 1936). Następnie tworzona jest aplikacja o nazwie camera. Dla aplikacji strumieniujących dane, jest ona dostępna pod adresem: rtmp://<ip-serwera>:1936/camera/<klucz>, gdzie klucz jest wybierany przez aplikację strumieniującą i tworzony dynamicznie, gdy tylko urządzenie zacznie nadawać dane pod wskazany adres.
-Ustawienia aplikacji decydują o tym, że dla urządzeń odtwarzających wideo, dostępne jest ono dzięki aplikacji HLS - opcja hls on. Na szczególną uwagę zasługują linie: hls fragment 2 oraz hls playlist length 3, które wskazują na to, że po stronie serwera, nagrywane będą 2 tymczasowe fragmenty, o długoci 3 sekund, każdy. Pliki te będą przechowywane w folderze /mnt/hls/, a ich nazwę jednoznacznie będzie wskazywać klucz strumienia.
+Powyższe linie powodują, że serwer rtmp, dostępny jest na porcie 1936 (domyślne porty dla protokołu RTMP, na urządzeniu z~systemem z~rodziny Ubuntu,  to 1935 i~1936). Następnie tworzona jest aplikacja o~nazwie camera. Dla aplikacji strumieniujących dane, jest ona dostępna pod adresem: rtmp://<ip-serwera>:1936/camera/<klucz>, gdzie klucz jest wybierany przez aplikację strumieniującą i~tworzony dynamicznie, gdy tylko urządzenie zacznie nadawać dane pod wskazany adres.
+Ustawienia aplikacji decydują o~tym, że dla urządzeń odtwarzających wideo, dostępne jest ono dzięki aplikacji HLS - opcja hls on. Na szczególną uwagę zasługują linie: hls fragment 2~oraz hls playlist length 3, które wskazują na to, że po stronie serwera, nagrywane będą 2~tymczasowe fragmenty, o~długości 3~sekund, każdy. Pliki te będą przechowywane w~folderze /mnt/hls/, a~ich nazwę jednoznacznie będzie wskazywać klucz strumienia.
 
 \begin{verbatim}
 http {
@@ -242,6 +242,6 @@ http {
 }
 \end{verbatim}
 
-Konfiguracja ta udostępnia aplikację HLS. Dla aplikacji klienckich, obraz będzie dostępny pod adresem: http://<ip-serwera>:80/hls/<klucz>.m3u8, o czym decyduje konfiguracja częsci związanej z serwerem RTMP.
+Konfiguracja ta udostępnia aplikację HLS. Dla aplikacji klienckich, obraz będzie dostępny pod adresem: http://<ip-serwera>:80/hls/<klucz>.m3u8, o~czym decyduje konfiguracja części związanej z serwerem RTMP.
 
-Wykorzystane funkcjonalnosci narzędzia Nginx nie wykorzystują w pełni możliwosci produktu, jednak projekt nie wymagał korzystania z funkcji serwera proxy.
+Wykorzystane funkcjonalności narzędzia Nginx nie wykorzystują w pełni możliwości produktu, jednak projekt nie wymagał korzystania z~funkcji serwera proxy.
