@@ -15,18 +15,18 @@ Architektura została przedstawiona na schemacie (rys.x.x) . Wszystkie urządzen
 \section{Komunikacja}
 
 Komunikacja, pomiędzy elementami systemu, odbywa się na zasadach architektury REST. Wiadomości przesyłane są asynchronicznie, na wskazane wcześniej adresy.
-Takie podejście gwarantuje prostotę przesyłanych komunikatów oraz skalowalność w kontekście nowych urządzeń Raspberry, strumieniujących dane, oraz nowych urządzeń korzystających z aplikacji klienckich. Początkowo, projekt był oparty o zapytania GET i POST.  \cite{WEBARCH}
+Takie podejście gwarantuje prostotę przesyłanych komunikatów oraz skalowalność w~kontekście nowych urządzeń Raspberry, strumieniujących dane, oraz nowych urządzeń korzystających z~aplikacji klienckich. Początkowo, projekt był oparty o~zapytania GET i~POST.  \cite{WEBARCH}
 
 \paragraph{Zapytanie GET}
-Metoda GET pozwala na pobranie dokumentu sieciowego, na postawie zapytania zawartego w adresie URL. Metoda ta jest używana tylko i wyłącznie do pobierania danych z punktu docelowego. 
+Metoda GET pozwala na pobranie dokumentu sieciowego, na postawie zapytania zawartego w~adresie URL. Metoda ta jest używana tylko i~wyłącznie do pobierania danych z~punktu docelowego. 
 
 \paragraph{Zapytanie POST}
-W metodzie POST, należy zamieścić wiadomość wewnątrz zapytania HTTP. Odpowiedzią na ten typ zapytania, może być zarówno kod statusu, jak i dane, zwracane w podobnej postaci jak przy zapytaniu GET.
+W metodzie POST, należy zamieścić wiadomość wewnątrz zapytania HTTP. Odpowiedzią na ten typ zapytania, może być zarówno kod statusu, jak i~dane, zwracane w podobnej postaci jak przy zapytaniu GET.
 
-Wprowadzenie tokenów uwierzytelniających (więcej w akapicie nt. Bezpieczeństwa), spowodowało, że wymianę komunikatów oparto tylko i wyłącznie na zapytaniach POST. 
-W zależności od zadania, obsługa zapytania polega na wykonaniu zapytania na bazie danych lub wysłaniu notyfikacji do klienta.
+Wprowadzenie tokenów uwierzytelniających (więcej w akapicie nt. Bezpieczeństwa), spowodowało, że wymianę komunikatów oparto tylko i~wyłącznie na zapytaniach POST. 
+W~zależności od zadania, obsługa zapytania polega na wykonaniu zapytania na bazie danych lub wysłaniu notyfikacji do klienta.
 Obsługę zapytań można również podzielić, ze względu na zaplanowane źródło zapytania: aplikacja użytkownika lub urządzenie Raspberry.
-W pierwszej kolejności przedstawione zostaną wiadomości wymieniane na linii Raspberry - Serwer.
+W~pierwszej kolejności przedstawione zostaną wiadomości wymieniane na linii Raspberry - Serwer.
 \paragraph{a) Rejestracja Raspberry Pi:}
 \begin{verbatim}
 Adres: /backend/v1/devices/add
@@ -37,7 +37,7 @@ Zawartość:
 	'token': 'jwt.token.from.client'
 }
 \end{verbatim}
-Działanie: Raspberry, o podanych serialu i nazwie, zostaje dodane do bazy danych urządzeń.
+Działanie: Raspberry, o~podanych serialu i~nazwie, zostaje dodane do bazy danych urządzeń.
 
 \paragraph{b) Wykrycie ruchu:}
 \begin{verbatim}
@@ -49,7 +49,7 @@ Zawartość:
 	'token': 'jwt.token.from.client'
 }
 \end{verbatim}
-Działanie: Po odebraniu informacji, o wykryciu ruchu, następuje pobranie klatki ze strumienia obrazu, nadawanego przez Raspberry o wskazanym serialu. Jeśli wykryto ruch człowieka, następuje nagranie fragmentu wideo, który zostaje zapisany w bazie danych Firebase Storage, a użytkownik zostaje poinformowany o zajściu i o nagraniu, które może pobrać. Jeśli nie wykryto obecności ludzkiej, notyfikacja zostaje zignorowana.
+Działanie: Po odebraniu informacji, o~wykryciu ruchu, następuje pobranie klatki ze strumienia obrazu, nadawanego przez Raspberry o~wskazanym serialu. Jeśli wykryto ruch człowieka, następuje nagranie fragmentu wideo, który zostaje zapisany w~bazie danych Firebase Storage, a~użytkownik zostaje poinformowany o~zajściu i~o~nagraniu, które może pobrać. Jeśli nie wykryto obecności ludzkiej, notyfikacja zostaje zignorowana.
 
 \paragraph{c) Wykrycie zmian na czujniku:}
 \begin{verbatim}
@@ -62,8 +62,8 @@ Zawartość:
 	'token': `jwt.token.from.client`
 }
 \end{verbatim}
-Działanie: Informuje serwer o zmianie wartości jednego z czujników.\newline
-Następne zapytania dotyczą poleceń wysyłanych z aplikacji użytkownika.
+Działanie: Informuje serwer o~zmianie wartości jednego z~czujników.\newline
+Następne zapytania dotyczą poleceń wysyłanych z~aplikacji użytkownika.
 \paragraph{d) Pobranie urządzeń użytkownika:}
 \begin{verbatim}
 Adres: /backend/v1/get
@@ -84,7 +84,7 @@ Zawartość:
 	'token': 'jwt.token.from.client'
 }
 \end{verbatim}
-Działanie: Zmienia nazwę urządzenia, wyświetlaną w podglądzie, w aplikacji użytkownika.
+Działanie: Zmienia nazwę urządzenia, wyświetlaną w podglądzie, w~aplikacji użytkownika.
 \paragraph{f) Uzbrojenie/rozbrojenie urządzenia:}
 \begin{verbatim}
 Adres: /backend/v1/devices/changeIsArmed
@@ -95,7 +95,7 @@ Zawartość:
 	'token': 'jwt.token.from.client'
 }
 \end{verbatim}
-Działanie: Ustala, czy nowe powiadomienia, związane z urządzeniem, dalej będą wysyłane do aplikacji.
+Działanie: Ustala, czy nowe powiadomienia, związane z~urządzeniem, dalej będą wysyłane do aplikacji.
 \paragraph{g) Pobranie listy notyfikacji:}
 \begin{verbatim}
 Adres: /backend/v1/devices/getNotifications
@@ -116,7 +116,7 @@ Zawartość:
 	'deviceId' : <id_aplikacji>
 }
 \end{verbatim}
-Działanie: Powiązuje aplikację, zarówno mobilną, jak i sesję aplikacji przeglądarkowej, o podanym tokenie, z kontem użytkownika. Dzięki temu, notyfikacje trafiają na wszystkie urządzenia użytkownika.
+Działanie: Powiązuje aplikację, zarówno mobilną, jak i~sesję aplikacji przeglądarkowej, o~podanym tokenie, z~kontem użytkownika. Dzięki temu, notyfikacje trafiają na wszystkie urządzenia użytkownika.
 \newline
 \newline
 Wybrane rozwiązanie pozwala na łatwą lokalizację ewentualnego błędu w działaniu systemu, oraz szybką naprawę zaistniałego problemu. Ponadto prosta logika oraz łatwe, krótkie funkcje, obsługujące zapytania, sprawiają, że dalszy rozwój tej części systemu, będzie możliwy bardzo niskim nakładem sił. 
