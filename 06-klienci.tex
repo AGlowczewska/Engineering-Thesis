@@ -199,71 +199,40 @@ Instalacja zewnętrznych bibliotek odbywa się za pomocą CocoaPods. Jest to men
   pod 'M13ProgressSuite'
 \end{verbatim}
 Moya używana jest do asynchronicznej REST-owej komunikacji z serwerem Django. SwiftyJSONMapper przydatna okazuje się do przekształcenia odpowiedzi serwera w postaci JSON do wcześniej zdefiniowanego modelu. MBProgressHUD umożliwia wyświetlanie ekranu ładowania podczas pobierania informacji z serwera. RxSwift i RxCocoa to biblioteki do programowania reaktywnego. Moduły Firebas/Core itp. służą do komunikacji z serwerami Firebase. Ostatni 'pod M13ProgressSuite' służy do rysowania wykresów i animowanych elementów graficznych w systemie iOS.
-Po uruchomieniu aplikacji pierwszym widokiem jest ekran logowania i rejestracji użytkowników (rys 5.4). 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=5cm]{ios_screenshots/login.png}
-	\caption{Ekran logowania [źródło własne]}
-\end{figure}
+Po uruchomieniu aplikacji pierwszym widokiem jest ekran logowania i rejestracji użytkowników (rys 6.1b). 
 Po prawidłowym uwierzytelnieniu użytkownika uzyskiwany jest dostęp do głównego widoku aplikacji. W górnej części możliwy jest wybór 5 sekcji:
 sekcja czujników, sekcja historii notyfikacji, sekcja ostatnich zagrożeń przy wykryciu ruchu, sekcja monitoringu na żywo, sekcja ustawień. Wszystkie te sekcje dotyczą konkretnego urządzenia wybranego na pasku u dołu ekranu. Funkcje każdej z nich zostały opisane w rozdziale 6.1, tutaj zostaną zaprezentowane jedynie szczegóły implementacyjne i zrzuty ekranów z wersji na iOS. Przy pierwszym uruchomieniu nie istnieje żadne urządzenie przypisane do naszego konta użytkownika. Aby dodać pierwsze i kolejne stacje, od których chcemy otrzymywać notyfikacje o zagrożeniach a także śledzić i monitorować informacje z czujników należy wybrać przycisk "New" z plusikiem w dolnej części ekranu. Pojawi się okno z prośbą o wpisanie numeru identyfikującego urządzenie. Po chwili dodany "Guard" będzie widoczny w na liście.
 
 
 \paragraph{Sekcja czujników:}
-Jest to jedna z najważniejszych sekcji aplikacji (rys 5.5).  Otrzymuje ona dane z czujników w czasie rzeczywistym i prezentuje je użytkownikowi. Implementacja funkcjonalności prezentowania zagrożenia na konkretnym czujniku przy użyciu kolorów zrealizowana została przy pomocy modelu HSV, który w przeciwieństwie do RGB pozwala na bardzo proste przejście z jednego koloru do kolejnego poprzez zmienę tylko jednego parametru. Zmieniając parametr Hue zmieniamy barwę przy stałym nasyceniu i jasności. Wartość tego parametru równa 120\textdegree{} odpowiada kolorowi zielonemu, kolor czerwony to 0\textdegree{}. Przekształcając wartość otrzymaną z czujników, która jest z zakresu [0-1] na wartość z przedziału [120-0] otrzymano wspomniany efekt. 
+Jest to jedna z najważniejszych sekcji aplikacji (rys 6.3b).  Otrzymuje ona dane z czujników w czasie rzeczywistym i prezentuje je użytkownikowi. Implementacja funkcjonalności prezentowania zagrożenia na konkretnym czujniku przy użyciu kolorów zrealizowana została przy pomocy modelu HSV, który w przeciwieństwie do RGB pozwala na bardzo proste przejście z jednego koloru do kolejnego poprzez zmienę tylko jednego parametru. Zmieniając parametr Hue zmieniamy barwę przy stałym nasyceniu i jasności. Wartość tego parametru równa 120\textdegree{} odpowiada kolorowi zielonemu, kolor czerwony to 0\textdegree{}. Przekształcając wartość otrzymaną z czujników, która jest z zakresu [0-1] na wartość z przedziału [120-0] otrzymano wspomniany efekt. 
 Poniżej przedstawiono fragment konwersji danych z czujników na kolor w modelu HSV, gdzie zmienna sensors[0] reprezentuje czujnik LPG.
 \begin{verbatim}
 UIColor(hue: CGFloat(0.33 - (sensors[0].value * 0.33)),
 saturation: 1, brightness: 1, alpha: 1)
 \end{verbatim}
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=5cm]{ios_screenshots/sensors.png}
-	\caption{Sekcja czujników [źródło własne]}
-\end{figure}
+
+
 \paragraph{Sekcja historii notyfikacji:}
-Po zaznaczeniu daty reprezentującej moment wystąpienia zagrożenia i wybraniu przycisku 'preview' prezentowana jest informacja o miejscu niebezpieczeństwa i jego rodzaju. (rys 5.6).
-\begin{figure}[ht]
-\centering
-\begin{minipage}{.4\linewidth}
-    \includegraphics[width=\linewidth]{ios_screenshots/history.png}
-    \caption{Sekcja historii notyfikacji  [źródło własne]}
-    \label{img1}
-\end{minipage}
-\hspace{.05\linewidth}
-\begin{minipage}{.4\linewidth}
-    \includegraphics[width=\linewidth]{ios_screenshots/settings.png}
-    \caption{Sekcja ustawień [źródło własne]}
-    \label{img2}
-\end{minipage}
-\end{figure} 
-\paragraph{Sekcja ustawień:}
-Zrzut ekranu przedstawiono na rysunku (rys. x).
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=5cm]{ios_screenshots/liveStreamiOS.png}
-	\caption{Sekcja monitoringu [źródło własne]}
-\end{figure}
+Po zaznaczeniu daty reprezentującej moment wystąpienia zagrożenia i wybraniu przycisku 'preview' prezentowana jest informacja o miejscu niebezpieczeństwa i jego rodzaju. (rys 6.4b).
+
+
 \paragraph{Sekcja monitoringu:}
-Sekcja odpowiedzialna za prawidłowy odbiór obrazu z kamery zaznaczonej w dolnej części ekranu(rys. 5.x). Okno, w którym odbywa się stream ustawiono w taki sposób, aby bez względu na rozmiar telefonu utrzymywało proporcję 16:9. Pozbyto się dzięki temu czarnych ramek lub braku części transmitowanego obrazu. 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=5cm]{ios_screenshots/dangeriOS.png}
-	\caption{Sekcja ostatniego zagrożenia [źródło własne]}
-\end{figure}
+Sekcja odpowiedzialna za prawidłowy odbiór obrazu z kamery zaznaczonej w dolnej części ekranu(rys. 6.2b). Okno, w którym odbywa się transmisja ustawiono w taki sposób, aby bez względu na rozmiar telefonu utrzymywało proporcję 16:9. Pozbyto się dzięki temu czarnych ramek lub braku części transmitowanego obrazu. W tym samym oknie prezentowane są nagrane materiały filmowe z historii zdarzeń, które zakrywają obraz nadawany na żywo. Przejście do tej sekcji wznawia pobieranie obrazu z urządzeń w czasie rzeczywistym.
+
 
 Przeprowadzono kilka testów aplikacji pod pełnym obciążeniem za pomocą programu Instruments. Szczególnie interesująco przedstawia się zużycie sieci podczas streamu obrazu. Widać, że w ciągu jednej minuty pobrano 6,61MB a wysłano jedynie 24,11Kb (rys. 5.8). Obraz pobierany jest tylko wtedy kiedy aplikacja jest aktywna. W ciągu godziny działania aplikacji pobierze ona około 400MB danych. Jednak dla zapewnienia komfortu użytkowania i płynnego streamu obrazu zalecane jest posiadanie łącza umożliwiającego transfer danych na poziomie min. 200KB/s. 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=11cm]{ios_screenshots/networkUsage.png}
-	\caption{Zużycie sieci podczas streamu [źródło własne]}
+	\caption{Zużycie sieci podczas transmisji obrazu [źródło własne]}
 \end{figure}
 Przeprowadzono także test na zużycie pamięci RAM i zużycie procesora. Te jednak są niewielkie i wynoszą odpowiednio 25MB pamięci RAM i średnio 1 procent zużycia procesora.
 Zużycie procesora wzrasta do poziomu ok. 15 procent tylko w momencie pobierania nagranego obrazu z serwera. Wtedy też zużycie pamięci RAM jest o około 5MB większe i wynosi około 30MB (rys. 5.9).
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=11cm]{ios_screenshots/CPURAM.png}
-	\caption{Zużycie procesora i RAM podczas największego obciążenia [źródło własne]}
+	\caption{Zużycie procesora i pamięci RAM przy największym obciążeniu [źródło własne]}
 \end{figure}
 Testy przeprowadzono na iPhonie 6S i iPadzie Pro.
 
