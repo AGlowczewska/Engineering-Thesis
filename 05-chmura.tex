@@ -2,7 +2,7 @@
 
 \section{Microsoft Azure}
 
-Aby zapewnić wysoki poziom bezpieczeństwa oraz dostępności systemu zdecydowano się na skorzystanie z chmury Micrsoft Azure.
+Aby zapewnić wysoki poziom bezpieczeństwa oraz dostępności systemu zdecydowano się na skorzystanie z~chmury Micrsoft Azure.
 Wykorzystany został serwer wirtualny, na którym zainstalowano system Ubuntu 16.04 LTS. Dostęp do serwera możliwy jest wyłącznie po protokole SSH.
 
 \paragraph{Parametry maszyny wirtualnej 'Anton'}
@@ -17,12 +17,12 @@ Wykorzystany został serwer wirtualny, na którym zainstalowano system Ubuntu 16
     \item \textbf{Koszt}: 60,98 € miesięcznie
 \end{itemize}
 
-Po skonfigurowaniu środowisk deweloperskich zarówno dla części obsługującej aplikacje mobilne oraz części odpowiedzialnej za przetwarzanie obrazu, wybrany katalog podłączono do repozytorium kodu korzystającego z systemu kontroli wersji  "git", które znajduje się w serwisie GitHub.com.
-W ten sposób bieżące zmiany były dokonywane na komputerach deweloperów, którzy za pomocą repozytorium publikowali nowe wersje aplikacji serwerowej w chmurze.
+Po skonfigurowaniu środowisk deweloperskich zarówno dla części obsługującej aplikacje mobilne oraz części odpowiedzialnej za przetwarzanie obrazu, wybrany katalog podłączono do repozytorium kodu korzystającego z systemu kontroli wersji "git", które znajduje się w~serwisie GitHub.com.
+W ten sposób bieżące zmiany były dokonywane na komputerach deweloperów, którzy za pomocą repozytorium publikowali nowe wersje aplikacji serwerowej w~chmurze.
 
 \section{Firebase}
 
-W celu usprawnienia działania aplikacji klienckich skorzystano także z usług platformy Firebase. Platforma Firebase jest częścią chmury Google Cloud i oferuje między innymi:
+W~celu usprawnienia działania aplikacji klienckich skorzystano także z~usług platformy Firebase. Platforma Firebase jest częścią chmury Google Cloud i~oferuje między innymi:
 
 \begin{itemize}
     \item \textbf{Firebase Auth} - usługę bezpiecznej autoryzacji użytkowników ,
@@ -30,12 +30,12 @@ W celu usprawnienia działania aplikacji klienckich skorzystano także z usług 
     \item \textbf{Firebase Realtime Database} - usługę bazy danych aktualizowanej w czasie rzeczywistym.
 \end{itemize}
 
-Usługi autoryzacji użytkowników zostały wykorzystane nie tylko w aplikacjach klienckich, ale i także na serwerze do autoryzacji tokenów z nadchodzących żądań klientów. Usługa przechowywania plików została wykorzystywana do przesyłania fragmentów nagrań na których wykryto niebezpieczeństwo. Usługa bazy danych została wykorzystana do prezentowania w czasie rzeczywistym wartości czujników w aplikacjach klienckich.
+Usługi autoryzacji użytkowników zostały wykorzystane nie tylko w aplikacjach klienckich, ale i~także na serwerze do autoryzacji tokenów z~nadchodzących żądań klientów. Usługa przechowywania plików została wykorzystywana do przesyłania fragmentów nagrań na których wykryto niebezpieczeństwo. Usługa bazy danych została wykorzystana do prezentowania w~czasie rzeczywistym wartości czujników w~aplikacjach klienckich.
 
 
 \section{Aplikacja serwerowa}
 
-Serwer, obsługujący aplikacje mobilne, wykonano we frameworku języka Python - Django, z wykorzystaniem modułu Django-Rest-Framework. Umożliwił on tworzenie endpointów, które, zgodnie z rozdziałem nt. komunikacji, które mogły odbierać zapytania POST.
+Serwer, obsługujący aplikacje mobilne, wykonano we frameworku języka Python - Django, z~wykorzystaniem modułu Django-Rest-Framework. Umożliwił on tworzenie endpointów, które, zgodnie z~rozdziałem nt. komunikacji, które mogły odbierać zapytania POST.
 Obsługę zapytań można podzielić, ze względu na zaplanowane źródło zapytania: aplikacja użytkownika lub urządzenie Raspberry.
 W~pierwszej kolejności przedstawione zostaną wiadomości wymieniane na linii Raspberry - Serwer.
 \paragraph{a) Rejestracja Raspberry Pi:}
@@ -60,7 +60,7 @@ Zawartość:
 	'token': 'jwt.token.from.client'
 }
 \end{verbatim}
-Działanie: Po odebraniu informacji o~wykryciu ruchu, następuje pobranie klatki ze strumienia obrazu nadawanego przez Raspberry o~wskazanym numerze seryjnym. Jeżeli na pobranej klatce wykryto człowieka, uruchamiana jest funkcja nagrywająca 30 sekundowy fragment wideo, który zostaje zapisany w~bazie danych Firebase Storage. Użytkownik zostaje poinformowany o~zajściu zdarzenia z informacją zawartą w polu 'message'. Notyfikacja zostanie wysłana jeżeli wykrycie ruchu zostało spowodowane przez człowieka. W każdym innym przypadku zostanie zignorowana.
+Działanie: Po odebraniu informacji o~wykryciu ruchu, następuje pobranie klatki ze strumienia obrazu nadawanego przez Raspberry o~wskazanym numerze seryjnym. Jeżeli na pobranej klatce wykryto człowieka, uruchamiana jest funkcja nagrywająca 30 sekundowy fragment wideo, który zostaje zapisany w~bazie danych Firebase Storage. Użytkownik zostaje poinformowany o~zajściu zdarzenia z~informacją zawartą w polu 'message'. Notyfikacja zostanie wysłana jeżeli wykrycie ruchu zostało spowodowane przez człowieka. W~każdym innym przypadku zostanie zignorowana.
 
 \paragraph{c) Wykrycie zmian na czujniku:}
 \begin{verbatim}
@@ -73,7 +73,7 @@ Zawartość:
 	'token': `jwt.token.from.client`
 }
 \end{verbatim}
-Działanie: Informuje serwer o wykryciu zagrożenia na jednym z~czujników. Serwer następnie wyszukuje wszystkich klientów, którzy posiadają urządzenie o numerze seryjnym, który wykrył niebezpieczne wskazania na czujniku i wysyła do nich powiadomienie za pomocą push notyfikacji. \newline
+Działanie: Informuje serwer o~wykryciu zagrożenia na jednym z~czujników. Serwer następnie wyszukuje wszystkich klientów, którzy posiadają urządzenie o~numerze seryjnym, który wykrył niebezpieczne wskazania na czujniku i~wysyła do nich powiadomienie za pomocą push notyfikacji. \newline
 Następne zapytania dotyczą poleceń wysyłanych z~aplikacji użytkownika.
 \paragraph{d) Pobranie urządzeń użytkownika:}
 \begin{verbatim}
@@ -95,7 +95,7 @@ Zawartość:
 	'token': 'jwt.token.from.client'
 }
 \end{verbatim}
-Działanie: Zmienia nazwę urządzenia, wyświetlaną w~aplikacji użytkownika. Przyjęto, że nazwa ta powinna oznaczać miejsce, w którym znajduje się urządzenie.
+Działanie: Zmienia nazwę urządzenia, wyświetlaną w~aplikacji użytkownika. Przyjęto, że nazwa ta powinna oznaczać miejsce, w~którym znajduje się urządzenie.
 \paragraph{f) Uzbrojenie/rozbrojenie urządzenia:}
 \begin{verbatim}
 Adres: /backend/v1/devices/changeIsArmed
@@ -117,7 +117,7 @@ Zawartość:
 	'token': 'jwt.token.from.client'
 }
 \end{verbatim}
-Działanie: Pobiera listę notyfikacji (historię zdarzeń) powiązanych z urządzeniem o podanym numerze seryjnym.
+Działanie: Pobiera listę notyfikacji (historię zdarzeń) powiązanych z~urządzeniem o~podanym numerze seryjnym.
 \paragraph{h) Powiązanie aplikacji z kontem użytkownika:}
 \begin{verbatim}
 Adres: /backend/v1/devices/fcmTokenUpdate
@@ -131,7 +131,7 @@ Zawartość:
 Działanie: Powiązuje aplikację mobilną jak i~sesję aplikacji przeglądarkowej o~podanym tokenie z~kontem użytkownika. Dzięki temu, notyfikacje trafiają na wszystkie urządzenia użytkownika.
 \newline
 \newline
-Wybrane rozwiązanie pozwala na łatwą lokalizację ewentualnego błędu w działaniu systemu oraz szybką jego naprawę. Ponadto prosta logika oraz łatwe i krótkie funkcje obsługujące zapytania sprawiają, że dalszy rozwój tej części systemu będzie możliwy bardzo niskim nakładem sił. 
+Wybrane rozwiązanie pozwala na łatwą lokalizację ewentualnego błędu w działaniu systemu oraz szybką jego naprawę. Ponadto prosta logika oraz łatwe i~krótkie funkcje obsługujące zapytania sprawiają, że dalszy rozwój tej części systemu będzie możliwy bardzo niskim nakładem sił. 
 
 \section{Baza danych}
 
