@@ -14,7 +14,7 @@ Architektura została przedstawiona na schemacie (rys.x.x) . Wszystkie urządzen
 
 \section{Komunikacja}
 
-Komunikacja, pomiędzy elementami systemu, odbywa się na zasadach architektury REST. Wiadomości przesyłane są asynchronicznie, na wskazane wcześniej adresy.
+Komunikacja pomiędzy elementami systemu odbywa się na zasadach architektury REST. Wiadomości przesyłane są asynchronicznie, na wskazane wcześniej adresy.
 Takie podejście gwarantuje prostotę przesyłanych komunikatów oraz skalowalność w~kontekście nowych urządzeń Raspberry, strumieniujących dane, oraz nowych urządzeń korzystających z~aplikacji klienckich. Początkowo, projekt był oparty o~zapytania GET i~POST.  \cite{WEBARCH}
 
 \paragraph{Zapytanie GET}
@@ -23,9 +23,8 @@ Metoda GET pozwala na pobranie dokumentu sieciowego, na postawie zapytania zawar
 \paragraph{Zapytanie POST}
 W metodzie POST, należy zamieścić wiadomość wewnątrz zapytania HTTP. Odpowiedzią na ten typ zapytania, może być zarówno kod statusu, jak i~dane, zwracane w podobnej postaci jak przy zapytaniu GET.
 
-Wprowadzenie tokenów uwierzytelniających (więcej w akapicie nt. Bezpieczeństwa), spowodowało, że wymianę komunikatów oparto tylko i~wyłącznie na zapytaniach POST. 
-W~zależności od zadania, obsługa zapytania polega na wykonaniu zapytania na bazie danych lub wysłaniu notyfikacji do klienta.
-Obsługę zapytań można również podzielić, ze względu na zaplanowane źródło zapytania: aplikacja użytkownika lub urządzenie Raspberry.
+Wprowadzenie tokenów uwierzytelniających (więcej w akapicie nt. Bezpieczeństwa), spowodowało, że wymianę komunikatów oparto tylko i~wyłącznie na zapytaniach POST. Wysłanie takiego zapytania na określony adres powoduje uruchomienie specjalnej funkcji na serwerze. Każdy adres ma przypisaną osobną funkcję uruchamianą automatycznie po otrzymaniu zapytania. Funkcje te realizują operacje na bazie danych (CRUD) lub odpowiedzialne są za wysyłanie notyfikacji do wszystkich urządzeń klienta.
+Obsługę zapytań można podzielić, ze względu na zaplanowane źródło zapytania: aplikacja użytkownika lub urządzenie Raspberry.
 W~pierwszej kolejności przedstawione zostaną wiadomości wymieniane na linii Raspberry - Serwer.
 \paragraph{a) Rejestracja Raspberry Pi:}
 \begin{verbatim}
@@ -37,7 +36,7 @@ Zawartość:
 	'token': 'jwt.token.from.client'
 }
 \end{verbatim}
-Działanie: Raspberry, o~podanych serialu i~nazwie, zostaje dodane do bazy danych urządzeń.
+Działanie: Raspberry, o~podanym numerze seryjnym i~nazwie, zostaje dodane do bazy danych urządzeń.
 
 \paragraph{b) Wykrycie ruchu:}
 \begin{verbatim}
@@ -49,7 +48,7 @@ Zawartość:
 	'token': 'jwt.token.from.client'
 }
 \end{verbatim}
-Działanie: Po odebraniu informacji, o~wykryciu ruchu, następuje pobranie klatki ze strumienia obrazu, nadawanego przez Raspberry o~wskazanym serialu. Jeśli wykryto ruch człowieka, następuje nagranie fragmentu wideo, który zostaje zapisany w~bazie danych Firebase Storage, a~użytkownik zostaje poinformowany o~zajściu i~o~nagraniu, które może pobrać. Jeśli nie wykryto obecności ludzkiej, notyfikacja zostaje zignorowana.
+Działanie: Po odebraniu informacji o~wykryciu ruchu, następuje pobranie klatki ze strumienia obrazu nadawanego przez Raspberry o~wskazanym numerze seryjnym. Jeżeli na pobranej klatce wykryto człowieka, uruchamiana jest funkcja nagrywająca 30 sekundowy fragment wideo, który zostaje zapisany w~bazie danych Firebase Storage. Użytkownik zostaje poinformowany o~zajściu zdarzenia z informacją zawartą w polu 'message'. Notyfikacja zostanie wysłana jeżeli wykrycie ruchu zostało spowodowane przez człowieka. W każdym innym przypadku zostanie zignorowana.
 
 \paragraph{c) Wykrycie zmian na czujniku:}
 \begin{verbatim}
@@ -62,7 +61,7 @@ Zawartość:
 	'token': `jwt.token.from.client`
 }
 \end{verbatim}
-Działanie: Informuje serwer o~zmianie wartości jednego z~czujników.\newline
+Działanie: Informuje serwer o wykryciu zagrożenia na jednym z~czujników. Serwer następnie wyszukuje wszystkich klientów, którzy posiadają urządzenie o numerze seryjnym, który wykrył niebezpieczne wskazania na czujniku i wysyła do nich powiadomienie za pomocą push notyfikacji. \newline
 Następne zapytania dotyczą poleceń wysyłanych z~aplikacji użytkownika.
 \paragraph{d) Pobranie urządzeń użytkownika:}
 \begin{verbatim}
@@ -84,10 +83,11 @@ Zawartość:
 	'token': 'jwt.token.from.client'
 }
 \end{verbatim}
-Działanie: Zmienia nazwę urządzenia, wyświetlaną w podglądzie, w~aplikacji użytkownika.
+Działanie: Zmienia nazwę urządzenia, wyświetlaną w~aplikacji użytkownika. Przyjęto, że nazwa ta powinna oznaczać miejsce, w którym znajduje się urządzenie.
 \paragraph{f) Uzbrojenie/rozbrojenie urządzenia:}
 \begin{verbatim}
 Adres: /backend/v1/devices/changeIsArmed
+
 Zawartość: 
 {
 	'serial': <serial-urządzenia>, 
@@ -95,7 +95,7 @@ Zawartość:
 	'token': 'jwt.token.from.client'
 }
 \end{verbatim}
-Działanie: Ustala, czy nowe powiadomienia, związane z~urządzeniem, dalej będą wysyłane do aplikacji.
+Działanie: Ustala czy nowe powiadomienia związane z~urządzeniem dalej będą wysyłane do aplikacji.
 \paragraph{g) Pobranie listy notyfikacji:}
 \begin{verbatim}
 Adres: /backend/v1/devices/getNotifications
@@ -105,7 +105,7 @@ Zawartość:
 	'token': 'jwt.token.from.client'
 }
 \end{verbatim}
-Działanie: Pobiera listę notyfikacji, powiązanych z urządzeniem o podanym serialu.
+Działanie: Pobiera listę notyfikacji (historię zdarzeń) powiązanych z urządzeniem o podanym numerze seryjnym.
 \paragraph{h) Powiązanie aplikacji z kontem użytkownika:}
 \begin{verbatim}
 Adres: /backend/v1/devices/fcmTokenUpdate
@@ -116,10 +116,10 @@ Zawartość:
 	'deviceId' : <id_aplikacji>
 }
 \end{verbatim}
-Działanie: Powiązuje aplikację, zarówno mobilną, jak i~sesję aplikacji przeglądarkowej, o~podanym tokenie, z~kontem użytkownika. Dzięki temu, notyfikacje trafiają na wszystkie urządzenia użytkownika.
+Działanie: Powiązuje aplikację mobilną jak i~sesję aplikacji przeglądarkowej o~podanym tokenie z~kontem użytkownika. Dzięki temu, notyfikacje trafiają na wszystkie urządzenia użytkownika.
 \newline
 \newline
-Wybrane rozwiązanie pozwala na łatwą lokalizację ewentualnego błędu w działaniu systemu, oraz szybką naprawę zaistniałego problemu. Ponadto prosta logika oraz łatwe, krótkie funkcje, obsługujące zapytania, sprawiają, że dalszy rozwój tej części systemu, będzie możliwy bardzo niskim nakładem sił. 
+Wybrane rozwiązanie pozwala na łatwą lokalizację ewentualnego błędu w działaniu systemu oraz szybką jego naprawę. Ponadto prosta logika oraz łatwe i krótkie funkcje obsługujące zapytania sprawiają, że dalszy rozwój tej części systemu będzie możliwy bardzo niskim nakładem sił. 
 
 \section{Bezpieczeństwo}
 
