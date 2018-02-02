@@ -11,10 +11,24 @@ Przebieg testu:\newline
 2. Tester odebrał informację o zagrożeniu.\newline
 3. Po naciśnięciu przycisku 'Check It!' użytkownik został przeniesiony na podstronę związaną z notyfikacją.\newline
 Wniosek:\newline
-Funkcjonalnoć zaimplementowana prawidłowo\newline
+Funkcjonalność zaimplementowana prawidłowo\newline
 \newline
 //////////////////////\newline
- * Rejestracja+dodanie raspa\newline
+\paragraph{Test nr 2}
+Zakres testu:\newline
+Użytkownik dodaje nowe urządzenie do swojego konta\newline
+Tester: XXX \newline
+Autor aplikacji: XXX \newline
+Przebieg testu:\newline
+1. Użytkownik wybiera przycisk 'Dodaj' w dolnej części ekranu \newline
+2. Użytkownik wprowadza numer seryjny urządzenia, które zamierza dodać \newline
+3. Po naciśnięciu przycisku 'Send' użytkownik otrzymał informację o sukcesie.\newline
+Wniosek:\newline
+Funkcjonalność zaimplementowana prawidłowo\newline
+
+ 
+ 
+ 
  * Aplikacji (3x, dla każdej):\newline
  ** Sprawdzenie zagrożenia (skok wartości jednego z czujników)\newline
  ** Sprawdzenie obrazu z kamery na wybranym raspie\newline
@@ -22,7 +36,7 @@ Funkcjonalnoć zaimplementowana prawidłowo\newline
 
 \chapter{Uwagi końcowe}
 
-Grupa zrealizowała wszystkie cele postawione sobie na początku pracy. Wykonany system działa i jest przystosowany do dalszej modyfikacji. Istnieje możliwość wymiany czujników z rodziny MQ na inne bez konieczności zmian w oprogramowaniu uruchomionym na Raspberry, ze względu na podobny charakter ich działania. W następnej fazie zalecane byłoby zaprojektowanie lepszej obudowy na czujniki aby poprawić design systemu. Zdecydowano, że cały system będzie na licencji open-source, aby każdy mógł pobrać oprogramowanie i edytować je według własnych potrzeb. Mimo, że taktowanie procesora Raspberry Pi 3 nie jest wysokie i nie poradziłby on sobie sam z zadaniami przedstawionymi na początku pracy to dzięki zastosowaniu zewnętrzych serwerów i usług na takich platformach jak Microstof Azure udało się wykonać w pełni działający system bezpieczeństwa. Przeniesiono bardzo obciążające zadania takie jak przetwarzanie obrazu na zewnętrzne platformy, które wyposażone są w znacznie bardziej zaawansowane podzespoły. Wykorzystanie natomiast usług Firebase, z którego korzystają też takie firmy jak Trivago czy Shazam pozwoliło na szybką implementację zaawansowanych funkcji takich jak uwierzytelnianie użytkowników czy aktualizację zmian w bazie danych w czasie rzeczywistym. Grupa zamierza dalej pracować nad systemem kontroli bezpieczeństwa - The Guard aby uczynić świat lepszym a przede wszystkim bezpieczniejszym miejscem do życia :)
+Grupa zrealizowała wszystkie cele postawione sobie na początku pracy. Wykonany system działa i jest przystosowany do dalszej modyfikacji. Istnieje możliwość wymiany czujników z rodziny MQ na inne bez konieczności zmian w oprogramowaniu uruchomionym na Raspberry, ze względu na podobny charakter ich działania. W następnej fazie zalecane byłoby zaprojektowanie nowej obudowy na czujniki aby poprawić wygląd urządzeń. Zdecydowano, że cały system będzie na licencji open-source, aby każdy mógł pobrać oprogramowanie i edytować je według własnych potrzeb. Mimo, że taktowanie procesora Raspberry Pi 3 nie jest wysokie i nie poradziłby on sobie sam z zadaniami przedstawionymi na początku pracy to dzięki zastosowaniu zewnętrzych serwerów i usług na takich platformach jak Microstof Azure udało się wykonać w pełni działający system bezpieczeństwa. Przeniesiono bardzo obciążające zadania takie jak przetwarzanie obrazu na zewnętrzne platformy, które wyposażone są w znacznie bardziej zaawansowane podzespoły. Wykorzystanie natomiast usług Firebase, z którego korzystają też takie firmy jak Trivago czy Shazam pozwoliło na szybką implementację zaawansowanych funkcji takich jak uwierzytelnianie użytkowników czy aktualizację zmian w bazie danych w czasie rzeczywistym. Grupa zamierza dalej pracować nad systemem kontroli bezpieczeństwa - The Guard aby uczynić świat lepszym a przede wszystkim bezpieczniejszym miejscem do życia :)
 
 
 // TODO Remove dummy doc links

@@ -44,11 +44,24 @@ Paweł Szudrowicz \album{122445}}
     \input{06-klienci.tex}
     \input{07-zakonczenie.tex}
 
-    % Bibliography (books, articles) starts here.
-    \bibliography{bibliography} 
-    \bibliographystyle{unsrt}
+    
   %  {\raggedright\sloppy\small\bibliography{bibliography}}
+    \cleardoublepage
+    \begingroup
+    \makeatletter
+    \let\ps@plain\ps@plain
+    \makeatother
+    
+    \pagestyle{plain}
+
+    % Bibliography (books, articles) starts here.
+    \bibliographystyle{unsrt} 
+    \bibliography{bibliography}     
     \listoffigures
+    \pagestyle{plain}
+    \cleardoublepage
+    \endgroup
+    
     % Colophon is a place where you should let others know about copyrights etc.
     \ppcolophon
 
