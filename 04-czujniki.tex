@@ -42,19 +42,16 @@ Następnym krokiem jest włączenie odpowiednich interfejsów w~panelu konfigura
 	\caption{Ustawienia [źródło własne]}
 	\label{rs_settings}
 \end{figure}
-Użyto biblioteki wiringpi do odczytu danych z~układów cyfrowych. Należy podkreślić, że numeracja fizycznych pinów(rys. \ref{gpio}) i~numeracja pinów w wiringPi(rys. \ref{wiringpi}) jest różna i~nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu numer 1 w~wiringPi jest równoznaczny z~odczytem stanu na pinie numer 12 (GPIO18).
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=6cm]{gpio.png}
-        \caption{GPIO \cite{gpio}}
-        \label{gpio}
+Użyto biblioteki wiringpi do odczytu danych z~układów cyfrowych. Należy podkreślić, że numeracja fizycznych pinów i~numeracja pinów w wiringPi(rys. \ref{piny}) jest różna i~nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu numer 1 w~wiringPi jest równoznaczny z~odczytem stanu na pinie numer 12 (GPIO18).
+\begin{figure}[H]
+    \centering
+    \subfloat[GPIO]{\includegraphics[width=6cm]{gpio.png}}
+    \hfill
+    \subfloat[Wiringpi]{\includegraphics[width=4cm]{wiringpi.png}}
+    \caption{Porównanie pinów na Raspberry Pi 3\cite{gpio} z wiringpi\cite{wiringpi}}
+    \label{piny}
 \end{figure}
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=4cm]{wiringpi.png}
-        \caption{WiringPi \cite{wiringpi}}
-        \label{wiringpi}
-\end{figure}
+
 Zainstalowane oprogramowanie odpowiedzialne jest za ciągłe monitorowanie stanów i~zbieranie danych z~czujników pomiarowych. Po podłączeniu układu do zasilania program jest uruchamiany automatycznie. Pierwszą czynnością jaką wykonuje Raspberry Pi jest wysłanie swojego numeru seryjnego do bazy danych Firebase. Cały proces jest w~pełni zautomatyzowany. Dzięki temu użytkownicy od razu mogą dodać urządzenie i~przeglądać dane z~czujników na aplikacjach klienckich. Dodanie akcesorium pomiarowego następuje poprzez wprowadzenie w~aplikacji jego numeru seryjnego.
 \section{Czujniki}
 Każdy zestaw składa się z~5~czujników analogowo cyfrowych,  jednej kamery i~jednego przetwornika AC. 
