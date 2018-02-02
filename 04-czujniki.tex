@@ -1,6 +1,6 @@
-\chapter{Zbieranie i przetwarzanie danych~z czujników}
+\chapter{Zbieranie i przetwarzanie danych z~czujników}
 \section{Raspberry Pi}
-Wszystkie zestawy zbudowano w oparciu o Raspberry Pi 3 v1.2. Zdecydowano się na to rozwiązanie, ponieważ bazuje na dystrybucji Linuxa, posiada opowiednie interfejsy i~złącza, a~także zintegrowany moduł WiFi. Minusem w~stosunku do konkurencyjnego Arduino jest brak wejść analogowych. Problem rozwiązano dodając zewnętrzny przetwornik A/C. Całość zamknięto w~małą plastikową obudowę z~wyciętymi otworami na czujniki (rys. \ref{the_guard_set}). Schemat budowy układu wykonano w~programie Fritzing (rys. \ref{the_guard_schem}).
+Wszystkie zestawy zbudowano w~oparciu o~Raspberry Pi 3 v1.2. Zdecydowano się na to rozwiązanie, ponieważ bazuje na dystrybucji Linuxa, posiada opowiednie interfejsy i~złącza, a~także zintegrowany moduł WiFi. Minusem w~stosunku do konkurencyjnego Arduino jest brak wejść analogowych. Problem rozwiązano dodając zewnętrzny przetwornik A/C. Całość zamknięto w~małą plastikową obudowę z~wyciętymi otworami na czujniki (rys. \ref{the_guard_set}). Schemat budowy układu wykonano w~programie Fritzing (rys. \ref{the_guard_schem}).
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=7cm]{guard.jpg}
@@ -21,7 +21,7 @@ Wszystkie zestawy zbudowano w oparciu o Raspberry Pi 3 v1.2. Zdecydowano się na
 \item Pamięć Karta microSD
 \item 40 GPIO
 \end{itemize}
-Aby prawidłowo zainstalować oprogramowanie The Guard na dowolnym urządzeniu Raspberry~Pi~3 należy wykonać poniższe czynności~w terminalu:
+Aby prawidłowo zainstalować oprogramowanie The Guard na dowolnym urządzeniu Raspberry~Pi~3 należy wykonać poniższe czynności w~terminalu:
 \begin{enumerate} 
 \item sudo apt-get install libx264-dev
 \item cd /usr/src
@@ -42,7 +42,7 @@ Następnym krokiem jest włączenie odpowiednich interfejsów w~panelu konfigura
 	\caption{Ustawienia [źródło własne]}
 	\label{rs_settings}
 \end{figure}
-Użyto biblioteki wiringpi do odczytu danych z~układów cyfrowych. Należy podkreślić, że numeracja fizycznych pinów i~numeracja pinów w wiringPi(rys. \ref{piny}) jest różna i~nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu numer 1 w~wiringPi jest równoznaczny z~odczytem stanu na pinie numer 12 (GPIO18).
+Użyto biblioteki wiringpi do odczytu danych z~układów cyfrowych. Należy podkreślić, że numeracja fizycznych pinów i~numeracja pinów w wiringPi(rys. \ref{piny}) jest różna i~nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu numer 1~w~wiringPi jest równoznaczny z~odczytem stanu na pinie numer 12 (GPIO18).
 \begin{figure}[H]
     \centering
     \subfloat[GPIO]{\includegraphics[width=6cm]{gpio.png}}
@@ -57,14 +57,14 @@ Zainstalowane oprogramowanie odpowiedzialne jest za ciągłe monitorowanie stan�
 Każdy zestaw składa się z~5~czujników analogowo cyfrowych,  jednej kamery i~jednego przetwornika AC. 
 \paragraph{a) Specyfikacja MQ-9 - czujnik tlenku węgla\cite{specyfikacjaMQ-9}:}
 \begin{itemize} 
-\item Zasilanie: 5 V
+\item Zasilanie: 5~V
 \item Pobór prądu: 150 mA
 \item Temperatura pracy: od -10 do 50 \textdegree{}C
 \item Wyjścia: analogowe oraz cyfrowe
 \end{itemize}
 \paragraph{b) Specyfikacja MQ-2 - czujnik LPG i dymu \protect\cite{specyfikacjaMQ-2}:}
 \begin{itemize} 
-\item Zasilanie: 5 V
+\item Zasilanie: 5~V
 \item Pobór prądu: 150 mA
 \item Temperatura pracy: od -10 do 50 \textdegree{}C
 \item Wyjścia: analogowe oraz cyfrowe
@@ -114,11 +114,11 @@ Na schematach (rys. \ref{mq2}, rys. \ref{mq9}) przedstawiono charakterystykę cz
 	\caption{Charakterystyka MQ-9 \protect\cite{mq9}}
 	\label{mq9}
 \end{figure}
-Ro - jest to stała wartość oporu czujnika przy 1000ppm H2 w czystym powietrzu.\\
+Ro - jest to stała wartość oporu czujnika przy 1000ppm H2 w~czystym powietrzu.\\
 Rs - jest to opór czujnika w~różnych stężeniach gazu. \\
-Skoro Ro jest stałe to przy wzroście Rs czułość będzie maleć. Dlatego też im mniejszy stosunek Rs do Ro tym lepiej. Widać, że oba czujniki reagują na wiele różnych gazów. MQ-2 nazwano czujnikiem LPG a MQ-9 czujnikiem CO ze względu na to, że w~stosunku do tych gazów mają najwyższą czułość. 
+Skoro Ro jest stałe to przy wzroście Rs czułość będzie maleć. Dlatego też im mniejszy stosunek Rs do Ro tym lepiej. Widać, że oba czujniki reagują na wiele różnych gazów. MQ-2 nazwano czujnikiem LPG, a~MQ-9 czujnikiem CO ze względu na to, że w~stosunku do tych gazów mają najwyższą czułość. 
 
-Niestety żaden model Raspberry nie posiada wbudowanego przetwornika analogowo cyfrowego dlatego konieczne było użycie układu zewnętrznego. Wybrano przetwornik MCP3008 ze względu na jego nisko koszt i~komunikację poprzez interfejs SPI, który jest wspierany przez Raspberry Pi. MCP3008 to 10-bitowy przetwornik analogowy cyfrowy. Zasilany jest napięciem 5V.  Skoro jest to przetwornik 10-bitowy jest w~stanie wykryć 1024 stany. Posiada 8 kanałów jednak w~projekcie wykorzystano tylko 2~–~dla MQ-9 i~MQ-2.
+Niestety żaden model Raspberry nie posiada wbudowanego przetwornika analogowo-cyfrowego dlatego konieczne było użycie układu zewnętrznego. Wybrano przetwornik MCP3008 ze względu na jego nisko koszt i~komunikację poprzez interfejs SPI, który jest wspierany przez Raspberry Pi. MCP3008 to 10-bitowy przetwornik analogowy cyfrowy. Zasilany jest napięciem 5V.  Skoro jest to przetwornik 10-bitowy jest w~stanie wykryć 1024 stany. Posiada 8 kanałów jednak w~projekcie wykorzystano tylko 2~–~dla MQ-9 i~MQ-2.
 \paragraph{Interfejs SPI:}
 \begin{figure}[ht]
 	\centering
@@ -141,7 +141,7 @@ Każdy układ monitoruje wskaźniki pomiarowe z czujników analogowych i~cyfrowy
 Czujnik MQ-9: od 0.15 do 0.2\\
 Czujnik MQ-2: od 0.05 do 0.15\\
 Przyjęto, że granicą wysłania notyfikacji do użytkownika jest przekroczenie progu 0.3. Wartości te to znormalizowane dane z~przetwornika AC, który jak już wcześniej wspomniano wykrywa 1024 stany. Odczytywane wartości bezpośrednio na wyjściu przetwornika MCP3008 dla czujnika MQ-9 w~czystym powietrzu to około 170. Stąd 170/1024 = 0.166. Wysłanie notyfikacji wiąże się z~otrzymaniem wartości większej niż 308.
-Czujniki cyfrowe wykorzystane w~pracy informują o wykryciu płomieni i ruchu. Czujnik ruchu detekcję zagrożenia określa przez stan wysoki natomiast czujnik płomieni przez stan niski. W kodzie jednak wykonano instrukcje negacji, aby stan wysoki informował o~niebezpieczeństwie, a~stan niski reprezentował jego brak. Na czujnikach znajduje się potencjometr, za pomocą którego dowolnie można ustawiać jego czułość. Odczyt danych następuje nieprzerwanie co 2~sekundy. Nie należy obawiać się, że czujnik ruchu nie wykryje zagrożenia z~powodu braku odczytu we właściwym momencie, ponieważ utrzymuje on stan wysoki przez 5~sekund po wykryciu ruchu. Oprogramowanie wysyła także informacje z~czujników do bazy danych Firebase. Zastosowanie takiej bazy daje możliwość monitorowania wszystkich danych w~czasie rzeczywistym na aplikacjach klienckich. Dodatkowo w~przypadku zagrożenia czyli przekroczeniu progu, o~którym mowa wyżej wysyłana jest push notyfikacja do urządzeń użytkownika, a~informacja o~zagrożeniu zapisywana jest w~bazie danych Django. Każdy jest w~stanie odtworzyć całą historię wydarzeń w~swoim systemie.
+Czujniki cyfrowe wykorzystane w~pracy informują o~wykryciu płomieni i~ruchu. Czujnik ruchu wykrycię zagrożenia określa przez stan wysoki, natomiast czujnik płomieni przez stan niski. W~kodzie jednak wykonano instrukcje negacji, aby stan wysoki informował o~niebezpieczeństwie, a~stan niski reprezentował jego brak. Na czujnikach znajduje się potencjometr, za pomocą którego dowolnie można ustawiać jego czułość. Odczyt danych następuje nieprzerwanie co 2~sekundy. Nie należy obawiać się, że czujnik ruchu nie wykryje zagrożenia z~powodu braku odczytu we właściwym momencie, ponieważ utrzymuje on stan wysoki przez 5~sekund po wykryciu ruchu. Oprogramowanie wysyła także informacje z~czujników do bazy danych Firebase. Zastosowanie takiej bazy daje możliwość monitorowania wszystkich danych w~czasie rzeczywistym na aplikacjach klienckich. Dodatkowo w~przypadku zagrożenia czyli przekroczeniu progu, o~którym mowa wyżej wysyłana jest push notyfikacja do urządzeń użytkownika, a~informacja o~zagrożeniu zapisywana jest w~bazie danych Django. Każdy jest w~stanie odtworzyć całą historię wydarzeń w~swoim systemie.
 Aby zapewnić wydajny i~pewny system bezpieczeństwa przy otrzymaniu wysokich wartości na czujnikach zapisywany jest czas zdarzenia. Każda kolejna notyfikacja zostanie wysłana po upływie 10 minut od poprzedniej przy założeniu, że stan na czujniku nadal jest wysoki. 
 
 \section{Obsługa wideo}
@@ -155,7 +155,7 @@ Ponadto wykorzystano protokół HLS (HTTP Live Streaming) zapisywanie odbieraneg
 
 \paragraph{H264}
 W~pracy wykorzystano kodowanie obrazu koderem H.264. Charakteryzuje go niska złożoność algorytmów kompresji oraz niewielkie opóźnienie dzięki czemu idealnie nadaje się do zadania związanego z~szybkim enkodowaniem obrazu przed przestrumieniowaniem go dalej. \cite{H264}
-Szybkoć i~złożonoć H.264 idą w parze z~jego jakością, która jest o~wiele wyższa niż w~starszych rozwiązaniach.
+Szybkoć i~złożonoć H.264 idą w~parze z~jego jakością, która jest o~wiele wyższa niż w~starszych rozwiązaniach.
 Cechą charakterystyczną dla tego typu kodowania wideo jest użycie klatki kluczowej (ang keyframe, i-frame). Jest to pełna klatka obrazu w~przeciwieństwie do następujących po niej danych, które wyrażają różnice między dwoma konsekutywnymi klatkami. Pozwala to na zmniejszenie rozmiarów ostatecznego obrazu wideo.
 
 \paragraph{Raspberry Pi}
