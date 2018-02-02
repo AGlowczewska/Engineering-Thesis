@@ -244,19 +244,6 @@ Aplikacja internetowa przeznaczona jest dla użytkowników wszystkich systemów 
 
 \paragraph{Panel logowania / rejestracji użytkownika:} Panele logowania oraz rejestracji użytkownika są do siebie bardzo podobne - jedyna ich różnica jest w nazwie i~funkcjonalności. Obydwa panele składają się z~loga aplikacji oraz formularza w~którym trzeba podać adres email i~hasło. W przypadku panelu logowania, dane są weryfikowane i~jeśli są poprawne użytkownik zostaje zalogowany. Jeżeli użytkownik chce zarejestrować konto, sprawdzana jest poprawność adresu email, a następnie tworzone jest konto w usłudze FireBase Auth. W przypadku błędu, jest on wyświetlany powyżej formularza (rys. \ref{web_login})
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=9cm]{web_screenshots/login.png}
-	\caption{Strona logowania w aplikacji webowej}
-	\label{web_login}
-\end{figure}
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=9cm]{web_screenshots/error.png}
-	\caption{Strona logowania - przykładowa obsługa błędu (użytkownik nie podał hasła)}
-	\label{web_login_error}
-\end{figure}
 \paragraph{Menu wyboru urządzenia:} Po prawidłowym zalogowaniu do aplikacji, użytkownik może zobaczyć listę swoich urządzeń, dodać nowe oraz zaczyna dostawać powiadomienia w razie wykrytego zagrożenia. W~przypadku kliknięcia przycisku `Connect rasp', użykownik zostaje przekierowany do widoku umożliwiającego rejestrację nowego urządzenia(rys. \ref{web_register}). Po wprowadzeniu numeru seryjnego urządzenia oraz jego nazwy, zostaje dodany do baz danych. Po wybraniu urządzenia, informacje nt. jego stanu będą wyświetlane po prawej stronie okna, która w momencie zalogowania jest pusta (rys. \ref{web_main_page}). Urządzenia w~menu są rozpoznawane na podstawie ich nazw. 
 
 \paragraph{Widok konkretnego urządzenia:} Po wybraniu z~menu kokretnego urządzenia, użytkownik zostaje przekierowany na stronę pojedyńczego urządzenia (rys. \ref{web_rasp_view}). Pod nazwą urządzenia i~jego numerem seryjnym wyświetlany jest aktualny obraz z kamery oraz stan czujników. Dzięki zastosowaniu nasłuchiwania na bazie danych Firebase, zmiany są na bieżąco wyświetlane na stronie. Użytkownik ma możliwość po naciśnięciu odpowiedniego przycisku:
@@ -265,24 +252,7 @@ Aplikacja internetowa przeznaczona jest dla użytkowników wszystkich systemów 
 \item Wyłączyć / włączyć alerty 
 \item Zobaczyć notyfikacje danego urządzenia - poprzez klknięcie na przycisk `Check notifications from this device', użytkownik zostanie przekierowany do widoku listy notyfikacji danego urządzenia (rys. \ref{web_rasp_notifications}).
 \end{itemize}
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=9cm]{web_screenshots/rasp_view.png}
-	\caption{Widok konkretnego urządzenia}
-	\label{web_rasp_view}
-\end{figure}
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=9cm]{web_screenshots/rasp_rename.png}
-	\caption{Panel zmiany nazwy urządzenia}
-	\label{web_rasp_rename}
-\end{figure}
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=9cm]{web_screenshots/rasp_notifications.png}
-	\caption{Panel notyfikacji urządzenia}
-	\label{web_rasp_notifications}
-\end{figure}
+
 \paragraph{Wyświetlanie notyfikacji:} W każdym z widoków aplikacji webowej w czasie rzeczywistym sprawdzane są notyfikacje z bazy danych z pomocą Firebase WebApi. W przypadku wykrycia zmiany uznawanej za niebezpieczną za pomocą skryptów przeglądarki (JavaScript + JQuery) wyświetlany jest monit informujący o niebezpiecznym zdarzeniu, co pokazane jest na rysunku \ref{web_rasp_notifications}.  
 
 \paragraph{Implementacja Django - połączenie z bazą danych:}
