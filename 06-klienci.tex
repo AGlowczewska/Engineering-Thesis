@@ -240,46 +240,37 @@ Testy przeprowadzono na iPhonie 6S i iPadzie Pro.
 \section{Aplikacja internetowa}
 Aplikacja webowa przeznaczona jest dla użytkowników wszystkich systemów operacyjnych i~została przetestowana w~przeglądarce Firefox. Rozmieszczenie komponentów aplikacji różni się od tego zastosowanego w~aplikacjach IOS oraz Android - spowodowane jest to inną rozdzielczością ekranu. 
 
-\paragraph{Panel logowania / rejestracji użytkownika:}
-\paragraph{Menu wyboru urządzenia:}
-\paragraph{Główny panel aplikacji:}
-\paragraph{Panel rejestracji urządzenia:}
-\paragraph{Panel notyfikacji:}
-
-
 \paragraph{Implementacja Django - połączenie z bazą danych:}
 Biblioteka Django posiada wbudowane rozwiązania umożliwiające pobieranie informacji z bazy danych projektu dzięki czemu aplikacja webowa nie wysyła zapytań na określone dla aplikacji mobilnych porty, tylko komunikuje się bezpośrednio z bazą danych. Rozwiązanie to umożliwia uniezależnienie aplikacji webowej od stanu portów oraz zmniejsza liczbę potrzebnych zapytań wysyłanych do serwera.
 Aplikacja internetowa przeznaczona jest dla użytkowników wszystkich systemów operacyjnych i~została przetestowana w~przeglądarce Firefox w systemach operacyjnych Microsoft Windows 10 oraz Linux Debian 9 (Firefox ESR 52.5.2 64 bit). Do stworzenia aplikacji użyto języków programowania Python 3, JavaScript oraz framework'u Django, natomiast frontend jest oparty na bibliotece Bootstrap oraz JQuery. Połączenie z~bazą danych Firebase zaimplementowano za pomocą Firebase Web Api. Rozmieszczenie komponentów aplikacji różni się od tego zastosowanego w~aplikacjach IOS oraz Android - spowodowane jest to inną rozdzielczością ekranu. 
 
-\paragraph{Panel logowania / rejestracji użytkownika:} Panele logowania oraz rejestracji użytkownika są do siebie bardzo podobne - jedyna ich różnica jest w nazwie i~funkcjonalności. Obydwa panele składają się z~loga aplikacji oraz formularza w~którym trzeba podać adres email i~hasło. W przypadku panelu logowania, dane są weryfikowane i~jeśli są poprawne użytkownik zostaje zalogowany. Jeżeli użytkownik chce zarejestrować konto, sprawdzana jest poprawność adresu email, a następnie tworzone jest konto w usłudze FireBase Auth. W przypadku błędu, jest on wyświetlany powyżej formularza (rys. \ref{web_login})
+\paragraph{Panel logowania / rejestracji użytkownika:} Panele logowania oraz rejestracji użytkownika są do siebie bardzo podobne - jedyna ich różnica jest w nazwie i~funkcjonalności. Obydwa panele składają się z~loga aplikacji oraz formularza w~którym trzeba podać adres email i~hasło. W przypadku panelu logowania, dane są weryfikowane i~jeśli są poprawne użytkownik zostaje zalogowany. Jeżeli użytkownik chce zarejestrować konto, sprawdzana jest poprawność adresu email, a następnie tworzone jest konto w usłudze FireBase Auth. W przypadku błędu, jest on wyświetlany powyżej formularza (rys. \ref{web_login_err})
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=11cm]{web_screenshots/error.png}
+	\caption{Widok logowania z przykładowym błędem w~aplikacji internetowej\newline[źródło własne]}
+	\label{web_login_err}
+\end{figure}
 
-\paragraph{Menu wyboru urządzenia:} Po prawidłowym zalogowaniu do aplikacji, użytkownik może zobaczyć listę swoich urządzeń, dodać nowe oraz zaczyna dostawać powiadomienia w razie wykrytego zagrożenia. W~przypadku kliknięcia przycisku `Connect rasp', użykownik zostaje przekierowany do widoku umożliwiającego rejestrację nowego urządzenia(rys. \ref{web_register}). Po wprowadzeniu numeru seryjnego urządzenia oraz jego nazwy, zostaje dodany do baz danych. Po wybraniu urządzenia, informacje nt. jego stanu będą wyświetlane po prawej stronie okna, która w momencie zalogowania jest pusta (rys. \ref{web_main_page}). Urządzenia w~menu są rozpoznawane na podstawie ich nazw. 
+\paragraph{Menu wyboru urządzenia:} Po prawidłowym zalogowaniu do aplikacji, użytkownik może zobaczyć listę swoich urządzeń, dodać nowe oraz zaczyna dostawać powiadomienia w razie wykrytego zagrożenia. W~przypadku kliknięcia przycisku `Connect rasp', użykownik zostaje przekierowany do widoku umożliwiającego rejestrację nowego urządzenia. Po wprowadzeniu numeru seryjnego urządzenia oraz jego nazwy, zostaje dodany do baz danych. Po wybraniu urządzenia, informacje nt. jego stanu będą wyświetlane po prawej stronie okna, która w momencie zalogowania jest pusta. Urządzenia w~menu są rozpoznawane na podstawie ich nazw. 
 
-\paragraph{Widok konkretnego urządzenia:} Po wybraniu z~menu kokretnego urządzenia, użytkownik zostaje przekierowany na stronę pojedyńczego urządzenia (rys. \ref{web_rasp_view}). Pod nazwą urządzenia i~jego numerem seryjnym wyświetlany jest aktualny obraz z kamery oraz stan czujników. Dzięki zastosowaniu nasłuchiwania na bazie danych Firebase, zmiany są na bieżąco wyświetlane na stronie. Użytkownik ma możliwość po naciśnięciu odpowiedniego przycisku:
+\paragraph{Widok konkretnego urządzenia:} Po wybraniu z~menu kokretnego urządzenia, użytkownik zostaje przekierowany na stronę pojedyńczego urządzenia (rys. \ref{fig:monitoring}). Pod nazwą urządzenia i~jego numerem seryjnym wyświetlany jest aktualny obraz z kamery oraz stan czujników. Dzięki zastosowaniu nasłuchiwania na bazie danych Firebase, zmiany są na bieżąco wyświetlane na stronie. Użytkownik ma możliwość po naciśnięciu odpowiedniego przycisku:
 \begin{itemize}
-\item Zmienić nazwę urządzenia - po kliknięciu na przycisk rename znajdujący się obok nazwy urządzenia, użytkownik zostanie przekierowany do panelu zmiany nazwy (rys. \ref{web_rasp_rename}).
+\item Zmienić nazwę urządzenia - po kliknięciu na przycisk rename znajdujący się obok nazwy urządzenia, użytkownik zostanie przekierowany do panelu zmiany nazwy (rys. \ref{fig:ustawienia}).
 \item Wyłączyć / włączyć alerty 
-\item Zobaczyć notyfikacje danego urządzenia - poprzez klknięcie na przycisk `Check notifications from this device', użytkownik zostanie przekierowany do widoku listy notyfikacji danego urządzenia (rys. \ref{web_rasp_notifications}).
+\item Zobaczyć notyfikacje danego urządzenia - poprzez klknięcie na przycisk `Check notifications from this device', użytkownik zostanie przekierowany do widoku listy notyfikacji danego urządzenia (rys. \ref{fig:zdarzenia}).
 \end{itemize}
 
-\paragraph{Wyświetlanie notyfikacji:} W każdym z widoków aplikacji webowej w czasie rzeczywistym sprawdzane są notyfikacje z bazy danych z pomocą Firebase WebApi. W przypadku wykrycia zmiany uznawanej za niebezpieczną za pomocą skryptów przeglądarki (JavaScript + JQuery) wyświetlany jest monit informujący o niebezpiecznym zdarzeniu, co pokazane jest na rysunku \ref{web_rasp_notifications}.  
+\paragraph{Wyświetlanie notyfikacji:} W każdym z widoków aplikacji webowej w czasie rzeczywistym sprawdzane są notyfikacje z bazy danych z pomocą Firebase WebApi. W przypadku wykrycia zmiany uznawanej za niebezpieczną za pomocą skryptów przeglądarki (JavaScript + JQuery) wyświetlany jest monit informujący o niebezpiecznym zdarzeniu, co pokazane jest na rysunku \ref{web_notification}.  
+
+\begin{figure}[H]
+	\centering
+        \captionsetup{justification=centering, margin=1cm}
+	\includegraphics[width=11cm]{web_screenshots/danger.png}
+	\caption{Informacja o~niebezpiecznym zdarzeniu -~nagłej zmianie wartości odczytanej przez czujnik [źródło własne]}
+	\label{web_notification}
+\end{figure}
 
 \paragraph{Implementacja Django - połączenie z bazą danych:}
 Biblioteka Django posiada wbudowane rozwiązania umożliwiające pobieranie informacji z bazy danych projektu dzięki czemu aplikacja webowa nie wysyła zapytań na określone dla aplikacji mobilnych porty, tylko komunikuje się bezpośrednio z bazą danych. Rozwiązanie to umożliwia uniezależnienie aplikacji webowej od stanu portów oraz zmniejsza liczbę potrzebnych zapytań wysyłanych do serwera.
-Aplikacja internetowa przeznaczona jest dla użytkowników wszystkich systemów operacyjnych i~została przetestowana w~przeglądarce Firefox w systemach operacyjnych Microsoft Windows 10 oraz Linux Debian 9 (Firefox ESR 52.5.2 64 bit). Do stworzenia aplikacji użyto języków programowania Python 3, JavaScript oraz framework'u Django, natomiast frontend jest oparty na bibliotece Bootstrap oraz JQuery. Połączenie z~bazą danych Firebase zaimplementowano za pomocą Firebase Web Api. Rozmieszczenie komponentów aplikacji różni się od tego zastosowanego w~aplikacjach IOS oraz Android - spowodowane jest to inną rozdzielczością ekranu. 
 
-\paragraph{Panel logowania / rejestracji użytkownika:} Panele logowania oraz rejestracji użytkownika są do siebie bardzo podobne - jedyna ich różnica jest w nazwie i~funkcjonalności. Obydwa panele składają się z~loga aplikacji oraz formularza w~którym trzeba podać adres email i~hasło. W przypadku panelu logowania, dane są weryfikowane i~jeśli są poprawne użytkownik zostaje zalogowany. Jeżeli użytkownik chce zarejestrować konto, sprawdzana jest poprawność adresu email, a następnie tworzone jest konto w usłudze FireBase Auth. W przypadku błędu, jest on wyświetlany powyżej formularza (rys. \ref{web_login})
-
-\paragraph{Menu wyboru urządzenia:} Po prawidłowym zalogowaniu do aplikacji, użytkownik może zobaczyć listę swoich urządzeń, dodać nowe oraz zaczyna dostawać powiadomienia w razie wykrytego zagrożenia. W~przypadku kliknięcia przycisku `Connect rasp', użykownik zostaje przekierowany do widoku umożliwiającego rejestrację nowego urządzenia(rys. \ref{web_register}). Po wprowadzeniu numeru seryjnego urządzenia oraz jego nazwy, zostaje dodany do baz danych. Po wybraniu urządzenia, informacje nt. jego stanu będą wyświetlane po prawej stronie okna, która w momencie zalogowania jest pusta (rys. \ref{web_main_page}). Urządzenia w~menu są rozpoznawane na podstawie ich nazw. 
-
-\paragraph{Widok konkretnego urządzenia:} Po wybraniu z~menu kokretnego urządzenia, użytkownik zostaje przekierowany na stronę pojedyńczego urządzenia (rys. \ref{web_rasp_view}). Pod nazwą urządzenia i~jego numerem seryjnym wyświetlany jest aktualny obraz z kamery oraz stan czujników. Dzięki zastosowaniu nasłuchiwania na bazie danych Firebase, zmiany są na bieżąco wyświetlane na stronie. Użytkownik ma możliwość po naciśnięciu odpowiedniego przycisku:
-\begin{itemize}
-\item Zmienić nazwę urządzenia - po kliknięciu na przycisk rename znajdujący się obok nazwy urządzenia, użytkownik zostanie przekierowany do panelu zmiany nazwy (rys. \ref{web_rasp_rename}).
-\item Wyłączyć / włączyć alerty 
-\item Zobaczyć notyfikacje danego urządzenia - poprzez klknięcie na przycisk `Check notifications from this device', użytkownik zostanie przekierowany do widoku listy notyfikacji danego urządzenia (rys. \ref{web_rasp_notifications}).
-\end{itemize}
-
-\paragraph{Wyświetlanie notyfikacji:} W każdym z widoków aplikacji webowej w czasie rzeczywistym sprawdzane są notyfikacje z bazy danych z pomocą Firebase WebApi. W przypadku wykrycia zmiany uznawanej za niebezpieczną za pomocą skryptów przeglądarki (JavaScript + JQuery) wyświetlany jest monit informujący o niebezpiecznym zdarzeniu, co pokazane jest na rysunku \ref{web_rasp_notifications}.  
-
-\paragraph{Implementacja Django - połączenie z bazą danych:}
-Biblioteka Django posiada wbudowane rozwiązania umożliwiające pobieranie informacji z bazy danych projektu dzięki czemu aplikacja webowa nie wysyła zapytań na określone dla aplikacji mobilnych porty, tylko komunikuje się bezpośrednio z bazą danych. Rozwiązanie to umożliwia uniezależnienie aplikacji webowej od stanu portów oraz zmniejsza liczbę potrzebnych zapytań wysyłanych do serwera.
