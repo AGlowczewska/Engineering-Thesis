@@ -244,7 +244,7 @@ Aplikacja webowa przeznaczona jest dla użytkowników wszystkich systemów opera
 
 \paragraph{Implementacja Django - połączenie z bazą danych:}
 Biblioteka Django posiada wbudowane rozwiązania umożliwiające pobieranie informacji z bazy danych projektu dzięki czemu aplikacja webowa nie wysyła zapytań na określone dla aplikacji mobilnych porty, tylko komunikuje się bezpośrednio z bazą danych. Rozwiązanie to umożliwia uniezależnienie aplikacji webowej od stanu portów oraz zmniejsza liczbę potrzebnych zapytań wysyłanych do serwera.
-Aplikacja internetowa przeznaczona jest dla użytkowników wszystkich systemów operacyjnych i~została przetestowana w~przeglądarce Firefox w systemach operacyjnych Microsoft Windows 10 oraz Linux Debian 9 (Firefox ESR 52.5.2 64 bit). Do stworzenia aplikacji użyto języków programowania Python 3, JavaScript oraz framework'u Django, natomiast frontend jest oparty na bibliotece Bootstrap oraz JQuery. Połączenie z~bazą danych Firebase zaimplementowano za pomocą Firebase Web Api. Rozmieszczenie komponentów aplikacji różni się od tego zastosowanego w~aplikacjach IOS oraz Android - spowodowane jest to inną rozdzielczością ekranu. 
+Aplikacja internetowa przeznaczona jest dla użytkowników wszystkich systemów operacyjnych i~została przetestowana w~przeglądarce Firefox w systemach operacyjnych Microsoft Windows 10 (Firefox 58.0.1) oraz Linux Debian 9 (Firefox ESR 52.5.2 64 bit). Do stworzenia aplikacji użyto języków programowania Python 3, JavaScript oraz framework'u Django, natomiast frontend jest oparty na bibliotece Bootstrap oraz JQuery. Połączenie z~bazą danych Firebase zaimplementowano za pomocą Firebase Web Api. Rozmieszczenie komponentów aplikacji różni się od tego zastosowanego w~aplikacjach IOS oraz Android - spowodowane jest to inną rozdzielczością ekranu. 
 
 \paragraph{Panel logowania / rejestracji użytkownika:} Panele logowania oraz rejestracji użytkownika są do siebie bardzo podobne - jedyna ich różnica jest w nazwie i~funkcjonalności. Obydwa panele składają się z~loga aplikacji oraz formularza w~którym trzeba podać adres email i~hasło. W przypadku panelu logowania, dane są weryfikowane i~jeśli są poprawne użytkownik zostaje zalogowany. Jeżeli użytkownik chce zarejestrować konto, sprawdzana jest poprawność adresu email, a następnie tworzone jest konto w usłudze FireBase Auth. W przypadku błędu, jest on wyświetlany powyżej formularza (rys. \ref{web_login_err})
 \begin{figure}[H]
@@ -272,7 +272,3 @@ Aplikacja internetowa przeznaczona jest dla użytkowników wszystkich systemów 
 	\caption{Informacja o~niebezpiecznym zdarzeniu -~nagłej zmianie wartości odczytanej przez czujnik [źródło własne]}
 	\label{web_notification}
 \end{figure}
-
-\paragraph{Implementacja Django - połączenie z bazą danych:}
-Biblioteka Django posiada wbudowane rozwiązania umożliwiające pobieranie informacji z bazy danych projektu dzięki czemu aplikacja webowa nie wysyła zapytań na określone dla aplikacji mobilnych porty, tylko komunikuje się bezpośrednio z bazą danych. Rozwiązanie to umożliwia uniezależnienie aplikacji webowej od stanu portów oraz zmniejsza liczbę potrzebnych zapytań wysyłanych do serwera.
-
