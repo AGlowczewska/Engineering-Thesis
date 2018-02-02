@@ -199,8 +199,18 @@ Po zaznaczeniu daty reprezentującej moment wystąpienia zagrożenia i wybraniu 
 \end{figure} 
 \paragraph{Sekcja ustawień:}
 Zrzut ekranu przedstawiono na rysunku (rys. x).
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=5cm]{ios_screenshots/liveStreamiOS.png}
+	\caption{Sekcja monitoringu [źródło własne]}
+\end{figure}
 \paragraph{Sekcja monitoringu:}
-Sekcja odpowiedzialna za prawidłowy odbiór obrazu z kamery zaznaczonej w dolnej części ekranu. Okno, w którym odbywa się stream ustawiono w taki sposób, aby bez względu na rozmiar telefonu utrzymywało proporcję 16:9. Pozbyto się dzięki temu czarnych ramek lub braku części obrazu ze streamu.
+Sekcja odpowiedzialna za prawidłowy odbiór obrazu z kamery zaznaczonej w dolnej części ekranu(rys. 5.x). Okno, w którym odbywa się stream ustawiono w taki sposób, aby bez względu na rozmiar telefonu utrzymywało proporcję 16:9. Pozbyto się dzięki temu czarnych ramek lub braku części transmitowanego obrazu. 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=5cm]{ios_screenshots/dangeriOS.png}
+	\caption{Sekcja ostatniego zagrożenia [źródło własne]}
+\end{figure}
 
 Przeprowadzono kilka testów aplikacji pod pełnym obciążeniem za pomocą programu Instruments. Szczególnie interesująco przedstawia się zużycie sieci podczas streamu obrazu. Widać, że w ciągu jednej minuty pobrano 6,61MB a wysłano jedynie 24,11Kb (rys. 5.8). Obraz pobierany jest tylko wtedy kiedy aplikacja jest aktywna. W ciągu godziny działania aplikacji pobierze ona około 400MB danych. Jednak dla zapewnienia komfortu użytkowania i płynnego streamu obrazu zalecane jest posiadanie łącza umożliwiającego transfer danych na poziomie min. 200KB/s. 
 \begin{figure}[ht]
