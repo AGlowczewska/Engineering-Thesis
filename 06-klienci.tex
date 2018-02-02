@@ -1,11 +1,11 @@
 \chapter{Aplikacje klienckie}
 
 Na podstawie analizy statystyk dotyczących podziału rynku aplikacji na platformy, dostępnych na stronie statcounter.com \url{http://gs.statcounter.com/os-market-share/mobile-tablet/worldwide/#monthly-201801-201801-bar} , zdecydowano się na stworzenie 3 klientów systemu The Guard, które pozwolę możliwie największej grupie osób na korzystanie z systemu:
-\newline
-\newline
-\textbullet \space aplikacja mobilna na system Android,\newline
-\textbullet \space aplikacja mobilna na system iOS,\newline
-\textbullet \space aplikacja webowa.
+\begin{itemize}
+\item aplikacja mobilna na system Android,
+\item aplikacja mobilna na system iOS,
+\item aplikacja webowa.
+\end{itemize}
 
 \section{Funkcje aplikacji}
 \paragraph{Logowanie}
@@ -94,7 +94,7 @@ Użytkownik ma możliwość zmiany nazwy urządzenia, które zazwyczaj reprezent
 \end{figure}
 
 \section{Aplikacja Android}
-\subsection*{Wybór narzędzi}
+\subsection{Wybór narzędzi}
 Do stworzenia aplikacji mobilnej na system Android użyto języka Kotlin - języka stworzonego przez firmę JetBrains, który 17 maja 2017 roku został uznany przez Google jako oficjalny język programowania aplikacji na platformę Android.\footnote{\url{https://twitter.com/Android/status/864911929143197696}}
 Kotlin ściśle współegzystuje z kodem stworzonym w Javie i w przypadku Androida jest kompilowany do kodu JVM.
 
@@ -102,39 +102,41 @@ Skorzystano ze środowiska Android Studio w wersji 3.0.1, do automatyzacji budow
 
 Aplikacja skierowana jest na urządzenia z systemem Android od wersji Lollipop 5.0 (o numerze SDK większym niż 20), który został wydany 12.12.2014 r. Ograniczenie wersji spowodowane jest możliwością użycia bardziej zaawansowanych komponentów, niedostępnych dla niższych wersji. W styczniu 2018 r. oficjalne statystyki informują o tym, że około 80,7 \% wszystkich urządzeń z systemem Android na świecie ma wersję 5.0 lub wyższą.
 
-\subsection*{Architektura}
-Aplikacja The Guard dla systemu Android została stworzona zgodnie z założeniami architektury Model View Presenter. Architektura MVP zakłada rozdzielenie kodu źródłowego aplikacji na 3 kategorie:
-
-\textbullet \space "Model", czyli kod odpowiedzialny za logikę biznesową, połączenie z serwerem i złożone operacje,\newline
-\textbullet \space "View", czyli kod odpowiedzialny wyłącznie za poprawne wyświetlanie przygotowanych informacji,\newline
-\textbullet \space "Presenter", czyli kod odpowiedzialny za przygotowanie informacji otrzymanych z warstwy model do wyświetlenia w warstwie View.\newline
-
-sNajwiększą zaletą architektury MVP jest możliwość wygodnego testowania logiki aplikacji (w warstwie Presenter) oraz zastosowanie programowania reaktywnego przy użyciu biblioteki RxKotlin.
+\subsection{Architektura}
+Aplikacja The Guard dla systemu Android została stworzona zgodnie z założeniami architektury Model View Presenter.
+Architektura MVP zakłada rozdzielenie kodu źródłowego aplikacji na 3 kategorie:
+\begin{itemize}
+\item Model - kod odpowiedzialny za logikę biznesową, połączenie z serwerem i złożone operacje biznesowe,
+\item View - kod odpowiedzialny wyłącznie za poprawne wyświetlanie przygotowanych informacji,
+\item Presenter - kod odpowiedzialny za przygotowanie informacji otrzymanych z warstwy model do wyświetlenia w warstwie View.
+\end{itemize}
+Największą zaletą architektury MVP jest możliwość wygodnego testowania logiki aplikacji (w warstwie Presenter) oraz zastosowanie programowania reaktywnego przy użyciu biblioteki RxKotlin.
 Warstwy komunikują się między sobą w sposób reaktywny - przy użyciu strumieni wydarzeń. Przykładowo klasa warstwy Presenter odpowiedzialna za wyświetlanie obrazu z kamery wykorzystuje klasę warstwy Model do asynchronicznej komunikacji z API.
 
-\subsection*{Funkcje i interfejs użytkownika}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=9cm]{android-mvp.png}
+    \caption{Struktura MVP [źródło własne]}
+\end{figure}
+
+\subsection{Interfejs użytkownika}
 Aplikacja została zaprojektowana zgodnie z wytycznymi Material Design\footnote{Learning Material Design: Master Material Design and create beautiful, animated interfaces for mobile and web applications, Kyle Mew, Packt Publishing 2015}.
 Do nawigacji po funkcjach aplikacji służy panel na dole ekranu - "Bottom Bar".
 Zanim będzie on widoczny, użytkownik musi najpierw zalogować się (lub zarejestrować) przy użyciu adresu email oraz hasła.
 
-\paragraph{Logowanie}
+\subsection{Wykorzystane biblioteki}
+\begin{itemize}
+    \item \textbf{com.squareup.retrofit2} - biblioteka służąca do wygodnej komunikacji z API
+    \item \textbf{io.reactivex:rxandroid} - biblioteka zapewniająca \textit{Scheduler} platformy Android dla kodu reaktywnego,
+    \item \textbf{com.jakewharton.rxbinding} - biblioteka zapewniająca nakładki na widoki Androida generujące zdarzenia dla programowania reaktywnego,
+    \item \textbf{com.github.zurche:plain-pie} - biblioteka wyświetlająca diagramy na podstawie danych z czujników,
+    \item \textbf{com.github.jacek-marchwicki.recyclerview-changes-detector} - biblioteka umożliwiająca automatyczną zmianę widoków po detekcji zmiany zbioru wyświetlanych danych,
+    \item \textbf{com.google.code.gson} - biblioteka umożliwiająca serializacje i deserializacje obiektów
+    \item \textbf{com.google.firebase} - biblioteki służące do obsługi usług Firebase
+\end{itemize}
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=6cm]{Logowanie}
-	\caption{Ekran logowania do aplikacji}
-\end{figure}
-
-Użytkownik loguje się do aplikacji przy użyciu adresu email oraz hasła. Dane te trafiają do Firebase Authotizdtio
-
-\subsection*{Integracje}
-Opis połączenia aplikacji z Firebase, Fabric i innymi bibliotekami.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=9cm]{ios_screenshots/android_architecture.png}
-    \caption{Architektura MVP}
-\end{figure}
+\subsection{}
+CDane te trafiają do usługi \textit{Firebase Authentication}, która w przypadku pomyślnego logowania zwraca jego identyfikator.
 
 \section{Aplikacja iOS}
 Aplikacja przeznaczona jest na urządzenia z systemem operacyjnym iOS od wersji 10.0. 
