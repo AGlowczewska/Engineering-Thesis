@@ -10,63 +10,87 @@ Na podstawie analizy statystyk dotyczących podziału rynku aplikacji na platfor
 \section{Funkcje aplikacji}
 \paragraph{Logowanie}
 Do prawidłowego przejścia do ekranu głównego aplikacji niezbędne jest posiadanie konta. Po rejestracji użytkownika lub po pomyślnym uwierzytelnieniu jeśli konto zostało już wcześniej założone następuje pobranie wszystkich danych użytkownika, jego podłączonych urządzeń i przejście do głównego panelu z dostępem do wszystkich niżej omówionych funkcji.
-
-
+\nopagebreak
 \begin{figure}[H]
    \centering
-   \subfloat[Aplikacja Android]{\includegraphics[width=4cm]{android-screenshots/Logowanie.png}}
-   \hspace{2cm}
-   \subfloat[Aplikacja iOS]{\includegraphics[width=4cm]{ios_screenshots/login.png}}
-   \qquad
-   \subfloat[Aplikacja webowa]{\includegraphics[width=10cm]{web_screenshots/login.png}}
+   \subfloat[Aplikacja Android]{\includegraphics[height=5cm]{android-screenshots/Logowanie.png}}
+   \hfill
+   \subfloat[Aplikacja iOS]{\includegraphics[height=5cm]{ios_screenshots/login.png}}
+   \hfill
+   \subfloat[Aplikacja webowa]{\includegraphics[height=4cm]{web_screenshots/login.png}}
    \caption{Widok logowania}
    \label{fig:logowanie}
 \end{figure}
 
-
-
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=9cm]{web_screenshots/login.png}
-	\caption{Widok logowania w aplikacji webowej}
-	\label{web_login}
-\end{figure}
 \paragraph{Monitoring}
-Aplikacja pobiera i wyświetla obraz na żywo z zaznaczonego urządzenia podłączonego do konto użytkownika. 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=9cm]{web_screenshots/rasp_view.png}
-	\caption{Widok konkretnego urządzenia}
-	\label{web_rasp_view}
+Aplikacja pobiera i wyświetla obraz na żywo z zaznaczonego urządzenia podłączonego do konto użytkownika.
+\nopagebreak
+\begin{figure}[H]
+    \centering
+    \subfloat[Aplikacja Android]{\includegraphics[height=5cm]{android-screenshots/Monitoring.png}}
+    \hfill
+    \subfloat[Aplikacja iOS]{\includegraphics[height=5cm]{ios_screenshots/liveStreamiOS.png}}
+    \hfill
+    \subfloat[Aplikacja webowa]{\includegraphics[height=4cm]{web_screenshots/rasp_view.png}}
+    \caption{Widok monitoringu}
+    \label{fig:monitoring}
 \end{figure}
+
 \paragraph{Status czujników}
 Po przejściu do tej sekcji użytkownik otrzymuje bieżące dane z wszystkich czujników z zaznaczonego urządzenia. Na podstawie koloru prezentowanej wartości z czujnika użytkownik może analizować zagrożenie. Kolor zielony reprezentuje bezpieczne odczyty na czujnikach, kolor pomarańczowy średnie, kolor czerwony natomiast oznacza bardzo wysoki poziom niebezpieczeństwa.
+\nopagebreak
+\begin{figure}[H]
+    \centering
+    \subfloat[Aplikacja Android]{\includegraphics[height=5cm]{android-screenshots/Czujniki.png}}
+    \hfill
+    \subfloat[Aplikacja iOS]{\includegraphics[height=5cm]{ios_screenshots/sensors.png}}
+    \hfill
+    \subfloat[Aplikacja webowa]{\includegraphics[height=4cm]{web_screenshots/rasp_view.png}}
+    \caption{Widok czujników}
+    \label{fig:czujniki}
+\end{figure}
 
 \paragraph{Dziennik zdarzeń}
-W tej sekcji użytkownik ma dostęp do historii zdarzeń w systemie. 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=9cm]{web_screenshots/rasp_notifications.png}
-	\caption{Panel notyfikacji urządzenia}
-	\label{web_rasp_notifications}
+W tej sekcji użytkownik ma dostęp do historii zdarzeń w systemie.
+\nopagebreak
+\begin{figure}[H]
+    \centering
+    \subfloat[Aplikacja Android]{\includegraphics[height=5cm]{android-screenshots/Zdarzenia.png}}
+    \hfill
+    \subfloat[Aplikacja iOS]{\includegraphics[height=5cm]{ios_screenshots/history.png}}
+    \hfill
+    \subfloat[Aplikacja webowa]{\includegraphics[height=4cm]{web_screenshots/rasp_notifications2.png}}
+    \caption{Widok zdarzeń}
+    \label{fig:zdarzenia}
 \end{figure}
+
 \paragraph{Ostatnie zagrożenia}
-Prezentacja ostatniego nagranego zagrożenia. Służy do szybkiego przeglądu ostatniego niebezpieczeństwa i prezentuje ostatni nagrany materiał video. 
+Prezentacja ostatniego nagranego zagrożenia. Służy do szybkiego przeglądu ostatniego niebezpieczeństwa i prezentuje ostatni nagrany materiał video.
+\nopagebreak
+\begin{figure}[H]
+    \centering
+    \subfloat[Aplikacja Android]{\includegraphics[height=5cm]{android-screenshots/Zagrozenia.png}}
+    \hfill
+    \subfloat[Aplikacja iOS]{\includegraphics[height=5cm]{ios_screenshots/dangeriOS.png}}
+    \hfill
+    \subfloat[Aplikacja webowa]{\includegraphics[height=4cm]{web_screenshots/rasp_notifications.png}}
+    \caption{Widok zagrożeń}
+    \label{fig:zagrozenia}
+\end{figure}
+\pagebreak
 
 \paragraph{Ustawienia urządzenia}
 Użytkownik ma możliwość zmiany nazwy urządzenia, które zazwyczaj reprezentuje miejsce, w którym się znajduje. Istnieje również możliwość uzbrojenia i wyłączenia każdego urządzenia. Sprowadza się to do tego, że w przypadku zaznaczenia opcji "Disarmed"  użytkownik nie otrzyma kolejnych notyfikacji o zagrożeniach. Opcja ta może okazać się przydatna w momencie uszkodzenia któregoś z modułów i tym samym błędnych danych wysyłanych z czujników.
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=9cm]{web_screenshots/add_rasp.png}
-	\caption{Panel rejestracji nowego urządzenia}
-	\label{web_register}
-\end{figure}
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=9cm]{web_screenshots/rasp_rename.png}
-	\caption{Panel zmiany nazwy urządzenia}
-	\label{web_rasp_rename}
+\nopagebreak
+\begin{figure}[H]
+    \centering
+    \subfloat[Aplikacja Android]{\includegraphics[height=5cm]{android-screenshots/Ustawienia.png}}
+    \hfill
+    \subfloat[Aplikacja iOS]{\includegraphics[height=5cm]{ios_screenshots/settings.png}}
+    \hfill
+    \subfloat[Aplikacja webowa]{\includegraphics[height=4cm]{web_screenshots/rasp_rename.png}}
+    \caption{Widok ustawień}
+    \label{fig:ustawienia}
 \end{figure}
 
 \section{Aplikacja Android}
