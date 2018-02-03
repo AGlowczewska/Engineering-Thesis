@@ -18,7 +18,7 @@ Wszystkie zestawy zbudowano w~oparciu o~Raspberry Pi 3 v1.2. Zdecydowano się na
 \item Procesor 1.2 GHz
 \item Liczba rdzeni 4. Quad Core
 \item Pamięć RAM 1 GB
-\item Pamięć karta microSD (w~użytych w~tej pracy urządzeniach posłużono się kartami o wielkości 8 i~16 GB).
+\item Karta pamięci microSD (w~użytych w~tej pracy urządzeniach posłużono się kartami o wielkości 8 i~16 GB).
 \item 40 GPIO
 \end{itemize}
 Aby prawidłowo zainstalować oprogramowanie The Guard na dowolnym urządzeniu Raspberry~Pi~3 należy wykonać poniższe czynności w~terminalu:
@@ -42,32 +42,38 @@ Następnym krokiem jest włączenie odpowiednich interfejsów w~panelu konfigura
 	\caption{Ustawienia [źródło własne]}
 	\label{rs_settings}
 \end{figure}
-Do odczytu danych z~układów cyfrowych użyto biblioteki wiringpi. Należy podkreślić, że numeracja fizycznych pinów i~numeracja pinów w wiringPi(rys. \ref{piny}) jest różna i~nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu numer 1~w~wiringPi jest równoznaczny z~odczytem stanu na pinie numer 12 (GPIO18).
+Do odczytu danych z~układów cyfrowych użyto biblioteki wiringPi. Należy podkreślić, że numeracja fizycznych pinów(rys. \ref{gpio}) i~numeracja pinów w wiringPi(rys. \ref{wiringpi}) jest różna oraz biblioteka wiringPi nie obsługuje wszystkich pinów urządzenia. Przykładowo odczyt pinu numer~1~w~wiringPi jest równoznaczny z~odczytem stanu pinu numer 12 (GPIO18).
 \begin{figure}[H]
     \centering
-    \subfloat[GPIO]{\includegraphics[width=6cm]{gpio.png}}
-    \hfill
-    \subfloat[Wiringpi]{\includegraphics[width=4cm]{wiringpi.png}}
-    \caption{Porównanie pinów na Raspberry Pi 3\cite{gpio} z wiringpi\cite{wiringpi}}
+    \subfloat[GPIO]{
+	    \includegraphics[width=5cm]{gpio.png}
+	    \label{gpio}
+	}
+    \hspace{3cm} 
+    \subfloat[WiringPi]{
+	    \includegraphics[height=5cm]{wiringpi.png}
+	    \label{wiringpi}
+	    }
+    \caption{Porównanie pinów Raspberry Pi 3 \cite{gpio} z pinami wiringPi \cite{wiringpi}}
     \label{piny}
 \end{figure}
 
 Zainstalowane oprogramowanie odpowiedzialne jest za ciągłe monitorowanie stanów i~zbieranie danych z~czujników pomiarowych. Po podłączeniu układu do zasilania program jest uruchamiany automatycznie. Pierwszą czynnością jaką wykonuje Raspberry Pi jest wysłanie swojego numeru seryjnego do bazy danych Firebase. Cały proces jest w~pełni zautomatyzowany. Dzięki temu użytkownicy od razu mogą dodać urządzenie i~przeglądać dane z~czujników na aplikacjach klienckich. Dodanie akcesorium pomiarowego następuje poprzez wprowadzenie w~aplikacji jego numeru seryjnego.
 \section{Czujniki}
-Każdy zestaw składa się z~5~czujników analogowo cyfrowych,  jednej kamery i~jednego przetwornika AC. 
+Każdy zestaw składa się z~5~czujników, jednej kamery oraz jednego przetwornika analogowo-cyfrowego (AC). 
 \paragraph{a) Specyfikacja MQ-9 - czujnik tlenku węgla\cite{specyfikacjaMQ-9}:}
 \begin{itemize} 
 \item Zasilanie: 5~V
 \item Pobór prądu: 150 mA
 \item Temperatura pracy: od -10 do 50 \textdegree{}C
-\item Wyjścia: analogowe oraz cyfrowe
+\item Wyjścia: analogowe oraz cyfrowe (do pomiarów użyto wyjścia analogowego)
 \end{itemize}
 \paragraph{b) Specyfikacja MQ-2 - czujnik LPG i dymu \protect\cite{specyfikacjaMQ-2}:}
 \begin{itemize} 
 \item Zasilanie: 5~V
 \item Pobór prądu: 150 mA
 \item Temperatura pracy: od -10 do 50 \textdegree{}C
-\item Wyjścia: analogowe oraz cyfrowe
+\item Wyjścia: analogowe oraz cyfrowe (do pomiarów użyto wyjścia analogowego)
 \end{itemize}
 \paragraph{c) Specyfikacja czujnika wykrywania płomieni \protect\cite{specyfikacjaFlame}:}
 \begin{itemize} 
@@ -83,7 +89,7 @@ Każdy zestaw składa się z~5~czujników analogowo cyfrowych,  jednej kamery i~
 \end{itemize}
 \paragraph{e) Kamera:}
 \begin{itemize} 
-\item Wykorzystano moduł kamery Raspberry Pi element14
+\item Wykorzystano moduł kamery Raspberry Pi
 \item Kamera 5MP - wspierająca nagrywanie 30 klatek na sekundę w rozdzielczości Full HD
 \end{itemize}
 \paragraph{f) Specyfikacja MCP3008 - przetwornik A/C \protect\cite{specyfikacjaAC}:}
@@ -101,24 +107,26 @@ Każdy zestaw składa się z~5~czujników analogowo cyfrowych,  jednej kamery i~
 \item Zakres pomiarowy: maks. 7 m
 \item Kąt widzenia: do 100\textdegree{}
 \end{itemize}
-Na schematach (rys. \ref{mq2}, rys. \ref{mq9}) przedstawiono charakterystykę czujników analogowych.
+Na wykresach (rys. \ref{mq2}, rys. \ref{mq9}) przedstawiono charakterystyki czułości czujników.
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=8cm]{MQ2}
-	\caption{Charakterystyka MQ-2 \protect\cite{mq2}}
-	\label{mq2}
-\end{figure}
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=8cm]{MQ9}
-	\caption{Charakterystyka MQ-9 \protect\cite{mq9}}
-	\label{mq9}
+	\subfloat[Charakterystyka czujnika MQ-2 \protect\cite{mq2}]{
+	    \includegraphics[height=6cm]{MQ2}
+	    \label{mq2}
+	}
+	\hfill
+	\subfloat[Charakterystyka czujnika MQ-9 \protect\cite{mq9}]{
+	    \includegraphics[height=6cm]{MQ9}
+	    \label{mq9}
+	    }
+	\caption{Charakterystyka czujników MQ-2 oraz MQ-9.}
+	\label{mq2_mq9}
 \end{figure}
 \\Ro - jest to stała wartość oporu czujnika przy 1000ppm H2 w~czystym powietrzu.\\
 Rs - jest to opór czujnika w~różnych stężeniach gazu. \\
-Skoro Ro jest stałe to przy wzroście Rs czułość będzie maleć. Dlatego też im mniejszy stosunek Rs do Ro tym lepiej. Widać, że oba czujniki reagują na wiele różnych gazów. MQ-2 nazwano czujnikiem LPG, a~MQ-9 czujnikiem CO ze względu na to, że w~stosunku do tych gazów mają najwyższą czułość. 
+Przy założeniu stałej wartości Ro, przy wzroście Rs czułość czujnika maleje -~im mniejszy stosunek Rs do Ro tym dokładniejszy pomiar wykonywany przez czujnik. Na schemacie \ref{mq2_mq9} widać, że obydwa czujniki reagują na wiele różnych gazów. MQ-2 nazwano w tej pracy czujnikiem LPG, a~MQ-9 czujnikiem CO ze względu na to, że w~stosunku do tych gazów mają najwyższą czułość. 
 
-Niestety żaden model Raspberry nie posiada wbudowanego przetwornika analogowo-cyfrowego dlatego konieczne było użycie układu zewnętrznego. Wybrano przetwornik MCP3008 ze względu na jego nisko koszt i~komunikację poprzez interfejs SPI, który jest wspierany przez Raspberry Pi. MCP3008 to 10-bitowy przetwornik analogowy cyfrowy. Zasilany jest napięciem 5V.  Przetwornik 10-bitowy jest w~stanie rozróżnić 1024 stany. Posiada 8 kanałów jednak w~projekcie wykorzystano tylko 2~–~dla MQ-9 i~MQ-2.
+Żaden z modeli Raspberry nie posiada wbudowanego przetwornika analogowo-cyfrowego dlatego konieczne było użycie układu zewnętrznego. Wybrano przetwornik MCP3008 ze względu na jego nisko koszt i~komunikację poprzez interfejs SPI, który jest wspierany przez Raspberry Pi. MCP3008 to 10-bitowy przetwornik analogowo-cyfrowy zasilany napięciem 5V.  Przetwornik 10-bitowy jest w~stanie rozróżnić 1024 stany. Posiada 8 kanałów jednak w~projekcie wykorzystano tylko 2~–~dla MQ-9 i~MQ-2.
 \paragraph{Interfejs SPI:}
 \begin{figure}[ht]
 	\centering
@@ -126,30 +134,34 @@ Niestety żaden model Raspberry nie posiada wbudowanego przetwornika analogowo-c
 	\caption{Interfejs SPI \protect\cite{spi}}
 	\label{spi}
 \end{figure}
-SPI jest to interfejs synchroniczny(rys. \ref{spi}). Może być do niego podłączone wiele urządzeń typu slave, jednak tylko z~jednym urządzeniem Master, które generuje zegar. Master poprzez linię SS wybiera urządzenie z~którym chce się komunikować. \\
-Interfejs ten zawiera jeszcze 3~linie:
+SPI jest to interfejs synchroniczny(rys. \ref{spi}). Może być do niego podłączone wiele urządzeń typu Slave, jednak są połączone tylko z~jednym urządzeniem Master, które generuje sygnał zegarowy. Urządzenie typu Master poprzez linię SS wybiera urządzenie z~którym chce się komunikować. \\
+Interfejs SPI zawiera jeszcze 3~linie:
 \begin{enumerate} 
 \item MOSI (ang. Master Output Slave Input): \\
 Poprzez tę linię wysyłane są dane z~Raspberry Pi do przetwornika analogowo cyfrowego MCP3008.
 \item MISO (ang. Master Input Slave Output):\\
-Poprzez tę linię wysyłane są dane z~przetwornika AC do układu Master czyli w~naszym przypadku Raspberry~Pi~3
+Poprzez tę linię wysyłane są dane z~przetwornika AC do układu Master, czyli w~naszym przypadku Raspberry~Pi~3
 \item SCLK (ang. Serial Clock) :\\
 Ta linia wykorzystywana jest do przesłania zegara wygenerowanego przez Rapberry~Pi~3
 \end{enumerate}
-Do komunikacji poprzez ten interfejs wykorzystano bibliotekę spiDev. \\
+Do komunikacji poprzez ten interfejs wykorzystano bibliotekę SpiDev \cite{spidev}. \\
 Każdy układ monitoruje wskaźniki pomiarowe z czujników analogowych i~cyfrowych. W~przypadku wykrycia wskazań, które w~znaczący sposób odbiegają od normy informuje właściciela o~zagrożeniu. Informacja ta wysyłana jest do wszystkich urządzeń(smartfony, tablety itp), które posiada właściciel.  Analizując dane z~czujników analogowych w~czystym powietrzu, które wynoszą odpowiednio:\\
 Czujnik MQ-9: od 0.15 do 0.2\\
-Czujnik MQ-2: od 0.05 do 0.15\\
-Przyjęto, że granicą wysłania notyfikacji do użytkownika jest przekroczenie progu 0.3. Wartości te to znormalizowane dane z~przetwornika AC, który jak już wcześniej wspomniano wykrywa 1024 stany. Odczytywane wartości bezpośrednio na wyjściu przetwornika MCP3008 dla czujnika MQ-9 w~czystym powietrzu to około 170. Stąd 170/1024 = 0.166. Wysłanie notyfikacji wiąże się z~otrzymaniem wartości większej niż 308.
-Czujniki cyfrowe wykorzystane w~pracy informują o~wykryciu płomieni i~ruchu. Czujnik ruchu wykrycię zagrożenia określa przez stan wysoki, natomiast czujnik płomieni przez stan niski. W~kodzie jednak wykonano instrukcje negacji, aby stan wysoki informował o~niebezpieczeństwie, a~stan niski reprezentował jego brak. Na czujnikach znajduje się potencjometr, za pomocą którego dowolnie można ustawiać jego czułość. Odczyt danych następuje nieprzerwanie co 2~sekundy. Nie należy obawiać się, że czujnik ruchu nie wykryje zagrożenia z~powodu braku odczytu we właściwym momencie, ponieważ utrzymuje on stan wysoki przez 5~sekund po wykryciu ruchu. Oprogramowanie wysyła także informacje z~czujników do bazy danych Firebase. Zastosowanie takiej bazy daje możliwość monitorowania wszystkich danych w~czasie rzeczywistym na aplikacjach klienckich. Dodatkowo w~przypadku zagrożenia czyli przekroczeniu progu, o~którym mowa wyżej wysyłana jest push notyfikacja do urządzeń użytkownika, a~informacja o~zagrożeniu zapisywana jest w~bazie danych Django. Każdy jest w~stanie odtworzyć całą historię wydarzeń w~swoim systemie.
+Czujnik MQ-2: od 0.05 do 0.15,\\
+przyjęto, że granicą wysłania notyfikacji do użytkownika jest przekroczenie progu 0.3. Wartości te to znormalizowane dane z~przetwornika AC, który jak już wcześniej wspomniano wykrywa 1024 stany. Odczytywane wartości bezpośrednio na wyjściu przetwornika MCP3008 dla czujnika MQ-9 w~czystym powietrzu to około 170. Stąd 170/1024 = 0.166. Wysłanie notyfikacji wiąże się z~otrzymaniem wartości większej niż 308.
+
+Czujniki cyfrowe wykorzystane w~pracy informują o~wykryciu płomieni lub ruchu. Czujnik ruchu wykrycie zagrożenia określa przez stan wysoki, natomiast czujnik płomieni przez stan niski. Przy implementacji zanegowano sygnał odbierany z~czujnika płomieni, aby stan wysoki zawsze informował o~niebezpieczeństwie, a~stan niski reprezentował jego brak. Na czujnikach znajduje się potencjometr, za pomocą którego dowolnie można ustawiać jego czułość. Odczyt danych następuje nieprzerwanie co 2~sekundy. Nie należy obawiać się, że aplikacja nie odczyta zagrożenia z~powodu zbyt krótkiego trwania sygnału wysokiego w bazie danych, ponieważ czujnik utrzymuje stan wysoki przez 5~sekund po wykryciu ruchu. 
+
+Oprogramowanie wysyła także informacje z~czujników do bazy danych Firebase. Zastosowanie takiej bazy daje możliwość monitorowania wszystkich danych w~czasie rzeczywistym na aplikacjach klienckich. Dodatkowo w~przypadku zagrożenia czyli przekroczeniu progu, o~którym mowa wyżej wysyłana jest push notyfikacja do urządzeń użytkownika, a~informacja o~zagrożeniu zapisywana jest w~bazie danych Django. Każdy użytkownik jest w~stanie odtworzyć całą historię wydarzeń w~swoim systemie.
+
 Aby zapewnić wydajny i~pewny system bezpieczeństwa przy otrzymaniu wysokich wartości na czujnikach zapisywany jest czas zdarzenia. Każda kolejna notyfikacja zostanie wysłana po upływie 10 minut od poprzedniej przy założeniu, że stan na czujniku nadal jest wysoki. 
 
 \section{Obsługa wideo}
 
 \paragraph{Protokół RTMP}
-Podstawą funkcji strumieniowania wideo jest protokół RTMP (Real-Time Message Protocol). Jest to oparty na protokole TCP protokół wysyłania obrazu, dźwięku oraz danych. \cite{MOBILERTMP}
+Podstawą funkcji strumieniowania wideo jest protokół RTMP (ang. Real-Time Message Protocol). Jest to oparty na protokole TCP protokół wysyłania obrazu, dźwięku oraz danych. \cite{MOBILERTMP}
 Podstawową jednostką danych w~protokole RTMP jest wiadomość (ang. Message), której struktura jest zależna od typu strumieniowanych informacji. 
-Wiadomości dzielone są na części (ang. Chunks), które są porcjami gotowymi do transmisji. Zatem strumień RTMP to ostatecznie strumień cząstek (ang. Chunk Stream) \cite{STREAMRTMP}
+Wiadomości dzielone są na części (ang. Chunks), które są gotowe do transmisji. Strumień RTMP to ostatecznie strumień fragmentów wiadomości (ang. Chunk Stream) \cite{STREAMRTMP}
 
 Ponadto wykorzystano protokół HLS (HTTP Live Streaming) zapisywanie odbieranego obrazu we wskazanej liczbie plików wideo o~określonej długości. Gdy aplikacja kliencka odtwarza strumień wideo, w~rzeczywistości odbiera strumieniowane po kolei zapisane pliki ts. Wpływa to na opóźnienie odtwarzania, względem rzeczywistości z~jednej strony, a~z drugiej dostarcza płynne wideo.
 
