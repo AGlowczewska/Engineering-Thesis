@@ -135,4 +135,12 @@ Wybrane rozwiązanie pozwala na łatwą lokalizację ewentualnego błędu w dzia
 
 \section{Baza danych}
 
-// Ola
+\paragraph{Baza danych Firebase}
+
+\paragraph{Baza danych Django} została zaimplementowana w SQlite3 i~poza specyficznymi dla bibliteki tabelami zawiera:
+\begin{itemize}
+	\item \textbf{backend\_fcmtokens} przechowuje trzy wartości: aktualny token, id urządzenia oraz nazwę konta (e-mail). Na podstawie tokenu zachodzi autoryzacja urządzeń mobilnych.
+	\item \textbf{backend\_notification} zawiera notyfikacje wraz z~ich typem, informacją z~którego urządzenia pochodzą, datą, wiadomością przesłaną razem z notyfikacją oraz adresem url wideo (jeśli takie zostało dołączone do wiadomości)
+	\item \textbf{backend\_rasps} zawiera informację nt. urządzenia: jego numer seryjny, nazwę, konto do którego jest przypisane, stan (czy urządzenie przesyła notyfikacje)
+	\item \textbf{users\_user} -~jest to tabela zawierająca dane użytkowników logujących się w~aplikacji internetowej (w~szczególności ich login i hasło, identyczny z~tymi przechowywanymi w~usłudze Firebase Auth)
+\end{itemize}
