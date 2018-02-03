@@ -232,7 +232,7 @@ Przeprowadzono kilka testów aplikacji pod pełnym obciążeniem za pomocą prog
 Przeprowadzono także test na zużycie pamięci RAM i zużycie procesora. Te jednak są niewielkie i wynoszą odpowiednio 25MB pamięci RAM i średnio 1 procent zużycia procesora.
 Zużycie procesora wzrasta do poziomu ok. 15 procent tylko w momencie pobierania nagranego obrazu z serwera. Wtedy też zużycie pamięci RAM jest o około 5MB większe i wynosi około 30MB (rys. 5.9).
 \begin{figure}[ht]
-	\centering
+	\centering 
 	\includegraphics[width=11cm]{ios_screenshots/CPURAM.png}
 	\caption{Zużycie procesora i pamięci RAM przy największym obciążeniu [źródło własne]}
 \end{figure}
@@ -241,6 +241,14 @@ Testy przeprowadzono na iPhonie 6S i iPadzie Pro.
 
 \section{Aplikacja internetowa}
 Aplikacja webowa przeznaczona jest dla użytkowników wszystkich systemów operacyjnych i~została przetestowana w~przeglądarce Firefox. Rozmieszczenie komponentów aplikacji różni się od tego zastosowanego w~aplikacjach IOS oraz Android - spowodowane jest to inną rozdzielczością ekranu. 
+
+\paragraph{Struktura projektu} przedstawiona jest na rysunku \ref{web_struct}. Folder migrations zawiera pliki tworzone automatycznie przez bibliotekę Django. W folderze templates stworzone są szablony plików html specyficzne dla danych widoków aplikacji. Na uwagę zasługują także pliki urls.py oraz views.py. W~pierwszym znajdują się adresy url używane przez aplikację oraz informacja nt. jaki widok powinien być wyrenderowany dla użytkownika w~momencie otwarcia przez niego w przeglądarce danego linku. W pliku views.py znajdują się funkcje odpowiedzialne za renderowanie widoków aplikacji oraz łączenie z bazami danych. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=5cm]{web_screenshots/web_struct.png}
+	\caption{Struktura projektu aplikacji internetowej\newline[źródło własne]}
+	\label{web_struct}
+\end{figure}
 
 \paragraph{Implementacja Django - połączenie z bazą danych:}
 Biblioteka Django posiada wbudowane rozwiązania umożliwiające pobieranie informacji z bazy danych projektu dzięki czemu aplikacja webowa nie wysyła zapytań na określone dla aplikacji mobilnych porty, tylko komunikuje się bezpośrednio z bazą danych. Rozwiązanie to umożliwia uniezależnienie aplikacji webowej od stanu portów oraz zmniejsza liczbę potrzebnych zapytań wysyłanych do serwera.
