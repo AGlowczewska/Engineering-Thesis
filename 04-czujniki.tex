@@ -163,7 +163,7 @@ Podstawą funkcji strumieniowania wideo jest protokół RTMP (ang. Real-Time Mes
 Podstawową jednostką danych w~protokole RTMP jest wiadomość (ang. Message), której struktura jest zależna od typu strumieniowanych informacji. 
 Wiadomości dzielone są na części (ang. Chunks), które są gotowe do transmisji. Strumień RTMP to ostatecznie strumień fragmentów wiadomości (ang. Chunk Stream) \cite{STREAMRTMP}
 
-Ponadto wykorzystano protokół HLS (HTTP Live Streaming) zapisywanie odbieranego obrazu we wskazanej liczbie plików wideo o~określonej długości. Gdy aplikacja kliencka odtwarza strumień wideo, w~rzeczywistości odbiera strumieniowane po kolei zapisane pliki ts. Wpływa to na opóźnienie odtwarzania, względem rzeczywistości z~jednej strony, a~z drugiej dostarcza płynne wideo.
+Ponadto wykorzystano protokół HLS (HTTP Live Streaming), którego cechą jest zapisywanie odbieranego obrazu w plikach o~określonej długości. Gdy aplikacja kliencka odtwarza strumień wideo, w~rzeczywistości odbiera strumieniowane po kolei zapisane pliki .ts. Z jednej strony, wpływa to na opóźnienie dostarczanego strumienia obrazu, a~z drugiej wpływa na płynność odbieranego wideo.
 
 \paragraph{H264}
 W~pracy wykorzystano kodowanie obrazu koderem H.264. Charakteryzuje go niska złożoność algorytmów kompresji oraz niewielkie opóźnienie dzięki czemu idealnie nadaje się do zadania związanego z~szybkim enkodowaniem obrazu przed przestrumieniowaniem go dalej. \cite{H264}
