@@ -2,7 +2,7 @@
 
 \paragraph{Test nr 1}
 Zakres testu:\newline
-Użytkownik po odebraniu notyfikacji w aplikacji przeglądarkowej ma skontrolować zagrożenie\newline
+Użytkownik po odebraniu notyfikacji, ma skontrolować zagrożenie - aplikacja internetowa\newline
 Tester: Piotr Falkiewicz\newline
 Autor aplikacji: Aleksandra Główczewska\newline
 Przebieg testu:\newline
@@ -15,7 +15,7 @@ Funkcjonalność zaimplementowana prawidłowo\newline
 
 \paragraph{Test nr 2}
 Zakres testu:\newline
-Użytkownik dodaje nowe urządzenie do swojego konta\newline
+Użytkownik dodaje nowe urządzenie do swojego konta - aplikacja iOS\newline
 Tester: Aleksandra Główczewska \newline
 Autor aplikacji: Paweł Szudrowicz \newline
 Przebieg testu:\newline
@@ -29,7 +29,7 @@ Funkcjonalność zaimplementowana prawidłowo\newline
  
  \paragraph{Test nr 3}
 Zakres testu:\newline
-Użytkownik ma otrzymać transmisję obrazu z urządzenia\newline
+Użytkownik ma otrzymać transmisję obrazu z urządzenia - aplikacja iOS\newline
 Tester: Piotr Falkiewicz \newline
 Autor aplikacji: Paweł Szudrowicz \newline
 Przebieg testu:\newline
@@ -42,7 +42,7 @@ Funkcjonalność zaimplementowana prawidłowo\newline
 
  \paragraph{Test nr 4}
 Zakres testu:\newline
-Użytkownik ma pobrać nagranie z bazy danych z ostatniego zagrożenia\newline
+Użytkownik ma pobrać nagranie z bazy danych z ostatniego zagrożenia - aplikacja iOS\newline
 Tester: Mateusz Bartos \newline
 Autor aplikacji: Paweł Szudrowicz \newline
 Przebieg testu:\newline
@@ -55,7 +55,22 @@ Przebieg testu:\newline
 Wniosek:\newline
 Funkcjonalność zaimplementowana prawidłowo\newline
 
+ \paragraph{Test nr 5}
+Zakres testu:\newline
+Użytkownik ma rozbroić urządzenie - aplikacja internetowa\newline
+Tester: Piotr Falkiewicz \newline
+Autor aplikacji: Aleksandra Główczewska \newline
+Przebieg testu:\newline
+1. Użytkownik otwiera aplikacje \newline
+2. Użytkownik odbiera informację o zagrożeniu \newline
+3. Użytkownik przechodzi do sekcji urządzenia \newline
+4. Użytkownik wybiera przycisk 'Disarm it!' \newline
+5. Aplikacja przestaje wyświetlać powiadomienia o zagrożeniu \newline
+Wniosek:\newline
+Funkcjonalność zaimplementowana prawidłowo\newline
+\newline
 
 \chapter{Uwagi końcowe}
 
-Grupa zrealizowała wszystkie cele postawione sobie na początku pracy. Wykonany system działa i jest przystosowany do dalszej modyfikacji. Istnieje możliwość wymiany czujników z rodziny MQ na inne bez konieczności zmian w oprogramowaniu uruchomionym na Raspberry, ze względu na podobny charakter ich działania. W następnej fazie zalecane byłoby zaprojektowanie nowej obudowy na czujniki aby poprawić wygląd urządzeń. Zdecydowano, że cały system będzie na licencji open-source, aby każdy mógł pobrać oprogramowanie i edytować je według własnych potrzeb. Mimo, że taktowanie procesora Raspberry Pi 3 nie jest wysokie i nie poradziłby on sobie sam z zadaniami przedstawionymi na początku pracy to dzięki zastosowaniu zewnętrzych serwerów i usług na takich platformach jak Microstof Azure udało się wykonać w pełni działający system bezpieczeństwa. Przeniesiono bardzo obciążające zadania takie jak przetwarzanie obrazu na zewnętrzne platformy, które wyposażone są w znacznie bardziej zaawansowane podzespoły. Wykorzystanie natomiast usług Firebase, z którego korzystają też takie firmy jak Trivago czy Shazam pozwoliło na szybką implementację zaawansowanych funkcji takich jak uwierzytelnianie użytkowników czy aktualizację zmian w bazie danych w czasie rzeczywistym. Grupa zamierza dalej pracować nad systemem kontroli bezpieczeństwa - The Guard aby uczynić świat lepszym a przede wszystkim bezpieczniejszym miejscem do życia :)
+Grupa zrealizowała wszystkie cele postawione sobie na początku pracy. Wykonany system działa i jest przystosowany do dalszej modyfikacji. Istnieje możliwość wymiany czujników z rodziny MQ na inne bez konieczności zmian w oprogramowaniu uruchomionym na Raspberry, ze względu na podobny charakter ich działania. W następnej fazie zalecane byłoby zaprojektowanie nowej obudowy na czujniki aby poprawić wygląd urządzeń. Zdecydowano, że cały system będzie na licencji open-source, aby każdy mógł pobrać oprogramowanie i edytować je według własnych potrzeb. Mimo, że taktowanie procesora Raspberry Pi 3 nie jest wysokie i nie poradziłby on sobie sam z zadaniami przedstawionymi na początku pracy to dzięki zastosowaniu zewnętrzych serwerów i usług na platformie Microstof Azure udało się wykonać w pełni działający system bezpieczeństwa. Przeniesiono bardzo obciążające zadania jak przetwarzanie obrazu na zewnętrzne platformy, które wyposażone są w znacznie bardziej zaawansowane podzespoły. Wykorzystanie natomiast usług Firebase, z którego korzystają też takie firmy jak Trivago czy Shazam pozwoliło na szybką implementację zaawansowanych funkcji m.in uwierzytelnianie użytkowników czy aktualizację zmian z bazy danych w czasie rzeczywistym. 
+Grupa zamierza dalej pracować nad systemem kontroli bezpieczeństwa - The Guard aby uczynić świat lepszym a przede wszystkim bezpieczniejszym miejscem do życia :)
