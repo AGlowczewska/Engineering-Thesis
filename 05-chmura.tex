@@ -17,7 +17,7 @@ Wykorzystany został serwer wirtualny, na którym zainstalowano system Ubuntu 16
     \item \textbf{Koszt}: 60,98 € miesięcznie
 \end{itemize}
 
-Po skonfigurowaniu środowisk deweloperskich zarówno dla części obsługującej aplikacje mobilne oraz części odpowiedzialnej za przetwarzanie obrazu, wybrany katalog podłączono do repozytorium kodu korzystającego z systemu kontroli wersji "git", które znajduje się w~serwisie GitHub.com.
+Po skonfigurowaniu środowisk deweloperskich zarówno dla części obsługującej aplikacje mobilne oraz części odpowiedzialnej za przetwarzanie obrazu, wybrany katalog podłączono do repozytorium kodu korzystającego z systemu kontroli wersji "git", który znajduje się w~serwisie GitHub.com.
 W ten sposób bieżące zmiany były dokonywane na komputerach deweloperów, którzy za pomocą repozytorium publikowali nowe wersje aplikacji serwerowej w~chmurze.
 
 \section{Firebase}
@@ -30,13 +30,13 @@ W~celu usprawnienia działania aplikacji klienckich skorzystano także z~usług 
     \item \textbf{Firebase Realtime Database} - usługę bazy danych aktualizowanej w czasie rzeczywistym.
 \end{itemize}
 
-Usługi autoryzacji użytkowników zostały wykorzystane nie tylko w aplikacjach klienckich, ale i~także na serwerze do autoryzacji tokenów z~nadchodzących żądań klientów. Usługa przechowywania plików została wykorzystywana do przesyłania fragmentów nagrań na których wykryto niebezpieczeństwo. Usługa bazy danych została wykorzystana do prezentowania w~czasie rzeczywistym wartości czujników w~aplikacjach klienckich.
+Usługi autoryzacji użytkowników zostały wykorzystane nie tylko w aplikacjach klienckich, ale także na serwerze do autoryzacji tokenów z~nadchodzących żądań klientów. Usługa przechowywania plików została wykorzystywana do przesyłania fragmentów nagrań, na których wykryto ruch spowodowany przez człowieka. Usługa bazy danych została wykorzystana do prezentowania w~czasie rzeczywistym wartości czujników w~aplikacjach klienckich.
 
 
 \section{Aplikacja serwerowa}
 
-Serwer, obsługujący aplikacje mobilne, wykonano we frameworku języka Python - Django, z~wykorzystaniem modułu Django-Rest-Framework. Umożliwił on tworzenie endpointów, które, zgodnie z~rozdziałem nt. komunikacji, które mogły odbierać zapytania POST.
-Obsługę zapytań można podzielić, ze względu na zaplanowane źródło zapytania: aplikacja użytkownika lub urządzenie Raspberry.
+Serwer obsługujący aplikacje mobilne wykonano w języku Python korzystając z rozwiązania Django z~wykorzystaniem modułu Django-Rest-Framework. Umożliwia on tworzenie punktów końcowych (ang. endpoint) które, zgodnie z~rozdziałem nt. komunikacji mogły odbierać zapytania POST.
+Obsługę zapytań można podzielić ze względu na źródło wysłania wiadomości: od aplikacji użytkownika lub od urządzenia Raspberry.
 W~pierwszej kolejności przedstawione zostaną wiadomości wymieniane na linii Raspberry - Serwer.
 \paragraph{a) Rejestracja Raspberry Pi:}
 \begin{verbatim}
@@ -48,7 +48,7 @@ Zawartość:
 	'token': 'jwt.token.from.client'
 }
 \end{verbatim}
-Działanie: Raspberry, o~podanym numerze seryjnym i~nazwie, zostaje dodane do bazy danych urządzeń.
+Działanie: Raspberry, o~podanym numerze seryjnym i~nazwie zostaje dodane do bazy danych urządzeń.
 
 \paragraph{b) Wykrycie ruchu:}
 \begin{verbatim}
@@ -73,7 +73,7 @@ Zawartość:
 	'token': `jwt.token.from.client`
 }
 \end{verbatim}
-Działanie: Informuje serwer o~wykryciu zagrożenia na jednym z~czujników. Serwer następnie wyszukuje wszystkich klientów, którzy posiadają urządzenie o~numerze seryjnym, który wykrył niebezpieczne wskazania na czujniku i~wysyła do nich powiadomienie za pomocą push notyfikacji. \newline
+Działanie: Informuje serwer o~wykryciu zagrożenia na jednym z~czujników. Serwer następnie wyszukuje wszystkich klientów, którzy posiadają urządzenie o~podanym numerze seryjnym, który wykrył niebezpieczne wskazania na czujniku i~wysyła do nich powiadomienie za pomocą push notyfikacji. \newline
 Następne zapytania dotyczą poleceń wysyłanych z~aplikacji użytkownika.
 \paragraph{d) Pobranie urządzeń użytkownika:}
 \begin{verbatim}
@@ -128,16 +128,14 @@ Zawartość:
 	'deviceId' : <id_aplikacji>
 }
 \end{verbatim}
-Działanie: Powiązuje aplikację mobilną jak i~sesję aplikacji przeglądarkowej o~podanym tokenie z~kontem użytkownika. Dzięki temu, notyfikacje trafiają na wszystkie urządzenia użytkownika.
+Działanie: Powiązuje aplikację mobilną o~podanym tokenie z~kontem użytkownika. Dzięki temu, notyfikacje trafiają na wszystkie urządzenia użytkownika.
 \newline
-\newline
-Wybrane rozwiązanie pozwala na łatwą lokalizację ewentualnego błędu w działaniu systemu oraz szybką jego naprawę. Ponadto prosta logika oraz łatwe i~krótkie funkcje obsługujące zapytania sprawiają, że dalszy rozwój tej części systemu będzie możliwy bardzo niskim nakładem sił. 
 
 \section{Baza danych}
-System bazuje na dwóch oddzielnych bazach danych. Pierwsza z~nich zawiera wyłącznie dane z~czujników pomiarowych, druga całą resztę. Dane z~czujników pomiarowych aktualizowane są bardzo często i~wymagają natychmiastowego asynchronicznego przesłania tej informacji do klientów. To było powodem przeniesienia tej tabeli do zewnętrznego systemu, który posiada już takie rozwiązania. Zdecydowano się na usługę Firebase, ponieważ oferuje właśnie te dwie bardzo ważne funkcjonalności.  Dane niewymagające częstych zmian znajdują się w bazie danych Django.
+System operuje na dwóch oddzielnych bazach danych. Pierwsza z~nich zawiera wyłącznie dane z~czujników pomiarowych, druga całą resztę. Dane z~czujników pomiarowych aktualizowane są bardzo często i~wymagają natychmiastowego asynchronicznego przesłania tej informacji do klientów. Było to powodem przeniesienia tej tabeli do zewnętrznego systemu, który posiada już takie rozwiązania. Zdecydowano się na usługę Firebase, ponieważ oferuje właśnie te dwie bardzo ważne funkcjonalności.  Dane niewymagające częstych zmian znajdują się w bazie danych Django.
 
 \paragraph{Baza danych Firebase}
-Baza danych firebase opiera się na strukturze JSON czyli na elementach klucz-wartość. Nie istnieje tu podział na kolumny i~wiersze jak w przypadku standardowej relacyjnej bazy danych. Dane z~czujników zapisywane są wewnątrz elementu nadrzędnego w~strukturze reprezentującego numer seryjny urządzenia Raspberry Pi, z~którego dane pochodzą (Rys. \ref{json}). Wewnątrz kluczy z~nazwami typów czujników znajdują się wartości zmierzone na nich wcześniej i~przechowywane są w polu 'value'. Za aktualizację tej struktury odpowiada oprogramowanie uruchomione na Raspberry.
+Baza danych firebase opiera się na strukturze JSON czyli na elementach klucz-wartość. Nie istnieje tu podział na kolumny i~wiersze jak w przypadku standardowej relacyjnej bazy danych. Dane z~czujników zapisywane są wewnątrz elementu nadrzędnego w~strukturze, reprezentującego numer seryjny urządzenia Raspberry Pi, z~którego pochodzą dane (Rys. \ref{json}). W polu 'value' znajdują się wartości zmierzone na konkretnym czujniku.  Za aktualizację tej struktury odpowiada oprogramowanie uruchomione na Raspberry.
 \begin{figure}[H]
    \centering
    \includegraphics[width=4cm]{firebasejson.png} 
@@ -145,10 +143,10 @@ Baza danych firebase opiera się na strukturze JSON czyli na elementach klucz-wa
    \label{json}
 \end{figure}
 
-\paragraph{Baza danych Django} została zaimplementowana w SQlite3 i~poza specyficznymi dla bibliteki tabelami zawiera:
+\paragraph{Baza danych Django} została zaimplementowana w SQlite3 i~poza specyficznymi dla biblioteki tabelami zawiera:
 \begin{itemize}
 	\item \textbf{backend\_fcmtokens} przechowuje trzy wartości: aktualny token, id urządzenia oraz nazwę konta (e-mail). Na podstawie tokenu zachodzi autoryzacja urządzeń mobilnych.
-	\item \textbf{backend\_notification} zawiera notyfikacje wraz z~ich typem, informacją z~którego urządzenia pochodzą, datą, wiadomością przesłaną razem z notyfikacją oraz adresem url wideo (jeśli takie zostało dołączone do wiadomości)
+	\item \textbf{backend\_notification} tabela ta reprezentuje historię zdarzeń w systemie. Pojedynczy rekord zawiera: rodzaj zagrożenia, informacje z~którego urządzenia pochodzą, datę, wiadomość przesłaną razem z notyfikacją oraz adres url do nagranego wideo (jeśli takie zostało dołączone do wiadomości)
 	\item \textbf{backend\_rasps} zawiera informację nt. urządzenia: jego numer seryjny, nazwę, konto do którego jest przypisane, stan (czy urządzenie przesyła notyfikacje)
 	\item \textbf{users\_user} -~jest to tabela zawierająca dane użytkowników logujących się w~aplikacji internetowej (w~szczególności ich login i hasło, identyczny z~tymi przechowywanymi w~usłudze Firebase Auth)
 \end{itemize}
