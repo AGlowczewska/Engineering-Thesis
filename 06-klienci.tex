@@ -94,7 +94,7 @@ Użytkownik ma możliwość zmiany nazwy urządzenia, które zazwyczaj reprezent
 \end{figure}
 
 \section{Aplikacja Android}
-\subsection{Wybór narzędzi}
+\paragraph{Wybór narzędzi} \newline
 Do stworzenia aplikacji mobilnej na system Android użyto języka Kotlin - języka stworzonego przez firmę JetBrains, który 17 maja 2017 roku został uznany przez Google jako oficjalny język programowania aplikacji na platformę Android.\footnote{\url{https://twitter.com/Android/status/864911929143197696}}
 Kotlin ściśle współegzystuje z kodem stworzonym w Javie i w przypadku Androida jest kompilowany do kodu JVM.\cite{KOTLIN}
 
@@ -102,7 +102,7 @@ Skorzystano ze środowiska Android Studio w wersji 3.0.1, do automatyzacji budow
 
 Aplikacja skierowana jest na urządzenia z systemem Android od wersji Lollipop 5.0 (o numerze SDK większym niż 20), który został wydany 12.12.2014 r. Ograniczenie wersji spowodowane jest możliwością użycia bardziej zaawansowanych komponentów, niedostępnych dla niższych wersji. W styczniu 2018 r. oficjalne statystyki informują o tym, że około 80,7 \% wszystkich urządzeń z systemem Android na świecie ma wersję 5.0 lub wyższą. \cite{android}
 
-\subsection{Architektura}
+\paragraph{Architektura} \newline
 Aplikacja The Guard dla systemu Android została stworzona zgodnie z założeniami architektury Model View Presenter.
 Architektura MVP zakłada rozdzielenie kodu źródłowego aplikacji na 3 kategorie:
 \begin{itemize}
@@ -120,12 +120,12 @@ Przykładowo klasa warstwy Presenter odpowiedzialna za wyświetlanie obrazu z ka
     \caption{Struktura MVP [źródło własne]}
 \end{figure}
 
-\subsection{Interfejs użytkownika}
+\paragraph{Interfejs użytkownika} \newline
 Aplikacja została zaprojektowana zgodnie z wytycznymi Material Design. \cite{MDESIGN}
 Do nawigacji po funkcjach aplikacji służy panel na dole ekranu - "Bottom Bar".
 Zanim będzie on widoczny, użytkownik musi najpierw zalogować się (lub zarejestrować) przy użyciu adresu email oraz hasła.
 
-\subsection{Wykorzystane biblioteki}
+\paragraph{Wykorzystane biblioteki}
 \begin{itemize}
     \item \textbf{com.squareup.retrofit2} - biblioteka służąca do wygodnej komunikacji z API
     \item \textbf{io.reactivex:rxandroid} - biblioteka zapewniająca \textit{Scheduler} platformy Android dla kodu reaktywnego,
@@ -136,7 +136,7 @@ Zanim będzie on widoczny, użytkownik musi najpierw zalogować się (lub zareje
     \item \textbf{com.google.firebase} - biblioteki służące do obsługi usług Firebase
 \end{itemize}
 
-\subsection{Programowanie reaktywne}
+\paragraph{Programowanie reaktywne} \newline
 Aktualizacja danych z czujników, obsługa interfejsu użytkownika, zapytania API oraz komunikacja z usługami Firebase zrealizowane są zgodnie z paradygmatami programowania reaktywnego.
 \textit{Observables} tworzą zdarzenia, które mogą zostać modyfikowane przez liczne operatory, a następnie powodować reakcje, które zostały do nich \textit{zasubskrybowane}.
 
