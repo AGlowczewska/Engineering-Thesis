@@ -96,11 +96,11 @@ Użytkownik ma możliwość zmiany nazwy urządzenia, które zazwyczaj reprezent
 \section{Aplikacja Android}
 \subsection{Wybór narzędzi}
 Do stworzenia aplikacji mobilnej na system Android użyto języka Kotlin - języka stworzonego przez firmę JetBrains, który 17 maja 2017 roku został uznany przez Google jako oficjalny język programowania aplikacji na platformę Android.\footnote{\url{https://twitter.com/Android/status/864911929143197696}}
-Kotlin ściśle współegzystuje z kodem stworzonym w Javie i w przypadku Androida jest kompilowany do kodu JVM.
+Kotlin ściśle współegzystuje z kodem stworzonym w Javie i w przypadku Androida jest kompilowany do kodu JVM.\cite{KOTLIN}
 
 Skorzystano ze środowiska Android Studio w wersji 3.0.1, do automatyzacji budowy projektu został wykrozystany Gradle w wersji 4.1.
 
-Aplikacja skierowana jest na urządzenia z systemem Android od wersji Lollipop 5.0 (o numerze SDK większym niż 20), który został wydany 12.12.2014 r. Ograniczenie wersji spowodowane jest możliwością użycia bardziej zaawansowanych komponentów, niedostępnych dla niższych wersji. W styczniu 2018 r. oficjalne statystyki informują o tym, że około 80,7 \% wszystkich urządzeń z systemem Android na świecie ma wersję 5.0 lub wyższą.
+Aplikacja skierowana jest na urządzenia z systemem Android od wersji Lollipop 5.0 (o numerze SDK większym niż 20), który został wydany 12.12.2014 r. Ograniczenie wersji spowodowane jest możliwością użycia bardziej zaawansowanych komponentów, niedostępnych dla niższych wersji. W styczniu 2018 r. oficjalne statystyki informują o tym, że około 80,7 \% wszystkich urządzeń z systemem Android na świecie ma wersję 5.0 lub wyższą. \cite{android}
 
 \subsection{Architektura}
 Aplikacja The Guard dla systemu Android została stworzona zgodnie z założeniami architektury Model View Presenter.
@@ -111,7 +111,8 @@ Architektura MVP zakłada rozdzielenie kodu źródłowego aplikacji na 3 kategor
 \item Presenter - kod odpowiedzialny za przygotowanie informacji otrzymanych z warstwy model do wyświetlenia w warstwie View.
 \end{itemize}
 Największą zaletą architektury MVP jest możliwość wygodnego testowania logiki aplikacji (w warstwie Presenter) oraz zastosowanie programowania reaktywnego przy użyciu biblioteki RxKotlin.
-Warstwy komunikują się między sobą w sposób reaktywny - przy użyciu strumieni wydarzeń. Przykładowo klasa warstwy Presenter odpowiedzialna za wyświetlanie obrazu z kamery wykorzystuje klasę warstwy Model do asynchronicznej komunikacji z API.
+Warstwy komunikują się między sobą w sposób reaktywny - przy użyciu strumieni wydarzeń.
+Przykładowo klasa warstwy Presenter odpowiedzialna za wyświetlanie obrazu z kamery wykorzystuje klasę warstwy Model do asynchronicznej komunikacji z API. \cite{RXJAVA}
 
 \begin{figure}[H]
     \centering
@@ -120,7 +121,7 @@ Warstwy komunikują się między sobą w sposób reaktywny - przy użyciu strumi
 \end{figure}
 
 \subsection{Interfejs użytkownika}
-Aplikacja została zaprojektowana zgodnie z wytycznymi Material Design\footnote{Learning Material Design: Master Material Design and create beautiful, animated interfaces for mobile and web applications, Kyle Mew, Packt Publishing 2015}.
+Aplikacja została zaprojektowana zgodnie z wytycznymi Material Design. \cite{MDESIGN}
 Do nawigacji po funkcjach aplikacji służy panel na dole ekranu - "Bottom Bar".
 Zanim będzie on widoczny, użytkownik musi najpierw zalogować się (lub zarejestrować) przy użyciu adresu email oraz hasła.
 
@@ -135,8 +136,8 @@ Zanim będzie on widoczny, użytkownik musi najpierw zalogować się (lub zareje
     \item \textbf{com.google.firebase} - biblioteki służące do obsługi usług Firebase
 \end{itemize}
 
-\subsection{}
-CDane te trafiają do usługi \textit{Firebase Authentication}, która w przypadku pomyślnego logowania zwraca jego identyfikator.
+\subsection{Programowanie reaktywne}
+Aktualizacja danych z czujników, obsługa interfejsu użytkownika, zapytania API oraz komunikacja z usługami Firebase opierają się na reaktywny
 
 \section{Aplikacja iOS}
 Aplikacja przeznaczona jest na urządzenia z systemem operacyjnym iOS od wersji 10.0. 
