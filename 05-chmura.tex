@@ -134,8 +134,16 @@ Działanie: Powiązuje aplikację mobilną jak i~sesję aplikacji przeglądarkow
 Wybrane rozwiązanie pozwala na łatwą lokalizację ewentualnego błędu w działaniu systemu oraz szybką jego naprawę. Ponadto prosta logika oraz łatwe i~krótkie funkcje obsługujące zapytania sprawiają, że dalszy rozwój tej części systemu będzie możliwy bardzo niskim nakładem sił. 
 
 \section{Baza danych}
+System bazuje na dwóch oddzielnych bazach danych. Pierwsza z nich zawiera wyłącznie dane z czujników pomiarowych, druga całą resztę. Dane z czujników pomiarowych aktualizowane są bardzo często i wymagają natychmiastowego asynchronicznego przesłania tej informacji do klientów. To było powodem przeniesienia tej tabeli do zewnętrznego systemu, który posiada już takie rozwiązania. Zdecydowano się na usługę Firebase, ponieważ oferuje właśnie te dwie bardzo ważne funkcjonalności.  Dane nie wymagające częstych zmian znajdują się w bazie danych Django.
 
 \paragraph{Baza danych Firebase}
+Baza danych firebase opiera się na strukturze JSON czyli na elementach klucz-wartość. Nie istnieje tu podział na kolumny i wiersze jak w przypadku standardowej relacyjnej bazy danych. Dane z czujników zapisywane są wewnątrz elementu nadrzędnego w strukturze JSON reprezentującego numer seryjny urządzenia Raspberry Pi, z którego dane pochodzą (Rys. \ref{json}). 
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=4cm]{firebasejson.png} 
+   \caption{Struktura bazy danych Firebase [źródło własne]}
+   \label{json}
+\end{figure}
 
 \paragraph{Baza danych Django} została zaimplementowana w SQlite3 i~poza specyficznymi dla bibliteki tabelami zawiera:
 \begin{itemize}
