@@ -13,12 +13,12 @@ Wszystkie zestawy zbudowano w~oparciu o~Raspberry Pi 3 v1.2. Zdecydowano się na
 	\caption{Schemat układu The Guard [źródło własne]}
 	\label{the_guard_schem}
 \end{figure}
-\paragraph{Specyfikacja Raspberry Pi 3:}
+\paragraph{Specyfikacja Raspberry Pi 3 na podstawie strony Botland.com.pl \cite{specyfikacja_rasp}:}
 \begin{itemize} 
 \item Procesor 1.2 GHz
 \item Liczba rdzeni 4. Quad Core
 \item Pamięć RAM 1 GB
-\item Pamięć Karta microSD
+\item Pamięć karta microSD (w~użytych w~tej pracy urządzeniach posłużono się kartami o wielkości 8 i~16 GB).
 \item 40 GPIO
 \end{itemize}
 Aby prawidłowo zainstalować oprogramowanie The Guard na dowolnym urządzeniu Raspberry~Pi~3 należy wykonać poniższe czynności w~terminalu:
@@ -42,7 +42,7 @@ Następnym krokiem jest włączenie odpowiednich interfejsów w~panelu konfigura
 	\caption{Ustawienia [źródło własne]}
 	\label{rs_settings}
 \end{figure}
-Użyto biblioteki wiringpi do odczytu danych z~układów cyfrowych. Należy podkreślić, że numeracja fizycznych pinów i~numeracja pinów w wiringPi(rys. \ref{piny}) jest różna i~nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu numer 1~w~wiringPi jest równoznaczny z~odczytem stanu na pinie numer 12 (GPIO18).
+Do odczytu danych z~układów cyfrowych użyto biblioteki wiringpi. Należy podkreślić, że numeracja fizycznych pinów i~numeracja pinów w wiringPi(rys. \ref{piny}) jest różna i~nie zawiera wszystkich dostępnych pinów na urządzeniu. Przykładowo odczyt pinu numer 1~w~wiringPi jest równoznaczny z~odczytem stanu na pinie numer 12 (GPIO18).
 \begin{figure}[H]
     \centering
     \subfloat[GPIO]{\includegraphics[width=6cm]{gpio.png}}
