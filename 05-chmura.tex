@@ -5,7 +5,7 @@
 Aby zapewnić wysoki poziom bezpieczeństwa oraz dostępności systemu zdecydowano się na skorzystanie z~chmury Micrsoft Azure.
 Wykorzystany został serwer wirtualny, na którym zainstalowano system Ubuntu 16.04 LTS. Dostęp do serwera możliwy jest wyłącznie po protokole SSH.
 
-\paragraph{Parametry maszyny wirtualnej 'Anton'}
+\paragraph{Parametry maszyny wirtualnej 'Anton'.}
 \begin{itemize}
     \item \textbf{Klasa}: B2MS
     \item \textbf{Lokalizacja}: Zachodnia Europa
@@ -22,11 +22,10 @@ W ten sposób bieżące zmiany były dokonywane na komputerach deweloperów, kt�
 
 \section{Firebase}
 
-W~celu usprawnienia działania aplikacji klienckich skorzystano także z~usług platformy Firebase. Platforma Firebase jest częścią chmury Google Cloud i~oferuje między innymi:
-
+W~celu usprawnienia działania aplikacji klienckich skorzystano także z~usług platformy Firebase. Platforma Firebase jest częścią chmury Google Cloud i~oferuje rozwiązania przedstawione poniżej.
 \begin{itemize}
-    \item \textbf{Firebase Auth} - usługę bezpiecznej autoryzacji użytkowników ,
-    \item \textbf{Firebase Storage} - usługę wygodnego przechowywania plików,
+    \item \textbf{Firebase Auth} - usługę bezpiecznej autoryzacji użytkowników.
+    \item \textbf{Firebase Storage} - usługę wygodnego przechowywania plików.
     \item \textbf{Firebase Realtime Database} - usługę bazy danych aktualizowanej w czasie rzeczywistym.
 \end{itemize}
 
@@ -38,7 +37,7 @@ Usługi autoryzacji użytkowników zostały wykorzystane nie tylko w aplikacjach
 Serwer obsługujący aplikacje mobilne wykonano w języku Python korzystając z rozwiązania Django z~wykorzystaniem modułu Django-Rest-Framework. Umożliwia on tworzenie punktów końcowych (ang. endpoint) które, zgodnie z~rozdziałem nt. komunikacji mogły odbierać zapytania POST.
 Obsługę zapytań można podzielić ze względu na źródło wysłania wiadomości: od aplikacji użytkownika lub od urządzenia Raspberry.
 W~pierwszej kolejności przedstawione zostaną wiadomości wymieniane na linii Raspberry - Serwer.
-\paragraph{a) Rejestracja Raspberry Pi:}
+\paragraph{a) Rejestracja Raspberry Pi.}
 \begin{verbatim}
 Adres: /backend/v1/devices/add
 Zawartość:
@@ -146,7 +145,7 @@ Baza danych firebase opiera się na strukturze JSON czyli na elementach klucz-wa
 \paragraph{Baza danych Django} została zaimplementowana w SQlite3 i~poza specyficznymi dla biblioteki tabelami zawiera:
 \begin{itemize}
 	\item \textbf{backend\_fcmtokens} przechowuje trzy wartości: aktualny token, id urządzenia oraz nazwę konta (e-mail). Na podstawie tokenu zachodzi autoryzacja urządzeń mobilnych.
-	\item \textbf{backend\_notification} tabela ta reprezentuje historię zdarzeń w systemie. Pojedynczy rekord zawiera: rodzaj zagrożenia, informacje z~którego urządzenia pochodzą, datę, wiadomość przesłaną razem z notyfikacją oraz adres url do nagranego wideo (jeśli takie zostało dołączone do wiadomości)
-	\item \textbf{backend\_rasps} zawiera informację nt. urządzenia: jego numer seryjny, nazwę, konto do którego jest przypisane, stan (czy urządzenie przesyła notyfikacje)
-	\item \textbf{users\_user} -~jest to tabela zawierająca dane użytkowników logujących się w~aplikacji internetowej (w~szczególności ich login i hasło, identyczny z~tymi przechowywanymi w~usłudze Firebase Auth)
+	\item \textbf{backend\_notification} tabela ta reprezentuje historię zdarzeń w systemie. Pojedynczy rekord zawiera: rodzaj zagrożenia, informacje z~którego urządzenia pochodzą, datę, wiadomość przesłaną razem z notyfikacją oraz adres url do nagranego wideo (jeśli takie zostało dołączone do wiadomości).
+	\item \textbf{backend\_rasps} zawiera informację nt. urządzenia: jego numer seryjny, nazwę, konto do którego jest przypisane, stan (czy urządzenie przesyła notyfikacje).
+	\item \textbf{users\_user} -~jest to tabela zawierająca dane użytkowników logujących się w~aplikacji internetowej (w~szczególności ich login i hasło, identyczny z~tymi przechowywanymi w~usłudze Firebase Auth).
 \end{itemize}
