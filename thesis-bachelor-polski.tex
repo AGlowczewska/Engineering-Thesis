@@ -32,26 +32,27 @@ Paweł Szudrowicz \album{122445}}
     \vfill\cleardoublepage%
 
     % Table of contents.
-    \pagenumbering{Roman}\pagestyle{ppfcmthesis}%
-    \tableofcontents* \cleardoublepage%
-
-    % Main content of your thesis starts here
-    \mainmatter
-    \cleardoublepage
+    
+        % Main content of your thesis starts here
+        \cleardoublepage
     \begingroup
     \makeatletter
-    \let\ps@plain\ps@plain
+    \let\ps@plain\ps@empty
     \makeatother
     
-    \pagestyle{plain}
+    \pagestyle{empty}
 
    \cleardoublepage
     \input{streszczenie.tex}
-    \pagestyle{plain}
+    \pagestyle{empty}
     \cleardoublepage
-    \endgroup 
-    
-    
+    \endgroup
+
+
+   \pagenumbering{Roman}\pagestyle{ppfcmthesis}% 
+   \tableofcontents \cleardoublepage%
+   \mainmatter
+ 
     \input{01-wstep.tex}
     \input{02-architektura.tex}
     \input{03-uzytkowanie.tex}
