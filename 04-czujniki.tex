@@ -13,7 +13,7 @@ Wszystkie zestawy zbudowano w~oparciu o~Raspberry Pi 3 v1.2. Zdecydowano się na
 	\caption{Schemat układu The Guard [opracowanie własne]}
 	\label{the_guard_schem}
 \end{figure}
-\paragraph{Specyfikacja Raspberry Pi 3 na podstawie strony Botland.com.pl \cite{specyfikacja_rasp}:}
+\paragraph{Specyfikacja Raspberry Pi 3 na podstawie strony Botland.com.pl \cite{specyfikacja_rasp}.}
 \begin{itemize} 
 \item Procesor 1.2 GHz
 \item Liczba rdzeni 4. Quad Core
@@ -21,7 +21,7 @@ Wszystkie zestawy zbudowano w~oparciu o~Raspberry Pi 3 v1.2. Zdecydowano się na
 \item Karta pamięci microSD (w~użytych w~tej pracy urządzeniach posłużono się kartami o wielkości 8 i~16 GB).
 \item 40 GPIO
 \end{itemize}
-Aby prawidłowo zainstalować oprogramowanie The Guard na dowolnym urządzeniu Raspberry~Pi~3 należy wykonać poniższe czynności w~terminalu:
+Aby przygotować dowolne urządzenie Raspberry~Pi~3 do poprawnej instalacji oprogramowania The Guard należy wykonać poniższe czynności w~terminalu.
 \begin{enumerate} 
 \item sudo apt-get install libx264-dev
 \item cd /usr/src
@@ -61,28 +61,28 @@ Do odczytu danych z~układów cyfrowych użyto biblioteki wiringPi. Należy podk
 Zainstalowane oprogramowanie odpowiedzialne jest za ciągłe monitorowanie stanów i~zbieranie danych z~czujników pomiarowych. Po podłączeniu układu do zasilania program jest uruchamiany automatycznie. Pierwszą czynnością jaką wykonuje Raspberry Pi jest wysłanie swojego numeru seryjnego do bazy danych Firebase. Cały proces jest w~pełni zautomatyzowany. Dzięki temu użytkownicy od razu mogą dodać urządzenie i~przeglądać dane z~czujników na aplikacjach klienckich. Dodanie akcesorium pomiarowego następuje poprzez wprowadzenie w~aplikacji jego numeru seryjnego.
 \section{Czujniki}
 Każdy zestaw składa się z~5~czujników, jednej kamery oraz jednego przetwornika analogowo-cyfrowego (AC). 
-\paragraph{a) Specyfikacja MQ-9 - czujnik tlenku węgla\cite{specyfikacjaMQ-9}:}
+\paragraph{a) Specyfikacja MQ-9 - czujnik tlenku węgla\cite{specyfikacjaMQ-9}.}
 \begin{itemize} 
 \item Zasilanie: 5~V
 \item Pobór prądu: 150 mA
 \item Temperatura pracy: od -10 do 50 \textdegree{}C
 \item Wyjścia: analogowe oraz cyfrowe (do pomiarów użyto wyjścia analogowego)
 \end{itemize}
-\paragraph{b) Specyfikacja MQ-2 - czujnik LPG i dymu \protect\cite{specyfikacjaMQ-2}:}
+\paragraph{b) Specyfikacja MQ-2 - czujnik LPG i dymu \protect\cite{specyfikacjaMQ-2}.}
 \begin{itemize} 
 \item Zasilanie: 5~V
 \item Pobór prądu: 150 mA
 \item Temperatura pracy: od -10 do 50 \textdegree{}C
 \item Wyjścia: analogowe oraz cyfrowe (do pomiarów użyto wyjścia analogowego)
 \end{itemize}
-\paragraph{c) Specyfikacja czujnika wykrywania płomieni \protect\cite{specyfikacjaFlame}:}
+\paragraph{c) Specyfikacja czujnika wykrywania płomieni \protect\cite{specyfikacjaFlame}.}
 \begin{itemize} 
 \item Zasilanie: 3.3 V
 \item Zakres wykrywanej fali: 760 do 1100nm
 \item Kąt detekcji: od 0 do 60 stopni
 \item Temperatura pracy: od -25 do 85 \textdegree{}C
 \end{itemize}
-\paragraph{d) Specyfikacja DS18B20 - czujnik temperatury \protect\cite{specyfikacjaTemp}:}
+\paragraph{d) Specyfikacja DS18B20 - czujnik temperatury \protect\cite{specyfikacjaTemp}.}
 \begin{itemize} 
 \item Zasilanie: 3.3 V
 \item Zakres pomiarowy: od -55 do 125 \textdegree{}C
@@ -92,7 +92,7 @@ Każdy zestaw składa się z~5~czujników, jednej kamery oraz jednego przetworni
 \item Wykorzystano moduł kamery Raspberry Pi
 \item Kamera 5MP - wspierająca nagrywanie 30 klatek na sekundę w rozdzielczości Full HD
 \end{itemize}
-\paragraph{f) Specyfikacja MCP3008 - przetwornik A/C \protect\cite{specyfikacjaAC}:}
+\paragraph{f) Specyfikacja MCP3008 - przetwornik A/C \protect\cite{specyfikacjaAC}.}
 \begin{itemize} 
 \item Zasilanie: od 2.7V do 5.5V
 \item Pobór prądu: 0.5 mA
@@ -100,7 +100,7 @@ Każdy zestaw składa się z~5~czujników, jednej kamery oraz jednego przetworni
 \item Liczba kanałów: 8
 \item Rozdzielczość: 10bit
 \end{itemize}
-\paragraph{g) Specyfikacja czujnika ruchu PIR HC-SR501 \protect\cite{pir}:}
+\paragraph{g) Specyfikacja czujnika ruchu PIR HC-SR501 \protect\cite{pir}.}
 \begin{itemize} 
 \item Zasilanie: od 4.5V do 20V
 \item Pobór prądu w stanie czuwania: 50 uA
@@ -135,19 +135,19 @@ Przy założeniu stałej wartości Ro, przy wzroście Rs czułość czujnika mal
 	\label{spi}
 \end{figure}
 SPI jest to interfejs synchroniczny(rys. \ref{spi}). Może być do niego podłączone wiele urządzeń typu Slave, jednak są połączone tylko z~jednym urządzeniem Master, które generuje sygnał zegarowy. Urządzenie typu Master poprzez linię SS wybiera urządzenie z~którym chce się komunikować. \\
-Interfejs SPI zawiera jeszcze 3~linie:
+Interfejs SPI zawiera jeszcze 3~linie.
 \begin{enumerate} 
 \item MOSI (ang. Master Output Slave Input): \\
 Poprzez tę linię wysyłane są dane z~Raspberry Pi do przetwornika analogowo cyfrowego MCP3008.
 \item MISO (ang. Master Input Slave Output):\\
-Poprzez tę linię wysyłane są dane z~przetwornika AC do układu Master, czyli w~naszym przypadku Raspberry~Pi~3
+Poprzez tę linię wysyłane są dane z~przetwornika AC do układu Master, czyli w~naszym przypadku Raspberry~Pi~3.
 \item SCLK (ang. Serial Clock) :\\
-Ta linia wykorzystywana jest do przesłania zegara wygenerowanego przez Rapberry~Pi~3
+Ta linia wykorzystywana jest do przesłania zegara wygenerowanego przez Rapberry~Pi~3.
 \end{enumerate}
 Do komunikacji poprzez ten interfejs wykorzystano bibliotekę SpiDev \cite{spidev}. \\
 Każdy układ monitoruje wskaźniki pomiarowe z czujników analogowych i~cyfrowych. W~przypadku wykrycia wskazań, które w~znaczący sposób odbiegają od normy informuje właściciela o~zagrożeniu. Informacja ta wysyłana jest do wszystkich urządzeń(smartfony, tablety itp), które posiada właściciel.  Analizując dane z~czujników analogowych w~czystym powietrzu, które wynoszą odpowiednio:\\
-Czujnik MQ-9: od 0.15 do 0.2\\
-Czujnik MQ-2: od 0.05 do 0.15,\\
+czujnik MQ-9: od 0.15 do 0.2,\\
+czujnik MQ-2: od 0.05 do 0.15,\\
 przyjęto, że granicą wysłania notyfikacji do użytkownika jest przekroczenie progu 0.3. Wartości te to znormalizowane dane z~przetwornika AC, który jak już wcześniej wspomniano wykrywa 1024 stany. Odczytywane wartości bezpośrednio na wyjściu przetwornika MCP3008 dla czujnika MQ-9 w~czystym powietrzu to około 170. Stąd 170/1024 = 0.166. Wysłanie notyfikacji wiąże się z~otrzymaniem wartości większej niż 308.
 
 Czujniki cyfrowe wykorzystane w~pracy informują o~wykryciu płomieni lub ruchu. Czujnik ruchu wykrycie zagrożenia określa przez stan wysoki, natomiast czujnik płomieni przez stan niski. Przy implementacji zanegowano sygnał odbierany z~czujnika płomieni, aby stan wysoki zawsze informował o~niebezpieczeństwie, a~stan niski reprezentował jego brak. Na czujnikach znajduje się potencjometr, za pomocą którego dowolnie można ustawiać jego czułość. Odczyt danych następuje nieprzerwanie co 2~sekundy. Nie należy obawiać się, że aplikacja nie odczyta zagrożenia z~powodu zbyt krótkiego trwania sygnału wysokiego w bazie danych, ponieważ czujnik utrzymuje stan wysoki przez 5~sekund po wykryciu ruchu. 
@@ -202,15 +202,15 @@ Drugim poleceniem jest wywołanie narzędzia ffmpeg. Odbiera ono za pomocą poto
 \end{itemize}
 
 \paragraph{Serwer}
-Narzędziem umożliwiającym obsługę proxy jest serwer nginx. W~części projektu związanej ze strumieniowaniem wideo wykorzystano moduł nginx-rtmp \cite{NGINX}. Umożliwił on obsługę obrazu transmitowanego z~wielu źródeł, na wiele urządzeń równocześnie. 
-Moduł ten pozwala między innymi na:
+Narzędziem umożliwiającym obsługę proxy jest serwer nginx. W~części projektu związanej ze strumieniowaniem wideo wykorzystano moduł nginx-rtmp \cite{NGINX}. Umożliwia on obsługę obrazu transmitowanego z~wielu źródeł, na wiele urządzeń równocześnie. 
+Moduł ten pozwala na realizację wielu funkcji, a niektóre z nich przedstawiono poniżej.
 \begin{itemize}
-\item Tworzenie dynamicznych punktów końcowych, dla urządzeń strumienujących obraz
-\item Zmianę parametrów przechwytywanego obrazu 
-\item Zapisywanie nagrań po stronie serwera
-\item Tworzenie punktów nadających, dla aplikacji odtwarzających strumień
+\item Tworzenie dynamicznych punktów końcowych, dla urządzeń strumieniujących obraz.
+\item Zmianę parametrów przechwytywanego obrazu .
+\item Zapisywanie nagrań po stronie serwera.
+\item Tworzenie punktów nadających, dla aplikacji odtwarzających strumień.
 \end{itemize}
-Ponadto pozwala na utworzenie aplikacji HLS, przechowującej tymczasowo obraz, zanim zostanie on przesłany dalej. Pozwala to na uniknięcie opóźnień między kolejnymi klatkami obrazu.
+Ponadto pozwala na utworzenie aplikacji HLS przechowującej tymczasowo obraz, zanim zostanie on przesłany dalej. Pozwala to na uniknięcie opóźnień między kolejnymi klatkami obrazu.
 
 Wszystkie funkcjonalności są zdefiniowane poprzez ustawienia pliku konfiguracyjnego, którego lokalizacja to /usr/local/nginx/conf/nginx.conf:
 
