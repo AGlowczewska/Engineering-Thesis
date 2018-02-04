@@ -31,16 +31,27 @@ Paweł Szudrowicz \album{122445}}
     \end{center}%
     \vfill\cleardoublepage%
 
-
-    % 
-    \input{streszczenie.tex}
-    
     % Table of contents.
     \pagenumbering{Roman}\pagestyle{ppfcmthesis}%
     \tableofcontents* \cleardoublepage%
 
-    % Main content of your thesis starts here.
-    \mainmatter%
+    % Main content of your thesis starts here
+    \mainmatter
+    \cleardoublepage
+    \begingroup
+    \makeatletter
+    \let\ps@plain\ps@plain
+    \makeatother
+    
+    \pagestyle{plain}
+
+   \cleardoublepage
+    \input{streszczenie.tex}
+    \pagestyle{plain}
+    \cleardoublepage
+    \endgroup 
+    
+    
     \input{01-wstep.tex}
     \input{02-architektura.tex}
     \input{03-uzytkowanie.tex}
@@ -51,7 +62,7 @@ Paweł Szudrowicz \album{122445}}
 
     
   %  {\raggedright\sloppy\small\bibliography{bibliography}}
-    \cleardoublepage
+   \cleardoublepage
     \begingroup
     \makeatletter
     \let\ps@plain\ps@plain
@@ -66,7 +77,7 @@ Paweł Szudrowicz \album{122445}}
    \listoffigures
     \pagestyle{plain}
     \cleardoublepage
-    \endgroup
+    \endgroup 
     
     % Colophon is a place where you should let others know about copyrights etc.
     \ppcolophon
