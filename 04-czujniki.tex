@@ -4,13 +4,13 @@ Wszystkie zestawy zbudowano w~oparciu o~Raspberry Pi 3 v1.2. Zdecydowano się na
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=7cm]{guard.jpg}
-	\caption{Zbudowany zestaw The Guard [źródło własne]}
+	\caption{Zbudowany zestaw The Guard [opracowanie własne]}
 	\label{the_guard_set}
 \end{figure}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=15cm]{GuardSchem}
-	\caption{Schemat układu The Guard [źródło własne]}
+	\caption{Schemat układu The Guard [opracowanie własne]}
 	\label{the_guard_schem}
 \end{figure}
 \paragraph{Specyfikacja Raspberry Pi 3 na podstawie strony Botland.com.pl \cite{specyfikacja_rasp}:}
@@ -39,7 +39,7 @@ Następnym krokiem jest włączenie odpowiednich interfejsów w~panelu konfigura
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=6cm]{RSettings}
-	\caption{Ustawienia [źródło własne]}
+	\caption{Ustawienia [opracowanie własne]}
 	\label{rs_settings}
 \end{figure}
 Do odczytu danych z~układów cyfrowych użyto biblioteki wiringPi. Należy podkreślić, że numeracja fizycznych pinów(rys. \ref{gpio}) i~numeracja pinów w wiringPi(rys. \ref{wiringpi}) jest różna oraz biblioteka wiringPi nie obsługuje wszystkich pinów urządzenia. Przykładowo odczyt pinu numer~1~w~wiringPi jest równoznaczny z~odczytem stanu pinu numer 12 (GPIO18).

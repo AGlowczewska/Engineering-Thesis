@@ -7,7 +7,7 @@ Dobre zaprojektowanie architektury systemu jest fundamentalnym zadaniem. Na rynk
 \begin{figure}[ht] 
    \centering
    \includegraphics[width=12cm]{anton.png} 
-   \caption{Schemat systemu [źródło własne]}
+   \caption{Schemat systemu [opracowanie własne]}
 \end{figure}
 
 Architektura została przedstawiona na schemacie (rys 2.1). Wszystkie urządzenia klienckie (iOS, Android i~Web), jak i~Raspberry Pi komunikują się z~serwerem ANTON wykupionym i~pracującym na platformie Microsoft Azure. Komunikacja pomiędzy klientami a~serwerem odbywa się dzięki REST API. Obraz natomiast przesyłany może być za pomocą dwóch protokołów RTMP i~HLS. Postanowiono, że transmisja obrazu w~systemie The Guard oparta będzie na protokole HLS ze względu na brak możliwości obsługi RTMP na iOS. Priorytetem było zapewnienie identycznych warunków i~tych samych doświadczeń użytkownika na wszystkich platformach. Było to głównym powodem całkowitego odrzucenia przesyłania obrazu przy użyciu protokołu RTMP. RTMP posiada jednak w~porównaniu do HLS jedną, aczkolwiek bardzo istotną przewagę. Jest to brak opóźnienia w~transmisji obrazu. HLS wysyła dane w~małych porcjach. Przed wysłaniem pierwszej części, konieczne jest jej nagranie. To właśnie powoduje kilkunastosekundowe opóźnienie w stosunku do RTMP, który transmituje obraz bezpośrednio. Oba protokoły omówiono dokładniej w~rozdziale 4.3.
@@ -27,7 +27,7 @@ Wysłanie zapytania na określony adres powoduje uruchomienie specjalnej funkcji
 \begin{figure}[ht] 
    \centering
    \includegraphics[width=14cm]{backend.png} 
-   \caption{Funkcja obsługująca dodanie nowego urządzenia [źródło własne]}
+   \caption{Funkcja obsługująca dodanie nowego urządzenia [opracowanie własne]}
 \end{figure}
 
 \section{Bezpieczeństwo}
