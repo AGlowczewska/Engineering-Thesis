@@ -126,7 +126,7 @@ Na wykresach (rys. \ref{mq2}, rys. \ref{mq9}) przedstawiono charakterystyki czu�
 Rs - jest to opór czujnika w~różnych stężeniach gazu. \\
 Przy założeniu stałej wartości Ro, przy wzroście Rs czułość czujnika maleje -~im mniejszy stosunek Rs do Ro tym dokładniejszy pomiar wykonywany przez czujnik. Na schemacie \ref{mq2_mq9} widać, że obydwa czujniki reagują na wiele różnych gazów. MQ-2 nazwano w tej pracy czujnikiem LPG, a~MQ-9 czujnikiem CO ze względu na to, że w~stosunku do tych gazów mają najwyższą czułość. 
 
-Żaden z modeli Raspberry nie posiada wbudowanego przetwornika analogowo-cyfrowego dlatego konieczne było użycie układu zewnętrznego. Wybrano przetwornik MCP3008 ze względu na jego nisko koszt i~komunikację poprzez interfejs SPI, który jest wspierany przez Raspberry Pi. MCP3008 to 10-bitowy przetwornik analogowo-cyfrowy zasilany napięciem 5V.  Przetwornik 10-bitowy jest w~stanie rozróżnić 1024 stany. Posiada 8 kanałów jednak w~projekcie wykorzystano tylko 2~–~dla MQ-9 i~MQ-2.
+Żaden z modeli Raspberry nie posiada wbudowanego przetwornika analogowo-cyfrowego dlatego konieczne było użycie układu zewnętrznego. Wybrano przetwornik MCP3008 ze względu na jego niski koszt i~komunikację poprzez interfejs SPI, który jest wspierany przez Raspberry Pi. MCP3008 to 10-bitowy przetwornik analogowo-cyfrowy zasilany napięciem 5V.  Przetwornik 10-bitowy jest w~stanie rozróżnić 1024 stany. Posiada 8 kanałów jednak w~projekcie wykorzystano tylko 2~–~dla MQ-9 i~MQ-2.
 \paragraph{Interfejs SPI:}
 \begin{figure}[ht]
 	\centering
