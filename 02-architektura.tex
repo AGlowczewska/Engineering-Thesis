@@ -15,7 +15,7 @@ Architektura została przedstawiona na schemacie (rys 2.1). Wszystkie urządzeni
 \section{Komunikacja}
 
 Komunikacja pomiędzy elementami systemu odbywa się na zasadach architektury REST. Wiadomości przesyłane są asynchronicznie, na wskazane wcześniej adresy.
-Takie podejście gwarantuje prostotę przesyłanych komunikatów oraz skalowalność w~kontekście nowych urządzeń Raspberry strumieniujących dane oraz nowych urządzeń korzystających z~aplikacji klienckich. Początkowo projekt oparto o~zapytania GET i~POST.  \cite{WEBARCH}. Wprowadzenie tokenów uwierzytelniających (więcej w akapicie nt. Bezpieczeństwa) spowodowało, że wymianę komunikatów oparto tylko i~wyłącznie na zapytaniach POST. 
+Takie podejście gwarantuje prostotę przesyłanych komunikatów oraz skalowalność w~kontekście nowych urządzeń Raspberry strumieniujących dane oraz nowych urządzeń korzystających z~aplikacji klienckich. Początkowo projekt oparto o~zapytania GET i~POST \cite{WEBARCH}. Wprowadzenie tokenów uwierzytelniających (więcej w akapicie nt. Bezpieczeństwa) spowodowało, że wymianę komunikatów oparto tylko i~wyłącznie na zapytaniach POST. 
 
 \paragraph{Zapytanie GET}
 Metoda GET pozwala na pobranie dokumentu sieciowego, na postawie zapytania zawartego w~adresie URL. Metoda ta jest używana tylko i~wyłącznie do pobierania danych z~punktu docelowego. 
