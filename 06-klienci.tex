@@ -202,7 +202,7 @@ Instalacja zewnętrznych bibliotek odbywa się za pomocą CocoaPods. Jest to men
 Moya używana jest do asynchronicznej REST-owej komunikacji z serwerem Django. SwiftyJSONMapper przydatna okazuje się do przekształcenia odpowiedzi serwera w postaci JSON do wcześniej zdefiniowanego modelu. MBProgressHUD umożliwia wyświetlanie ekranu ładowania podczas pobierania informacji z serwera. RxSwift i RxCocoa to biblioteki do programowania reaktywnego. Moduły Firebase itp. służą do komunikacji z serwerami Firebase. Ostatni 'pod M13ProgressSuite' wykorzystano do rysowania wykresów i animowanych elementów graficznych w systemie iOS.
 Po uruchomieniu aplikacji pierwszym widokiem jest ekran logowania i rejestracji użytkowników (rys 6.1b). 
 Po prawidłowym uwierzytelnieniu użytkownika uzyskiwany jest dostęp do głównego widoku aplikacji. W górnej części możliwy jest wybór 5 sekcji:
-sekcja czujników, sekcja historii notyfikacji, sekcja ostatnich zagrożeń przy wykryciu ruchu, sekcja monitoringu na żywo, sekcja ustawień. Wszystkie te sekcje dotyczą konkretnego urządzenia wybranego na pasku u dołu ekranu. Funkcje każdej z nich zostały opisane w rozdziale 6.1, tutaj zostaną zaprezentowane jedynie szczegóły implementacyjne i zrzuty ekranów z wersji na iOS. Przy pierwszym uruchomieniu nie istnieje żadne urządzenie przypisane do naszego konta użytkownika. Aby dodać pierwsze i kolejne stacje, od których chcemy otrzymywać notyfikacje o zagrożeniach a także śledzić i monitorować informacje z~czujników należy wybrać przycisk "New" z plusikiem w dolnej części ekranu. Pojawi się okno z~prośbą o wpisanie numeru identyfikującego urządzenie. Po chwili dodany 'Guard' będzie widoczny w na liście.
+sekcja czujników, sekcja historii notyfikacji, sekcja ostatnich zagrożeń przy wykryciu ruchu, sekcja monitoringu na żywo, sekcja ustawień. Wszystkie te sekcje dotyczą konkretnego urządzenia wybranego na pasku u dołu ekranu. Funkcje każdej z nich zostały opisane w rozdziale 6.1, tutaj zostaną zaprezentowane jedynie szczegóły implementacyjne i zrzuty ekranów z wersji na iOS. Przy pierwszym uruchomieniu nie istnieje żadne urządzenie przypisane do naszego konta użytkownika. Aby dodać pierwsze i kolejne stacje, od których chcemy otrzymywać notyfikacje o~zagrożeniach, a~także śledzić i~monitorować informacje z~czujników należy wybrać przycisk "New" z~plusikiem w~dolnej części ekranu. Pojawi się okno z~prośbą o wpisanie numeru identyfikującego urządzenie. Po chwili dodany 'Guard' będzie widoczny w na liście.
 
 
 \paragraph{Sekcja czujników:}
@@ -215,7 +215,7 @@ saturation: 1, brightness: 1, alpha: 1)
 
 
 \paragraph{Sekcja historii notyfikacji:}
-Po zaznaczeniu daty reprezentującej moment wystąpienia zagrożenia i wybraniu przycisku 'preview' prezentowana jest informacja o miejscu niebezpieczeństwa i~jego rodzaju. (rys 6.4b).
+Po zaznaczeniu daty reprezentującej moment wystąpienia niebezpieczeństwa i wybraniu przycisku 'preview' prezentowana jest informacja o~miejscu i~rodzaju zagrożenia. (rys 6.4b).
 
 
 \paragraph{Sekcja monitoringu:}
