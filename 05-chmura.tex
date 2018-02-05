@@ -76,7 +76,7 @@ Działanie: Informuje serwer o~wykryciu zagrożenia na jednym z~czujników. Serw
 Następne zapytania dotyczą poleceń wysyłanych z~aplikacji użytkownika.
 \paragraph{d) Pobranie urządzeń użytkownika:}
 \begin{verbatim}
-Adres: /backend/v1/get
+Adres: /backend/v1/devices/get
 Zawartość: 
 {
 	'owner':<użytkownik>, 
@@ -134,7 +134,7 @@ Działanie: Powiązuje aplikację mobilną o~podanym tokenie z~kontem użytkowni
 System operuje na dwóch oddzielnych bazach danych. Pierwsza z~nich zawiera wyłącznie dane z~czujników pomiarowych, druga całą resztę. Dane z~czujników pomiarowych aktualizowane są bardzo często i~wymagają natychmiastowego asynchronicznego przesłania tej informacji do klientów. Było to powodem przeniesienia tej tabeli do zewnętrznego systemu, który posiada już takie rozwiązania. Zdecydowano się na usługę Firebase, ponieważ oferuje właśnie te dwie bardzo ważne funkcjonalności.  Dane niewymagające częstych zmian znajdują się w bazie danych Django.
 
 \paragraph{Baza danych Firebase}
-Baza danych firebase opiera się na strukturze JSON czyli na elementach klucz-wartość. Nie istnieje tu podział na kolumny i~wiersze jak w przypadku standardowej relacyjnej bazy danych. Dane z~czujników zapisywane są wewnątrz elementu nadrzędnego w~strukturze, reprezentującego numer seryjny urządzenia Raspberry Pi, z~którego pochodzą dane (rys. \ref{json}). W~polu 'value' znajdują się wartości zmierzone na konkretnym czujniku.  Za aktualizację tej struktury odpowiada oprogramowanie uruchomione na Raspberry.
+Baza danych Firebase opiera się na strukturze JSON czyli na elementach klucz-wartość. Nie istnieje tu podział na kolumny i~wiersze jak w przypadku standardowej relacyjnej bazy danych. Dane z~czujników zapisywane są wewnątrz elementu nadrzędnego w~strukturze, reprezentującego numer seryjny urządzenia Raspberry Pi, z~którego pochodzą dane (rys. \ref{json}). W~polu 'value' znajdują się wartości zmierzone na konkretnym czujniku.  Za aktualizację tej struktury odpowiada oprogramowanie uruchomione na Raspberry.
 \begin{figure}[H]
    \centering
    \includegraphics[width=4cm]{firebasejson.png} 
