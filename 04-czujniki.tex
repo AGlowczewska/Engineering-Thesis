@@ -161,7 +161,7 @@ Aby zapewnić wydajny i~pewny system bezpieczeństwa przy otrzymaniu wysokich wa
 \paragraph{Protokół RTMP}
 Podstawą funkcji strumieniowania wideo jest protokół RTMP (ang. Real-Time Message Protocol). Jest to oparty na protokole TCP protokół wysyłania obrazu, dźwięku oraz danych. \cite{MOBILERTMP}
 Podstawową jednostką danych w~protokole RTMP jest wiadomość (ang. Message), której struktura jest zależna od typu strumieniowanych informacji. 
-Wiadomości dzielone są na części (ang. Chunks), które są gotowe do transmisji. Strumień RTMP to ostatecznie strumień fragmentów wiadomości (ang. Chunk Stream) \cite{STREAMRTMP}
+Wiadomości dzielone są na części (ang. Chunks), które są gotowe do transmisji. Strumień RTMP to ostatecznie strumień fragmentów wiadomości (ang. Chunk Stream) \cite{STREAMRTMP}.
 
 Ponadto wykorzystano protokół HLS (HTTP Live Streaming), którego cechą jest zapisywanie odbieranego obrazu w plikach o~określonej długości. Gdy aplikacja kliencka odtwarza strumień wideo, w~rzeczywistości odbiera strumieniowane po kolei zapisane pliki .ts. Zaletą takiego rozwiązania jest płynność odbieranego wideo, a~jego wadą opóźnienie w~transmisji.
 
