@@ -146,9 +146,9 @@ Ta linia wykorzystywana jest do przesłania zegara wygenerowanego przez Rapberry
 \end{enumerate}
 Do komunikacji poprzez ten interfejs wykorzystano bibliotekę SpiDev \cite{spidev}. \\
 Każdy układ monitoruje wskaźniki pomiarowe z czujników analogowych i~cyfrowych. W~przypadku wykrycia wskazań, które w~znaczący sposób odbiegają od normy informuje właściciela o~zagrożeniu. Informacja ta wysyłana jest do wszystkich urządzeń(smartfony, tablety itp), które posiada właściciel.  Analizując dane z~czujników analogowych w~czystym powietrzu, które wynoszą odpowiednio:\\
-czujnik MQ-9: od 0.15 do 0.2,\\
-czujnik MQ-2: od 0.05 do 0.15,\\
-przyjęto, że granicą wysłania notyfikacji do użytkownika jest przekroczenie progu 0.3. Wartości te to znormalizowane dane z~przetwornika AC, który jak już wcześniej wspomniano wykrywa 1024 stany. Odczytywane wartości bezpośrednio na wyjściu przetwornika MCP3008 dla czujnika MQ-9 w~czystym powietrzu to około 170. Stąd 170/1024 = 0.166. Wysłanie notyfikacji wiąże się z~otrzymaniem wartości większej niż 308.
+czujnik MQ-9: od 0.15 do 0.3,\\
+czujnik MQ-2: od 0.10 do 0.25,\\
+przyjęto, że granicą wysłania notyfikacji do użytkownika jest przekroczenie progu 0.35. Wartości te to znormalizowane dane z~przetwornika AC, który jak już wcześniej wspomniano wykrywa 1024 stany. Odczytywane wartości bezpośrednio na wyjściu przetwornika MCP3008 dla czujnika MQ-9 w~czystym powietrzu to około 170. Stąd 170/1024 = 0.166. Wysłanie notyfikacji wiąże się z~otrzymaniem wartości większej niż 308.
 
 Czujniki cyfrowe wykorzystane w~pracy informują o~wykryciu płomieni lub ruchu. Czujnik ruchu wykrycie zagrożenia określa przez stan wysoki, natomiast czujnik płomieni przez stan niski. Przy implementacji zanegowano sygnał odbierany z~czujnika płomieni, aby stan wysoki zawsze informował o~niebezpieczeństwie, a~stan niski reprezentował jego brak. Na czujnikach znajduje się potencjometr, za pomocą którego dowolnie można ustawiać jego czułość. Odczyt danych następuje nieprzerwanie co 2~sekundy. Nie należy obawiać się, że aplikacja nie odczyta zagrożenia z~powodu zbyt krótkiego trwania sygnału wysokiego w bazie danych, ponieważ czujnik utrzymuje stan wysoki przez 5~sekund po wykryciu ruchu. 
 
