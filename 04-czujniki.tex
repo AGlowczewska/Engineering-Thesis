@@ -137,11 +137,11 @@ Przy założeniu stałej wartości Ro, przy wzroście Rs czułość czujnika mal
 SPI jest to interfejs synchroniczny (rys. \ref{spi}). Może być do niego podłączone wiele urządzeń typu Slave, jednak są połączone tylko z~jednym urządzeniem Master, które generuje sygnał zegarowy. Urządzenie typu Master poprzez linię SS wybiera urządzenie z~którym chce się komunikować. \\
 Interfejs SPI zawiera jeszcze 3~linie.
 \begin{enumerate} 
-\item MOSI (ang. Master Output Slave Input): \\
+\item MOSI (ang. Master Output Slave Input). \\
 Poprzez tę linię wysyłane są dane z~Raspberry Pi do przetwornika analogowo cyfrowego MCP3008.
-\item MISO (ang. Master Input Slave Output):\\
+\item MISO (ang. Master Input Slave Output).\\
 Poprzez tę linię wysyłane są dane z~przetwornika AC do układu Master, czyli w~naszym przypadku Raspberry~Pi~3.
-\item SCLK (ang. Serial Clock) :\\
+\item SCLK (ang. Serial Clock).\\
 Ta linia wykorzystywana jest do przesłania zegara wygenerowanego przez Rapberry~Pi~3.
 \end{enumerate}
 Do komunikacji poprzez ten interfejs wykorzystano bibliotekę SpiDev \cite{spidev}. \\
